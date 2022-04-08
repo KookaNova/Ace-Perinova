@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Base%20Style.uss?fileID=7433441132597879392&amp;guid=b5d4a2525d41c904badb9305180712a0&amp;type=3#Base Style" />
+    <ui:VisualElement name="Screen" class="Screen screen" style="flex-grow: 1; align-items: stretch; justify-content: space-between; width: 100%; height: 100%;">
+        <ui:VisualElement name="Top" />
+        <ui:VisualElement name="Center" style="flex-grow: 1; justify-content: center;">
+            <ui:VisualElement name="Title" style="flex-grow: 1; align-items: center; justify-content: center; flex-direction: column; display: flex; margin-bottom: -8%;">
+                <ui:VisualElement name="TitleArt" style="align-items: center; justify-content: center; background-image: url(&apos;project://database/Assets/Textures/AP%20Logo%20Full.png?fileID=2800000&amp;guid=d0832c1ad516eb14da7163a660a4d3ea&amp;type=3#AP Logo Full&apos;); -unity-background-scale-mode: scale-to-fit; flex-grow: 0.35; width: 100%; height: 100%; margin-bottom: 1%; flex-basis: auto;" />
+                <ui:Label text="Press any button to start" display-tooltip-when-elided="true" class="text1" style="flex-direction: row; justify-content: center; align-items: stretch; -unity-font: url(&apos;project://database/Assets/Fonts/conthrax-sb.ttf?fileID=12800000&amp;guid=b6c747822e625a540884b64b2fd4d4c0&amp;type=3#conthrax-sb&apos;); -unity-font-definition: none; color: rgb(233, 233, 233);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Bottom" style="flex-direction: row; justify-content: space-between;">
+            <ui:VisualElement name="Left" style="flex-direction: column; justify-content: flex-end; width: 33%;">
+                <ui:VisualElement name="HomeButtons" style="justify-content: flex-end; align-items: stretch; width: 80%; flex-direction: column; display: none;">
+                    <ui:Button text="PLAY A MATCH" display-tooltip-when-elided="true" name="Play" enable-rich-text="true" class="button1 text2" />
+                    <ui:Button text="SETTINGS" display-tooltip-when-elided="true" name="Settings" class="button1 text2" />
+                    <ui:Button text="EXIT" display-tooltip-when-elided="true" name="Exit" class="button1 text2" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Right" style="flex-direction: row; justify-content: flex-end; align-items: flex-end; width: 33%;">
+                <ui:Label text="Offline" display-tooltip-when-elided="true" name="Server" class="text2" style="padding-right: 2%;" />
+                <ui:Label text="Pre-Alpha 0.1.0" display-tooltip-when-elided="true" name="Version" class="text2" style="padding-right: 2%;" />
+                <ui:Label text="12:00AM" display-tooltip-when-elided="true" name="Time" class="text2" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
