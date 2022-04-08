@@ -71,3 +71,4 @@ Assets/AddressableAssetsData/*/*.bin*
 Assets/StreamingAssets/aa.meta
 Assets/StreamingAssets/aa/*
 AcePerinova/Assets/Localization/GoogleSheetsService.asset
+AcePerinova/Assets/Localization/GoogleSheetsService.asset.meta
