@@ -8,11 +8,14 @@ namespace AcePerinova.Controller
     public class InputInterpreter : MonoBehaviour, SpacecraftInputs.IFlightActions
     {
         public PlayerController sc;
+        public float thrust, brake, yaw;
+        public Vector2 torque, cameraInput;
+
 
         SpacecraftInputs _controls;
 
         public void OnEnable() {
-            sc = GetComponent<PlayerController>();
+            //sc = GetComponent<PlayerController>();
             _controls = new SpacecraftInputs();
 
             _controls.Flight.SetCallbacks(this);
@@ -26,7 +29,7 @@ namespace AcePerinova.Controller
 
         public void OnBrake(InputAction.CallbackContext context)
         {
-            sc.brake = context.ReadValue<float>();
+            brake = context.ReadValue<float>();
         }
 
         public void OnStart(InputAction.CallbackContext context)
@@ -41,21 +44,24 @@ namespace AcePerinova.Controller
 
         public void OnThrust(InputAction.CallbackContext context)
         {
-            sc.thrust = context.ReadValue<float>();
+            thrust = context.ReadValue<float>();
         }
 
         public void OnTorque(InputAction.CallbackContext context)
         {
             //input y = pitch, input x = roll
-            var rot = context.ReadValue<Vector2>();
-            sc.pitch = rot.y; sc.roll = rot.x;
+            torque = context.ReadValue<Vector2>();
         }
 
         public void OnYaw(InputAction.CallbackContext context)
         {
-            sc.yaw = context.ReadValue<float>();
+            yaw = context.ReadValue<float>();
         }
 
+        public void OnCameraOrientation(InputAction.CallbackContext context)
+        {
+            cameraInput = context.ReadValue<Vector2>();
+        }
     }
 }
 

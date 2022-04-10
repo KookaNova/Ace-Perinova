@@ -82,6 +82,15 @@ namespace AcePerinova.Controller
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraOrientation"",
+                    ""type"": ""Value"",
+                    ""id"": ""17102f9d-86ba-4872-92cf-98c1ec52cf91"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""InvertVector2(invertX=false)"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -304,34 +313,72 @@ namespace AcePerinova.Controller
                     ""action"": ""Tab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""New action map"",
-            ""id"": ""3d89d10f-33a6-4c68-a434-7adee8bf2963"",
-            ""actions"": [
-                {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""15f5ffb8-9de3-421f-ae6f-12e7dc5076d7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": """",
-                    ""id"": ""2811b162-e3ba-4b88-b849-99f349a5d058"",
-                    ""path"": """",
+                    ""id"": ""2c644a39-89f5-4fef-abd4-78ac86f2e82d"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""CameraOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""8789e0e0-4d75-4d31-acb6-a4d15d66d7cb"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraOrientation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c745d080-ec61-4fdb-83b4-d8b592df83ee"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraOrientation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ba38a97e-2de2-4e7a-9d0c-d66fc90e09d4"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraOrientation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""d3a946c6-345a-4d7e-883e-b01d8d1a1555"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraOrientation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""23ff6ff7-8ed6-4332-96c6-8146e6912fce"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraOrientation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -346,9 +393,7 @@ namespace AcePerinova.Controller
             m_Flight_Brake = m_Flight.FindAction("Brake", throwIfNotFound: true);
             m_Flight_Start = m_Flight.FindAction("Start", throwIfNotFound: true);
             m_Flight_Tab = m_Flight.FindAction("Tab", throwIfNotFound: true);
-            // New action map
-            m_Newactionmap = asset.FindActionMap("New action map", throwIfNotFound: true);
-            m_Newactionmap_Newaction = m_Newactionmap.FindAction("New action", throwIfNotFound: true);
+            m_Flight_CameraOrientation = m_Flight.FindAction("CameraOrientation", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -414,6 +459,7 @@ namespace AcePerinova.Controller
         private readonly InputAction m_Flight_Brake;
         private readonly InputAction m_Flight_Start;
         private readonly InputAction m_Flight_Tab;
+        private readonly InputAction m_Flight_CameraOrientation;
         public struct FlightActions
         {
             private @SpacecraftInputs m_Wrapper;
@@ -424,6 +470,7 @@ namespace AcePerinova.Controller
             public InputAction @Brake => m_Wrapper.m_Flight_Brake;
             public InputAction @Start => m_Wrapper.m_Flight_Start;
             public InputAction @Tab => m_Wrapper.m_Flight_Tab;
+            public InputAction @CameraOrientation => m_Wrapper.m_Flight_CameraOrientation;
             public InputActionMap Get() { return m_Wrapper.m_Flight; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -451,6 +498,9 @@ namespace AcePerinova.Controller
                     @Tab.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTab;
                     @Tab.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTab;
                     @Tab.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTab;
+                    @CameraOrientation.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraOrientation;
+                    @CameraOrientation.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraOrientation;
+                    @CameraOrientation.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraOrientation;
                 }
                 m_Wrapper.m_FlightActionsCallbackInterface = instance;
                 if (instance != null)
@@ -473,43 +523,13 @@ namespace AcePerinova.Controller
                     @Tab.started += instance.OnTab;
                     @Tab.performed += instance.OnTab;
                     @Tab.canceled += instance.OnTab;
+                    @CameraOrientation.started += instance.OnCameraOrientation;
+                    @CameraOrientation.performed += instance.OnCameraOrientation;
+                    @CameraOrientation.canceled += instance.OnCameraOrientation;
                 }
             }
         }
         public FlightActions @Flight => new FlightActions(this);
-
-        // New action map
-        private readonly InputActionMap m_Newactionmap;
-        private INewactionmapActions m_NewactionmapActionsCallbackInterface;
-        private readonly InputAction m_Newactionmap_Newaction;
-        public struct NewactionmapActions
-        {
-            private @SpacecraftInputs m_Wrapper;
-            public NewactionmapActions(@SpacecraftInputs wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Newaction => m_Wrapper.m_Newactionmap_Newaction;
-            public InputActionMap Get() { return m_Wrapper.m_Newactionmap; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(NewactionmapActions set) { return set.Get(); }
-            public void SetCallbacks(INewactionmapActions instance)
-            {
-                if (m_Wrapper.m_NewactionmapActionsCallbackInterface != null)
-                {
-                    @Newaction.started -= m_Wrapper.m_NewactionmapActionsCallbackInterface.OnNewaction;
-                    @Newaction.performed -= m_Wrapper.m_NewactionmapActionsCallbackInterface.OnNewaction;
-                    @Newaction.canceled -= m_Wrapper.m_NewactionmapActionsCallbackInterface.OnNewaction;
-                }
-                m_Wrapper.m_NewactionmapActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @Newaction.started += instance.OnNewaction;
-                    @Newaction.performed += instance.OnNewaction;
-                    @Newaction.canceled += instance.OnNewaction;
-                }
-            }
-        }
-        public NewactionmapActions @Newactionmap => new NewactionmapActions(this);
         public interface IFlightActions
         {
             void OnTorque(InputAction.CallbackContext context);
@@ -518,10 +538,7 @@ namespace AcePerinova.Controller
             void OnBrake(InputAction.CallbackContext context);
             void OnStart(InputAction.CallbackContext context);
             void OnTab(InputAction.CallbackContext context);
-        }
-        public interface INewactionmapActions
-        {
-            void OnNewaction(InputAction.CallbackContext context);
+            void OnCameraOrientation(InputAction.CallbackContext context);
         }
     }
 }

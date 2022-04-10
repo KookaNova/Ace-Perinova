@@ -8,28 +8,25 @@ namespace AcePerinova.Controller{
     /// </summary>
     public class PlayerController : SpacecraftController
     {
-        #region Input Data
-        public float thrust;
-        public float brake;
-        public float pitch;
-        public float yaw;
-        public float roll;
-        #endregion
+        private InputInterpreter _in;
 
-        protected override void Movement()
-        {
+        protected override void Activate() {
+            _in = GetComponent<InputInterpreter>();
+        }
+
+        protected override void Movement(){
+            if(_in == null)return; //if no input interpreter is found, don't use inputs.
+
             //find speed
-            speedTarget += thrust;
-            speedTarget -= brake;
+            speedTarget += _in.thrust;
+            speedTarget -= _in.brake;
             speedTarget = Mathf.Clamp(speedTarget, minSpeed, maxSpeed);
-
             currentSpeed = Mathf.Lerp(currentSpeed, speedTarget, acceleration * Time.fixedDeltaTime);
             currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);
-
             rb.AddRelativeForce(Vector3.forward * currentSpeed, ForceMode.Acceleration);
-            rb.AddRelativeTorque(pitch * m_pitch * Time.fixedDeltaTime, yaw * m_yaw * Time.fixedDeltaTime, roll * m_roll * Time.fixedDeltaTime, ForceMode.Acceleration);
-
-            Debug.Log(currentSpeed);
+            //Add Torque
+            rb.AddRelativeTorque(_in.torque.y * m_pitch * Time.fixedDeltaTime, _in.yaw * m_yaw * Time.fixedDeltaTime, _in.torque.x * m_roll * Time.fixedDeltaTime, ForceMode.Acceleration);
+            //torque.y = pitch, torque.x = roll
         }
     }
 }

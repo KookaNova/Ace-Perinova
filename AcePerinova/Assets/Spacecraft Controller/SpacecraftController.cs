@@ -21,10 +21,10 @@ namespace AcePerinova.Controller{
         protected Rigidbody rb;
 
         private void Awake() {
-            rb = GetComponent<Rigidbody>();
+            rb = GetComponentInChildren<Rigidbody>();
+            Activate();
             LoadShipData();
         }
-
         private void LoadShipData(){
             acceleration = ship.acceleration;
             m_pitch = ship.pitch;
@@ -32,13 +32,16 @@ namespace AcePerinova.Controller{
             m_roll = ship.roll;
         }
 
+        protected virtual void Activate(){}
+
         private void FixedUpdate() {
             Movement();
         }
 
-        protected virtual void Movement(){
-            
-        }
+        protected virtual void Movement(){}
+
+        
+
         
     }
 
