@@ -11,6 +11,7 @@ namespace AcePerinova.Controller{
     {
         InputInterpreter _in;
         bool using1stPerson = false;
+        bool targetTracking = false;
         Vector2 rotationInput = Vector2.zero;
 
         private void Awake() {
@@ -26,25 +27,28 @@ namespace AcePerinova.Controller{
         private void LateUpdate() {
             if(_in == null)return;
 
-            if(using1stPerson){
-                //code that rotates with limits for the cockpit seat.
-            }
-            else{
-                //get inputs multiplied my max rotation
-                rotationInput.x = _in.cameraInput.x * 150;
-                rotationInput.y = _in.cameraInput.y * 90;
+            switch (targetTracking)
+            {
+                case true:
+                    //Lock camera to target, ignoring imputs
+                    break;
 
-                Quaternion targetRotation = Quaternion.Euler(rotationInput.y, rotationInput.x, 0); //y and x are swapped from inputs
-
-                //set rotation
-                gameObject.transform.localRotation = Quaternion.Slerp(gameObject.transform.localRotation, targetRotation, 15f * Time.deltaTime);
-
-
-                Debug.Log(rotationInput);
-                
-            }
-            
+                case false:
+                    if(using1stPerson){
+                        //get inputs multiplied my max rotation
+                        rotationInput.x = _in.cameraInput.x * 120;
+                        rotationInput.y = _in.cameraInput.y * 90;
+                    }
+                    else{
+                        //get inputs multiplied my max rotation
+                        rotationInput.x = _in.cameraInput.x * 150;
+                        rotationInput.y = _in.cameraInput.y * 90;
+                    }
+                    Quaternion targetRotation = Quaternion.Euler(rotationInput.y, rotationInput.x, 0); //y and x are swapped from inputs
+                    //set rotation
+                    gameObject.transform.localRotation = Quaternion.Slerp(gameObject.transform.localRotation, targetRotation, 15f * Time.deltaTime);
+                    break;
+            } 
         }
-
     }
 }
