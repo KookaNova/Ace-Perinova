@@ -7,12 +7,12 @@ namespace AcePerinova.Controller
 {
     public class InputInterpreter : MonoBehaviour, SpacecraftInputs.IFlightActions
     {
-        public SpacecraftController sc;
+        public PlayerController sc;
 
         SpacecraftInputs _controls;
 
         public void OnEnable() {
-            sc = GetComponent<SpacecraftController>();
+            sc = GetComponent<PlayerController>();
             _controls = new SpacecraftInputs();
 
             _controls.Flight.SetCallbacks(this);
@@ -26,8 +26,7 @@ namespace AcePerinova.Controller
 
         public void OnBrake(InputAction.CallbackContext context)
         {
-            Debug.Log("BRAKE");
-            sc.thrust = 0;
+            sc.brake = context.ReadValue<float>();
         }
 
         public void OnStart(InputAction.CallbackContext context)
@@ -42,19 +41,19 @@ namespace AcePerinova.Controller
 
         public void OnThrust(InputAction.CallbackContext context)
         {
-            Debug.Log("THRUST");
-            sc.thrust = 1;
+            sc.thrust = context.ReadValue<float>();
         }
 
         public void OnTorque(InputAction.CallbackContext context)
         {
-            sc.rotate = new Vector3(context.ReadValue<Vector2>().y, sc.rotate.y, context.ReadValue<Vector2>().x );
-            //x = pitch, y = yaw, z = roll
+            //input y = pitch, input x = roll
+            var rot = context.ReadValue<Vector2>();
+            sc.pitch = rot.y; sc.roll = rot.x;
         }
 
         public void OnYaw(InputAction.CallbackContext context)
         {
-            sc.rotate = new Vector3(sc.rotate.x, context.ReadValue<float>(), sc.rotate.z);
+            sc.yaw = context.ReadValue<float>();
         }
 
     }

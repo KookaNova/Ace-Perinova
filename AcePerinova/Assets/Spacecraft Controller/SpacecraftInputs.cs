@@ -15,12 +15,14 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @SpacecraftInputs : IInputActionCollection2, IDisposable
+namespace AcePerinova.Controller
 {
-    public InputActionAsset asset { get; }
-    public @SpacecraftInputs()
+    public partial class @SpacecraftInputs : IInputActionCollection2, IDisposable
     {
-        asset = InputActionAsset.FromJson(@"{
+        public InputActionAsset asset { get; }
+        public @SpacecraftInputs()
+        {
+            asset = InputActionAsset.FromJson(@"{
     ""name"": ""SpacecraftInputs"",
     ""maps"": [
         {
@@ -304,153 +306,222 @@ public partial class @SpacecraftInputs : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""New action map"",
+            ""id"": ""3d89d10f-33a6-4c68-a434-7adee8bf2963"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""15f5ffb8-9de3-421f-ae6f-12e7dc5076d7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2811b162-e3ba-4b88-b849-99f349a5d058"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // Flight
-        m_Flight = asset.FindActionMap("Flight", throwIfNotFound: true);
-        m_Flight_Torque = m_Flight.FindAction("Torque", throwIfNotFound: true);
-        m_Flight_Yaw = m_Flight.FindAction("Yaw", throwIfNotFound: true);
-        m_Flight_Thrust = m_Flight.FindAction("Thrust", throwIfNotFound: true);
-        m_Flight_Brake = m_Flight.FindAction("Brake", throwIfNotFound: true);
-        m_Flight_Start = m_Flight.FindAction("Start", throwIfNotFound: true);
-        m_Flight_Tab = m_Flight.FindAction("Tab", throwIfNotFound: true);
-    }
+            // Flight
+            m_Flight = asset.FindActionMap("Flight", throwIfNotFound: true);
+            m_Flight_Torque = m_Flight.FindAction("Torque", throwIfNotFound: true);
+            m_Flight_Yaw = m_Flight.FindAction("Yaw", throwIfNotFound: true);
+            m_Flight_Thrust = m_Flight.FindAction("Thrust", throwIfNotFound: true);
+            m_Flight_Brake = m_Flight.FindAction("Brake", throwIfNotFound: true);
+            m_Flight_Start = m_Flight.FindAction("Start", throwIfNotFound: true);
+            m_Flight_Tab = m_Flight.FindAction("Tab", throwIfNotFound: true);
+            // New action map
+            m_Newactionmap = asset.FindActionMap("New action map", throwIfNotFound: true);
+            m_Newactionmap_Newaction = m_Newactionmap.FindAction("New action", throwIfNotFound: true);
+        }
 
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-    public IEnumerable<InputBinding> bindings => asset.bindings;
-
-    public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
-    {
-        return asset.FindAction(actionNameOrId, throwIfNotFound);
-    }
-    public int FindBinding(InputBinding bindingMask, out InputAction action)
-    {
-        return asset.FindBinding(bindingMask, out action);
-    }
-
-    // Flight
-    private readonly InputActionMap m_Flight;
-    private IFlightActions m_FlightActionsCallbackInterface;
-    private readonly InputAction m_Flight_Torque;
-    private readonly InputAction m_Flight_Yaw;
-    private readonly InputAction m_Flight_Thrust;
-    private readonly InputAction m_Flight_Brake;
-    private readonly InputAction m_Flight_Start;
-    private readonly InputAction m_Flight_Tab;
-    public struct FlightActions
-    {
-        private @SpacecraftInputs m_Wrapper;
-        public FlightActions(@SpacecraftInputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Torque => m_Wrapper.m_Flight_Torque;
-        public InputAction @Yaw => m_Wrapper.m_Flight_Yaw;
-        public InputAction @Thrust => m_Wrapper.m_Flight_Thrust;
-        public InputAction @Brake => m_Wrapper.m_Flight_Brake;
-        public InputAction @Start => m_Wrapper.m_Flight_Start;
-        public InputAction @Tab => m_Wrapper.m_Flight_Tab;
-        public InputActionMap Get() { return m_Wrapper.m_Flight; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(FlightActions set) { return set.Get(); }
-        public void SetCallbacks(IFlightActions instance)
+        public void Dispose()
         {
-            if (m_Wrapper.m_FlightActionsCallbackInterface != null)
+            UnityEngine.Object.Destroy(asset);
+        }
+
+        public InputBinding? bindingMask
+        {
+            get => asset.bindingMask;
+            set => asset.bindingMask = value;
+        }
+
+        public ReadOnlyArray<InputDevice>? devices
+        {
+            get => asset.devices;
+            set => asset.devices = value;
+        }
+
+        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+        public bool Contains(InputAction action)
+        {
+            return asset.Contains(action);
+        }
+
+        public IEnumerator<InputAction> GetEnumerator()
+        {
+            return asset.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Enable()
+        {
+            asset.Enable();
+        }
+
+        public void Disable()
+        {
+            asset.Disable();
+        }
+        public IEnumerable<InputBinding> bindings => asset.bindings;
+
+        public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
+        {
+            return asset.FindAction(actionNameOrId, throwIfNotFound);
+        }
+        public int FindBinding(InputBinding bindingMask, out InputAction action)
+        {
+            return asset.FindBinding(bindingMask, out action);
+        }
+
+        // Flight
+        private readonly InputActionMap m_Flight;
+        private IFlightActions m_FlightActionsCallbackInterface;
+        private readonly InputAction m_Flight_Torque;
+        private readonly InputAction m_Flight_Yaw;
+        private readonly InputAction m_Flight_Thrust;
+        private readonly InputAction m_Flight_Brake;
+        private readonly InputAction m_Flight_Start;
+        private readonly InputAction m_Flight_Tab;
+        public struct FlightActions
+        {
+            private @SpacecraftInputs m_Wrapper;
+            public FlightActions(@SpacecraftInputs wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Torque => m_Wrapper.m_Flight_Torque;
+            public InputAction @Yaw => m_Wrapper.m_Flight_Yaw;
+            public InputAction @Thrust => m_Wrapper.m_Flight_Thrust;
+            public InputAction @Brake => m_Wrapper.m_Flight_Brake;
+            public InputAction @Start => m_Wrapper.m_Flight_Start;
+            public InputAction @Tab => m_Wrapper.m_Flight_Tab;
+            public InputActionMap Get() { return m_Wrapper.m_Flight; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(FlightActions set) { return set.Get(); }
+            public void SetCallbacks(IFlightActions instance)
             {
-                @Torque.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTorque;
-                @Torque.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTorque;
-                @Torque.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTorque;
-                @Yaw.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnYaw;
-                @Yaw.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnYaw;
-                @Yaw.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnYaw;
-                @Thrust.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnThrust;
-                @Thrust.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnThrust;
-                @Thrust.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnThrust;
-                @Brake.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnBrake;
-                @Brake.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnBrake;
-                @Brake.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnBrake;
-                @Start.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnStart;
-                @Start.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnStart;
-                @Start.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnStart;
-                @Tab.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTab;
-                @Tab.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTab;
-                @Tab.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTab;
-            }
-            m_Wrapper.m_FlightActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Torque.started += instance.OnTorque;
-                @Torque.performed += instance.OnTorque;
-                @Torque.canceled += instance.OnTorque;
-                @Yaw.started += instance.OnYaw;
-                @Yaw.performed += instance.OnYaw;
-                @Yaw.canceled += instance.OnYaw;
-                @Thrust.started += instance.OnThrust;
-                @Thrust.performed += instance.OnThrust;
-                @Thrust.canceled += instance.OnThrust;
-                @Brake.started += instance.OnBrake;
-                @Brake.performed += instance.OnBrake;
-                @Brake.canceled += instance.OnBrake;
-                @Start.started += instance.OnStart;
-                @Start.performed += instance.OnStart;
-                @Start.canceled += instance.OnStart;
-                @Tab.started += instance.OnTab;
-                @Tab.performed += instance.OnTab;
-                @Tab.canceled += instance.OnTab;
+                if (m_Wrapper.m_FlightActionsCallbackInterface != null)
+                {
+                    @Torque.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTorque;
+                    @Torque.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTorque;
+                    @Torque.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTorque;
+                    @Yaw.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnYaw;
+                    @Yaw.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnYaw;
+                    @Yaw.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnYaw;
+                    @Thrust.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnThrust;
+                    @Thrust.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnThrust;
+                    @Thrust.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnThrust;
+                    @Brake.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnBrake;
+                    @Brake.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnBrake;
+                    @Brake.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnBrake;
+                    @Start.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnStart;
+                    @Start.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnStart;
+                    @Start.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnStart;
+                    @Tab.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTab;
+                    @Tab.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTab;
+                    @Tab.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTab;
+                }
+                m_Wrapper.m_FlightActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Torque.started += instance.OnTorque;
+                    @Torque.performed += instance.OnTorque;
+                    @Torque.canceled += instance.OnTorque;
+                    @Yaw.started += instance.OnYaw;
+                    @Yaw.performed += instance.OnYaw;
+                    @Yaw.canceled += instance.OnYaw;
+                    @Thrust.started += instance.OnThrust;
+                    @Thrust.performed += instance.OnThrust;
+                    @Thrust.canceled += instance.OnThrust;
+                    @Brake.started += instance.OnBrake;
+                    @Brake.performed += instance.OnBrake;
+                    @Brake.canceled += instance.OnBrake;
+                    @Start.started += instance.OnStart;
+                    @Start.performed += instance.OnStart;
+                    @Start.canceled += instance.OnStart;
+                    @Tab.started += instance.OnTab;
+                    @Tab.performed += instance.OnTab;
+                    @Tab.canceled += instance.OnTab;
+                }
             }
         }
-    }
-    public FlightActions @Flight => new FlightActions(this);
-    public interface IFlightActions
-    {
-        void OnTorque(InputAction.CallbackContext context);
-        void OnYaw(InputAction.CallbackContext context);
-        void OnThrust(InputAction.CallbackContext context);
-        void OnBrake(InputAction.CallbackContext context);
-        void OnStart(InputAction.CallbackContext context);
-        void OnTab(InputAction.CallbackContext context);
+        public FlightActions @Flight => new FlightActions(this);
+
+        // New action map
+        private readonly InputActionMap m_Newactionmap;
+        private INewactionmapActions m_NewactionmapActionsCallbackInterface;
+        private readonly InputAction m_Newactionmap_Newaction;
+        public struct NewactionmapActions
+        {
+            private @SpacecraftInputs m_Wrapper;
+            public NewactionmapActions(@SpacecraftInputs wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Newaction => m_Wrapper.m_Newactionmap_Newaction;
+            public InputActionMap Get() { return m_Wrapper.m_Newactionmap; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(NewactionmapActions set) { return set.Get(); }
+            public void SetCallbacks(INewactionmapActions instance)
+            {
+                if (m_Wrapper.m_NewactionmapActionsCallbackInterface != null)
+                {
+                    @Newaction.started -= m_Wrapper.m_NewactionmapActionsCallbackInterface.OnNewaction;
+                    @Newaction.performed -= m_Wrapper.m_NewactionmapActionsCallbackInterface.OnNewaction;
+                    @Newaction.canceled -= m_Wrapper.m_NewactionmapActionsCallbackInterface.OnNewaction;
+                }
+                m_Wrapper.m_NewactionmapActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Newaction.started += instance.OnNewaction;
+                    @Newaction.performed += instance.OnNewaction;
+                    @Newaction.canceled += instance.OnNewaction;
+                }
+            }
+        }
+        public NewactionmapActions @Newactionmap => new NewactionmapActions(this);
+        public interface IFlightActions
+        {
+            void OnTorque(InputAction.CallbackContext context);
+            void OnYaw(InputAction.CallbackContext context);
+            void OnThrust(InputAction.CallbackContext context);
+            void OnBrake(InputAction.CallbackContext context);
+            void OnStart(InputAction.CallbackContext context);
+            void OnTab(InputAction.CallbackContext context);
+        }
+        public interface INewactionmapActions
+        {
+            void OnNewaction(InputAction.CallbackContext context);
+        }
     }
 }

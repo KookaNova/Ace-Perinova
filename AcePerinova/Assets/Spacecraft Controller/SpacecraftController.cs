@@ -1,24 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AcePerinova.Selectables;
 
 namespace AcePerinova.Controller{
     /// <summary>
-    /// This component serves to help in controlling spacecraft.
+    /// Generic class that handles basic ship functions and movement
     /// </summary>
-    public class SpacecraftController : MonoBehaviour
+    public abstract class SpacecraftController : MonoBehaviour
     {
-        public float thrust {get; set;}
-        public Vector3 rotate {get;set;}
+        public ShipObject ship;
 
-        public float speed = 20;
-        public float pitch = 10;
-        public float yaw = 5;
-        public float roll = 10;
+        protected float maxSpeed = 120, currentSpeed, minSpeed = 0, speedTarget;
 
-        private void Update() {
-            this.transform.Translate(new Vector3(0,0,thrust * speed * Time.deltaTime), Space.Self);
-            this.transform.Rotate(rotate.x * pitch * Time.deltaTime, rotate.y * yaw * Time.deltaTime, rotate.z * roll * Time.deltaTime);
+        #region Ship Data
+        protected float acceleration, m_pitch, m_yaw, m_roll;
+
+        #endregion
+
+        protected Rigidbody rb;
+
+        private void Awake() {
+            rb = GetComponent<Rigidbody>();
+            LoadShipData();
+        }
+
+        private void LoadShipData(){
+            acceleration = ship.acceleration;
+            m_pitch = ship.pitch;
+            m_yaw = ship.yaw;
+            m_roll = ship.roll;
+        }
+
+        private void FixedUpdate() {
+            Movement();
+        }
+
+        protected virtual void Movement(){
+            
         }
         
     }
