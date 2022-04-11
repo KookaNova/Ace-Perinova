@@ -15,3 +15,14 @@ MonoBehaviour:
   ShipName: Ol' Tri-Speeder
   bio: This old reliable speeder may not be the strongest or the most maneuverable,
     but it is fast and well rounded. It's shields charge slow due to older technology.
+  shipUtility: {fileID: 2924310484775253931, guid: cba5189edbe91d348a81fff3d8f0c125, type: 3}
+  nameArt: {fileID: 0}
+  selectArt: {fileID: 0}
+  primary: {fileID: 1293974354215673490, guid: 0bbe3383876411a4185b8cff1cea6351, type: 3}
+  secondary: {fileID: 0}
+  maxSpeed: 60
+  minSpeed: 0
+  acceleration: 30
+  pitch: 30
+  yaw: 15
+  roll: 75

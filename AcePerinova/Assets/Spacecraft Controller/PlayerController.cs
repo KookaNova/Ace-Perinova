@@ -10,8 +10,14 @@ namespace AcePerinova.Controller{
     {
         private InputInterpreter _in;
 
-        protected override void Activate() {
+        protected override void OnActivate() {
             _in = GetComponent<InputInterpreter>();
+        }
+
+        private void Update() {
+            if(_in.pIsFiring){
+                StartCoroutine(UsePrimaryWeapon());
+            }
         }
 
         protected override void Movement(){
@@ -20,14 +26,13 @@ namespace AcePerinova.Controller{
             //find speed
             speedTarget += _in.thrust;
             speedTarget -= _in.brake;
-            speedTarget = Mathf.Clamp(speedTarget, minSpeed, maxSpeed);
-            currentSpeed = Mathf.Lerp(currentSpeed, speedTarget, acceleration * Time.fixedDeltaTime);
-            currentSpeed = Mathf.Clamp(currentSpeed, minSpeed, maxSpeed);
-            rb.AddRelativeForce(Vector3.forward * currentSpeed, ForceMode.Acceleration);
+            
             //Add Torque
-            rb.AddRelativeTorque(_in.torque.y * m_pitch * Time.fixedDeltaTime, _in.yaw * m_yaw * Time.fixedDeltaTime, _in.torque.x * m_roll * Time.fixedDeltaTime, ForceMode.Acceleration);
+            rb.AddRelativeTorque(_in.torque.y * (m_pitch * 10) * Time.fixedDeltaTime, _in.yaw * (m_yaw * 10) * Time.fixedDeltaTime, _in.torque.x * (m_roll * 10) * Time.fixedDeltaTime, ForceMode.Acceleration);
             //torque.y = pitch, torque.x = roll
         }
+
+        
     }
 }
 

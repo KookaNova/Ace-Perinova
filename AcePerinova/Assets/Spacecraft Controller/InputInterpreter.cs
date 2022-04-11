@@ -7,9 +7,11 @@ namespace AcePerinova.Controller
 {
     public class InputInterpreter : MonoBehaviour, SpacecraftInputs.IFlightActions
     {
-        public PlayerController sc;
+        PlayerController sc;
+        
         public float thrust, brake, yaw;
         public Vector2 torque, cameraInput;
+        public bool pIsFiring, sIsFiring;
 
 
         SpacecraftInputs _controls;
@@ -61,6 +63,11 @@ namespace AcePerinova.Controller
         public void OnCameraOrientation(InputAction.CallbackContext context)
         {
             cameraInput = context.ReadValue<Vector2>();
+        }
+
+        public void OnPrimaryWeapon(InputAction.CallbackContext context)
+        {
+            pIsFiring = context.ReadValueAsButton();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AcePerinova.Weapons;
 
 
 namespace AcePerinova.Selectables{
@@ -13,9 +14,14 @@ namespace AcePerinova.Selectables{
         public string ShipName;
         [TextArea(1,25)]
         public string bio;
+        public ShipUtility shipUtility;
         public Texture2D nameArt, selectArt;
 
-        public float
+        public WeaponComponent primary, secondary;
+
+        [Header("Movement Stats")]
+        public float maxSpeed = 100;
+        public float minSpeed = 5,
             acceleration = 30,
             pitch = 150,
             yaw = 80,

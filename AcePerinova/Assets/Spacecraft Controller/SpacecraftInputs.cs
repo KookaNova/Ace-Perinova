@@ -91,6 +91,15 @@ namespace AcePerinova.Controller
                     ""processors"": ""InvertVector2(invertX=false)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PrimaryWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9f0ff3f-ef33-4cbc-9377-3f7e0a06e4dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -379,6 +388,28 @@ namespace AcePerinova.Controller
                     ""action"": ""CameraOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62b35fc6-01de-4d90-a4f1-f7650cb5138b"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de92ffc0-bcf6-4ac5-92a0-745f0f58cef2"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -394,6 +425,7 @@ namespace AcePerinova.Controller
             m_Flight_Start = m_Flight.FindAction("Start", throwIfNotFound: true);
             m_Flight_Tab = m_Flight.FindAction("Tab", throwIfNotFound: true);
             m_Flight_CameraOrientation = m_Flight.FindAction("CameraOrientation", throwIfNotFound: true);
+            m_Flight_PrimaryWeapon = m_Flight.FindAction("PrimaryWeapon", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -460,6 +492,7 @@ namespace AcePerinova.Controller
         private readonly InputAction m_Flight_Start;
         private readonly InputAction m_Flight_Tab;
         private readonly InputAction m_Flight_CameraOrientation;
+        private readonly InputAction m_Flight_PrimaryWeapon;
         public struct FlightActions
         {
             private @SpacecraftInputs m_Wrapper;
@@ -471,6 +504,7 @@ namespace AcePerinova.Controller
             public InputAction @Start => m_Wrapper.m_Flight_Start;
             public InputAction @Tab => m_Wrapper.m_Flight_Tab;
             public InputAction @CameraOrientation => m_Wrapper.m_Flight_CameraOrientation;
+            public InputAction @PrimaryWeapon => m_Wrapper.m_Flight_PrimaryWeapon;
             public InputActionMap Get() { return m_Wrapper.m_Flight; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -501,6 +535,9 @@ namespace AcePerinova.Controller
                     @CameraOrientation.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraOrientation;
                     @CameraOrientation.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraOrientation;
                     @CameraOrientation.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraOrientation;
+                    @PrimaryWeapon.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnPrimaryWeapon;
+                    @PrimaryWeapon.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnPrimaryWeapon;
+                    @PrimaryWeapon.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnPrimaryWeapon;
                 }
                 m_Wrapper.m_FlightActionsCallbackInterface = instance;
                 if (instance != null)
@@ -526,6 +563,9 @@ namespace AcePerinova.Controller
                     @CameraOrientation.started += instance.OnCameraOrientation;
                     @CameraOrientation.performed += instance.OnCameraOrientation;
                     @CameraOrientation.canceled += instance.OnCameraOrientation;
+                    @PrimaryWeapon.started += instance.OnPrimaryWeapon;
+                    @PrimaryWeapon.performed += instance.OnPrimaryWeapon;
+                    @PrimaryWeapon.canceled += instance.OnPrimaryWeapon;
                 }
             }
         }
@@ -539,6 +579,7 @@ namespace AcePerinova.Controller
             void OnStart(InputAction.CallbackContext context);
             void OnTab(InputAction.CallbackContext context);
             void OnCameraOrientation(InputAction.CallbackContext context);
+            void OnPrimaryWeapon(InputAction.CallbackContext context);
         }
     }
 }
