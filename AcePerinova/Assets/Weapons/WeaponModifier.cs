@@ -10,12 +10,12 @@ namespace AcePerinova.Weapons{
     [CreateAssetMenu(menuName = "Weapon Modifier", fileName = "New Modifier")]
     public class WeaponModifier : ScriptableObject
     {   
-        public GameObject startUpFX, trailFX, endFX;
+        public GameObject startUpVFX, collisionVFX;
         public AudioClip startSound, activeSound, endSound;
 
         public float activeTime = 6f;
         [Tooltip("When 'true', the modifier will terminate at the end on collision, despite the time remaining on a delay.")]
-        public bool useCollision = true;
+        public bool terminateOnCollision = true;
         [Tooltip("When 'true', the weapon does not move.")]
         public bool isStationary = false;
         public float moveForce = 100f;

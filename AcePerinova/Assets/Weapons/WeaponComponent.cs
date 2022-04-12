@@ -51,7 +51,10 @@ namespace AcePerinova.Weapons{
         }
 
         private void OnCollisionEnter(Collision other) {
-            if(modifiers[i].useCollision){
+            if(modifiers[i].collisionVFX != null){
+               Instantiate(modifiers[i].collisionVFX, this.transform.position, this.transform.rotation, null);
+           }
+            if(modifiers[i].terminateOnCollision){
                 TerminateModifier();
             }
             
@@ -60,7 +63,10 @@ namespace AcePerinova.Weapons{
         private void ActivateModifier(){
            // Instantiate(modifiers[i].startUpFX, this.transform.position, this.transform.rotation, null);
            if(randomizeModifiers){
-               i = Random.Range(0, modifiers.Length);
+               i = Random.Range(0, modifiers.Length - 1);
+           }
+           if(modifiers[i].startUpVFX != null){
+               Instantiate(modifiers[i].startUpVFX, this.transform.position, this.transform.rotation, null);
            }
             StartCoroutine(ModifierTimer());
             if(!modifiers[i].isStationary)
@@ -70,6 +76,7 @@ namespace AcePerinova.Weapons{
         private void TerminateModifier(){
             if(randomizeModifiers){
                 EndUse();
+                return;
             }
             //Instantiate(modifiers[i].endFX, null);
             IncrementModifiers();

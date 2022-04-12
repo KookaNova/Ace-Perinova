@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AcePerinova.Controller;
 
-namespace AcePerinova.GameUtilities{
+namespace AcePerinova.GameManagement{
     /// <summary>
     /// Handles the initialization of gamemodes and spawning in players.
     /// </summary>
     public class GameManager : MonoBehaviour
     {
         public GameObject playerPrefab, aiPrefab;
-
+        
+        public List<TargetableObject> allTargets;
         #region Game Start
 
         private void Awake() {
             //Only start if client is host
+
             StartGame();
         }
 
@@ -55,6 +58,9 @@ namespace AcePerinova.GameUtilities{
 
             Instantiate(playerPrefab);
             //instantiate at spawn points. This will be Network.Instantiate in the future.
+        }
+        public void RegisterTarget(TargetableObject newTarget){
+            allTargets.Add(newTarget);
         }
 
         #endregion
