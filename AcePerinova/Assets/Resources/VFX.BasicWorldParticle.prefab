@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3521178832052089832}
   - component: {fileID: 3521178832052089833}
   m_Layer: 0
-  m_Name: VFX.MuzzleFlash
+  m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3521178832052089834}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: ec248a06e58c83140a775e6da0978764, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 5aee671dbe4530642a5604e1bc21a9d0, type: 3}
   m_InitialEventName: 0
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
