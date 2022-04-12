@@ -9,6 +9,7 @@ namespace AcePerinova.Controller{
     /// </summary>
     public abstract class SpacecraftController : MonoBehaviour
     {
+        public string playerName = "Unknown";
         public ShipObject ship;
         
         public float currentSpeed, speedTarget;
@@ -79,7 +80,7 @@ namespace AcePerinova.Controller{
                 var w = Instantiate(w_primary, t.position, t.rotation, null);
                 w.owner = this;
                 w.Activate();
-                shipUtility.primaryMuzzle[p_index].Reinit();
+                shipUtility.primaryMuzzle[p_index].Play();
                 p_index++;
                 if(p_index >= primaryWeaponPositions.Length){
                     p_index = 0;
