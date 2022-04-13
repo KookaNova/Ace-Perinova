@@ -58,9 +58,7 @@ namespace AcePerinova.Controller{
             aimDistance = ship.aimDistance;
 
         }
-
         
-
         protected virtual void OnActivate(){}
         protected virtual void Movement(){}
 
@@ -69,7 +67,7 @@ namespace AcePerinova.Controller{
         private void FixedUpdate() {
             Movement(); //finds target speed and set rotation
             speedTarget = Mathf.Clamp(speedTarget, ship.minSpeed, ship.maxSpeed);
-            currentSpeed = Mathf.Lerp(currentSpeed, speedTarget, acceleration * Time.fixedDeltaTime);
+            currentSpeed = Mathf.Lerp(currentSpeed, speedTarget, (acceleration/50) * Time.fixedDeltaTime);
             currentSpeed = Mathf.Clamp(currentSpeed, ship.minSpeed, ship.maxSpeed);
             rb.AddRelativeForce(Vector3.forward * currentSpeed, ForceMode.Acceleration);
             

@@ -100,6 +100,24 @@ namespace AcePerinova.Controller
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondaryWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""aff477bc-f879-4e71-8853-9565cb833ba1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraChange"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d72ca89-604f-4170-83ff-4dc30d570ba3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -410,6 +428,50 @@ namespace AcePerinova.Controller
                     ""action"": ""PrimaryWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cfda47ff-217e-4849-abfe-c8cc3f749cbb"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21b2d470-93a0-425d-845c-ad37ef48523c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84f1bca6-52b8-49c1-affe-086719b8b0c8"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""005e06c1-af9f-4fc3-ad94-41efe84626e7"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -426,6 +488,8 @@ namespace AcePerinova.Controller
             m_Flight_Tab = m_Flight.FindAction("Tab", throwIfNotFound: true);
             m_Flight_CameraOrientation = m_Flight.FindAction("CameraOrientation", throwIfNotFound: true);
             m_Flight_PrimaryWeapon = m_Flight.FindAction("PrimaryWeapon", throwIfNotFound: true);
+            m_Flight_SecondaryWeapon = m_Flight.FindAction("SecondaryWeapon", throwIfNotFound: true);
+            m_Flight_CameraChange = m_Flight.FindAction("CameraChange", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -493,6 +557,8 @@ namespace AcePerinova.Controller
         private readonly InputAction m_Flight_Tab;
         private readonly InputAction m_Flight_CameraOrientation;
         private readonly InputAction m_Flight_PrimaryWeapon;
+        private readonly InputAction m_Flight_SecondaryWeapon;
+        private readonly InputAction m_Flight_CameraChange;
         public struct FlightActions
         {
             private @SpacecraftInputs m_Wrapper;
@@ -505,6 +571,8 @@ namespace AcePerinova.Controller
             public InputAction @Tab => m_Wrapper.m_Flight_Tab;
             public InputAction @CameraOrientation => m_Wrapper.m_Flight_CameraOrientation;
             public InputAction @PrimaryWeapon => m_Wrapper.m_Flight_PrimaryWeapon;
+            public InputAction @SecondaryWeapon => m_Wrapper.m_Flight_SecondaryWeapon;
+            public InputAction @CameraChange => m_Wrapper.m_Flight_CameraChange;
             public InputActionMap Get() { return m_Wrapper.m_Flight; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -538,6 +606,12 @@ namespace AcePerinova.Controller
                     @PrimaryWeapon.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnPrimaryWeapon;
                     @PrimaryWeapon.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnPrimaryWeapon;
                     @PrimaryWeapon.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnPrimaryWeapon;
+                    @SecondaryWeapon.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnSecondaryWeapon;
+                    @SecondaryWeapon.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnSecondaryWeapon;
+                    @SecondaryWeapon.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnSecondaryWeapon;
+                    @CameraChange.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraChange;
+                    @CameraChange.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraChange;
+                    @CameraChange.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraChange;
                 }
                 m_Wrapper.m_FlightActionsCallbackInterface = instance;
                 if (instance != null)
@@ -566,6 +640,12 @@ namespace AcePerinova.Controller
                     @PrimaryWeapon.started += instance.OnPrimaryWeapon;
                     @PrimaryWeapon.performed += instance.OnPrimaryWeapon;
                     @PrimaryWeapon.canceled += instance.OnPrimaryWeapon;
+                    @SecondaryWeapon.started += instance.OnSecondaryWeapon;
+                    @SecondaryWeapon.performed += instance.OnSecondaryWeapon;
+                    @SecondaryWeapon.canceled += instance.OnSecondaryWeapon;
+                    @CameraChange.started += instance.OnCameraChange;
+                    @CameraChange.performed += instance.OnCameraChange;
+                    @CameraChange.canceled += instance.OnCameraChange;
                 }
             }
         }
@@ -580,6 +660,8 @@ namespace AcePerinova.Controller
             void OnTab(InputAction.CallbackContext context);
             void OnCameraOrientation(InputAction.CallbackContext context);
             void OnPrimaryWeapon(InputAction.CallbackContext context);
+            void OnSecondaryWeapon(InputAction.CallbackContext context);
+            void OnCameraChange(InputAction.CallbackContext context);
         }
     }
 }

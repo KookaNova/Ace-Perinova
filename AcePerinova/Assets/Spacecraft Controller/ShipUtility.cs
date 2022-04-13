@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using AcePerinova.Controller;
 
 namespace AcePerinova.Selectables{
     /// <summary>
@@ -9,26 +10,50 @@ namespace AcePerinova.Selectables{
     /// </summary>
     public class ShipUtility : MonoBehaviour
     {
-        Controller.SpacecraftController sc;
+        SpacecraftController sc;
+        InputInterpreter _in;
+
 
         public Transform[] primaryWeaponPositions;
         public VisualEffect[] primaryMuzzle;
         public Transform[] secondaryWeaponPositions;
         public VisualEffect[] secondaryMuzzle;
-        public Vector3 aimPosition;
+
+        public GameObject[] cameras;
+        int cameraIndex = 0;
+
+        [HideInInspector] public Vector3 targetPosition, actualPosition;
 
         private void Awake() {
-            sc = GetComponentInParent<Controller.SpacecraftController>();
-            GetComponent<Controller.HUDController>().ship = this; 
+            sc = GetComponentInParent<SpacecraftController>();
+            _in = this?.GetComponentInParent<InputInterpreter>();
         }
 
         private void Update(){
-            aimPosition = transform.forward * sc.aimDistance;
+            targetPosition = transform.position + (transform.forward * sc.aimDistance);
+            actualPosition = Vector3.Lerp(actualPosition, targetPosition, 15f * Time.deltaTime);
+
             foreach(var item in primaryWeaponPositions){
-                var toTarget = aimPosition - item.position;
-                var targetRotation = Vector3.RotateTowards(item.forward, toTarget, 50 * Time.deltaTime, 1080);
-                item.rotation = Quaternion.LookRotation(targetRotation);
+                item.LookAt(actualPosition);
             }
+            if(_in?.cameraIndex != cameraIndex){
+                Camera();
+            }
+
+        }
+
+        private void Camera(){
+            cameras[cameraIndex].SetActive(false);
+            if(_in?.cameraIndex >= cameras.Length){
+                _in.cameraIndex = 0;
+                cameraIndex = 0;
+            }
+            else{
+                cameraIndex++;
+            }
+            cameras[cameraIndex].SetActive(true);
+
+
         }
     }
 }

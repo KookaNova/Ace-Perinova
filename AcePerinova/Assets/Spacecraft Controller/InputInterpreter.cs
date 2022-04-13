@@ -12,6 +12,7 @@ namespace AcePerinova.Controller
         public float thrust, brake, yaw;
         public Vector2 torque, cameraInput;
         public bool pIsFiring, sIsFiring;
+        public int cameraIndex;
 
 
         SpacecraftInputs _controls;
@@ -68,6 +69,17 @@ namespace AcePerinova.Controller
         public void OnPrimaryWeapon(InputAction.CallbackContext context)
         {
             pIsFiring = context.ReadValueAsButton();
+        }
+
+        public void OnSecondaryWeapon(InputAction.CallbackContext context)
+        {
+            sIsFiring = context.ReadValueAsButton();
+        }
+
+        public void OnCameraChange(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+            cameraIndex++;
         }
     }
 }

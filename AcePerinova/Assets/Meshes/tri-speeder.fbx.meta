@@ -3,7 +3,12 @@ guid: cf93fdc4546a6f3458b26d9ebf24611e
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tri-Canopy
+    second: {fileID: 2100000, guid: b1cd7a7e04d5cef4f91b52a5f1fd5769, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

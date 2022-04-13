@@ -8,7 +8,9 @@ namespace AcePerinova.Controller{
     /// </summary>
     public class PlayerController : SpacecraftController
     {
-        private InputInterpreter _in;
+        [HideInInspector] public InputInterpreter _in;
+
+        int currentCam;
 
         protected override void OnActivate() {
             _in = GetComponent<InputInterpreter>();

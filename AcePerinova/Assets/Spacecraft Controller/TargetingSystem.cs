@@ -9,6 +9,7 @@ namespace AcePerinova.Controller
         TargetableObject selectedTarget;
         GameManagement.GameManager gm;
 
+
         //store screen positions of targets.
         //decide if a target is visible
 
@@ -16,7 +17,8 @@ namespace AcePerinova.Controller
             gm = FindObjectOfType<GameManagement.GameManager>();
         }
 
-        private void LateUpdate() {
+        private void Update() {
+
             
         }
     }

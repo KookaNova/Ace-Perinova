@@ -22,7 +22,8 @@ MonoBehaviour:
   secondary: {fileID: 0}
   maxSpeed: 60
   minSpeed: 0
-  acceleration: 30
+  acceleration: 50
   pitch: 30
   yaw: 15
   roll: 75
+  aimDistance: 200

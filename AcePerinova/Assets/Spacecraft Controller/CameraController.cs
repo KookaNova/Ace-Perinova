@@ -10,7 +10,6 @@ namespace AcePerinova.Controller{
     public class CameraController : MonoBehaviour
     {
         InputInterpreter _in;
-        bool using1stPerson = false;
         bool targetTracking = false;
         Vector2 rotationInput = Vector2.zero;
 
@@ -27,26 +26,17 @@ namespace AcePerinova.Controller{
         private void LateUpdate() {
             if(_in == null)return;
 
-            switch (targetTracking)
-            {
+            switch (targetTracking){
                 case true:
                     //Lock camera to target, ignoring imputs
                     break;
-
                 case false:
-                    if(using1stPerson){
-                        //get inputs multiplied my max rotation
-                        rotationInput.x = _in.cameraInput.x * 120;
-                        rotationInput.y = _in.cameraInput.y * 90;
-                    }
-                    else{
-                        //get inputs multiplied my max rotation
-                        rotationInput.x = _in.cameraInput.x * 150;
-                        rotationInput.y = _in.cameraInput.y * 90;
-                    }
+                    rotationInput.x = _in.cameraInput.x * 150; //Turns input directly into rotation values.
+                    rotationInput.y = _in.cameraInput.y * 90;
                     Quaternion targetRotation = Quaternion.Euler(rotationInput.y, rotationInput.x, 0); //y and x are swapped from inputs
-                    //set rotation
-                    gameObject.transform.localRotation = Quaternion.Slerp(gameObject.transform.localRotation, targetRotation, 15f * Time.deltaTime);
+                
+                    targetRotation.x = Mathf.Clamp(targetRotation.x, -1, .3f); //clamps 1st person limitation. May be adjusted later.
+                    gameObject.transform.localRotation = Quaternion.Slerp(gameObject.transform.localRotation, targetRotation, 15f * Time.deltaTime); //set rotation
                     break;
             } 
         }
