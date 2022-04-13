@@ -26,6 +26,7 @@ namespace AcePerinova.Selectables{
             pitch = 150,
             yaw = 80,
             roll = 200;
+        public int aimDistance = 200;
 
     }
 }

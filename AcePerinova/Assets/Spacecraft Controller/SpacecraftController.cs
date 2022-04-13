@@ -24,6 +24,7 @@ namespace AcePerinova.Controller{
         protected ShipUtility shipUtility;
         protected Rigidbody rb;
         protected Weapons.WeaponComponent w_primary, w_secondary;
+        public int aimDistance;
         #endregion
 
         #region Input
@@ -54,6 +55,7 @@ namespace AcePerinova.Controller{
             w_secondary = ship.secondary;
             primaryWeaponPositions = shipUtility.primaryWeaponPositions;
             secondaryWeaponPositions = shipUtility.secondaryWeaponPositions;
+            aimDistance = ship.aimDistance;
 
         }
 
