@@ -6,11 +6,11 @@ using UnityEngine.UI;
 namespace AcePerinova.Utilities{
     public class IndicatorComponent : MonoBehaviour
     {
-        public Text player, character, distance;
-        public GameObject lockIndicator;
+        public Text player, objectName, distance;
+        public GameObject lockIcon;
 
         private void Awake() {
-            lockIndicator.SetActive(false);
+            //lockIcon.SetActive(false);
         }
     
     }

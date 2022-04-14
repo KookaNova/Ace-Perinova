@@ -10,6 +10,8 @@ namespace AcePerinova.GameManagement{
     public class GameManager : MonoBehaviour
     {
         public GameObject playerPrefab, aiPrefab;
+        public int playersA, playersB;
+        public int scoreA, scoreB;
         
         public List<TargetableObject> allTargets;
         #region Game Start
@@ -61,6 +63,12 @@ namespace AcePerinova.GameManagement{
         }
         public void RegisterTarget(TargetableObject newTarget){
             allTargets.Add(newTarget);
+            if(newTarget.team == 0){
+                playersA++;
+            }
+            if(newTarget.team == 1){
+                playersB++;
+            }
         }
 
         #endregion

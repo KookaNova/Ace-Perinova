@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7798858039961416715}
   - component: {fileID: 6928666164230484593}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6437336863660259589}
   - component: {fileID: 8211641398753257529}
   - component: {fileID: 6135906563446133991}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 1293974354215673490}
   - component: {fileID: 8236369189648692459}
   - component: {fileID: 8796071702662707079}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Weapon.ImpactBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,6 +507,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1ee609f24d9460b4fb0fccd2ba2207b4, type: 3}
       propertyPath: m_Name
       value: ImpactBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1ee609f24d9460b4fb0fccd2ba2207b4, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ee609f24d9460b4fb0fccd2ba2207b4, type: 3}

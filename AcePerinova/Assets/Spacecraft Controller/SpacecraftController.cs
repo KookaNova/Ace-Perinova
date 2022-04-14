@@ -10,6 +10,7 @@ namespace AcePerinova.Controller{
     public abstract class SpacecraftController : MonoBehaviour
     {
         public string playerName = "Unknown";
+        public int team = 0;
         public ShipObject ship;
         
         public float currentSpeed, speedTarget;

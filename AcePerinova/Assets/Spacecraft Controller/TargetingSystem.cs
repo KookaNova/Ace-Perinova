@@ -8,13 +8,21 @@ namespace AcePerinova.Controller
     {
         TargetableObject selectedTarget;
         GameManagement.GameManager gm;
+        SpacecraftController sc;
+        HUDController hud;
+        int targetedTeam = 0;
 
-
+        public List<Vector3> targetScreenPos;
         //store screen positions of targets.
         //decide if a target is visible
 
         private void Awake() {
-            gm = FindObjectOfType<GameManagement.GameManager>();
+            if(sc.team == 0){
+                targetedTeam = 1;
+            }
+            else{
+                targetedTeam = 0;
+            }
         }
 
         private void Update() {

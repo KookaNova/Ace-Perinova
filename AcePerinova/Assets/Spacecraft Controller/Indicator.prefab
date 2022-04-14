@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 838997698715846761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 838997699636311873}
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 838997699636311872}
-  character: {fileID: 838997699527070638}
+  objectName: {fileID: 838997699527070638}
   distance: {fileID: 838997699203091064}
-  lockIndicator: {fileID: 838997699569120700}
+  lockIcon: {fileID: 838997699569120700}
 --- !u!1 &838997699203091070
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +107,6 @@ GameObject:
   m_Component:
   - component: {fileID: 838997699203091065}
   - component: {fileID: 838997699203091066}
-  - component: {fileID: 838997699203091067}
   - component: {fileID: 838997699203091064}
   m_Layer: 5
   m_Name: Distance
@@ -144,22 +143,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838997699203091070}
   m_CullTransparentMesh: 1
---- !u!114 &838997699203091067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838997699203091070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c070048b07a85394a84e8b273b225d92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  character: {fileID: 0}
-  distance: {fileID: 0}
-  lockIndicator: {fileID: 0}
 --- !u!114 &838997699203091064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,10 +187,9 @@ GameObject:
   m_Component:
   - component: {fileID: 838997699527070639}
   - component: {fileID: 838997699527070632}
-  - component: {fileID: 838997699527070633}
   - component: {fileID: 838997699527070638}
   m_Layer: 5
-  m_Name: CharacterName
+  m_Name: ObjectName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,22 +223,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838997699527070636}
   m_CullTransparentMesh: 1
---- !u!114 &838997699527070633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838997699527070636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c070048b07a85394a84e8b273b225d92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  character: {fileID: 0}
-  distance: {fileID: 0}
-  lockIndicator: {fileID: 0}
 --- !u!114 &838997699527070638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +267,6 @@ GameObject:
   m_Component:
   - component: {fileID: 838997699569120703}
   - component: {fileID: 838997699569120696}
-  - component: {fileID: 838997699569120697}
   - component: {fileID: 838997699569120702}
   m_Layer: 5
   m_Name: Lock
@@ -338,22 +303,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838997699569120700}
   m_CullTransparentMesh: 1
---- !u!114 &838997699569120697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838997699569120700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c070048b07a85394a84e8b273b225d92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  character: {fileID: 0}
-  distance: {fileID: 0}
-  lockIndicator: {fileID: 0}
 --- !u!114 &838997699569120702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +347,6 @@ GameObject:
   m_Component:
   - component: {fileID: 838997699636311873}
   - component: {fileID: 838997699636311874}
-  - component: {fileID: 838997699636311875}
   - component: {fileID: 838997699636311872}
   m_Layer: 5
   m_Name: PlayerName
@@ -435,22 +383,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838997699636311878}
   m_CullTransparentMesh: 1
---- !u!114 &838997699636311875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838997699636311878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c070048b07a85394a84e8b273b225d92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  character: {fileID: 0}
-  distance: {fileID: 0}
-  lockIndicator: {fileID: 0}
 --- !u!114 &838997699636311872
 MonoBehaviour:
   m_ObjectHideFlags: 0
