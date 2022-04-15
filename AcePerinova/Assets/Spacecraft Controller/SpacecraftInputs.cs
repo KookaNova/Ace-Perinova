@@ -118,6 +118,42 @@ namespace AcePerinova.Controller
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TargetTeamIncrement"",
+                    ""type"": ""Button"",
+                    ""id"": ""61f90934-d91a-42f9-9ba2-74f6d1b28ce3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TargetTeamDecrement"",
+                    ""type"": ""Button"",
+                    ""id"": ""e753ab2f-01c3-49df-949f-da9b9bf0d602"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TargetSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""055da5a7-22f1-4b86-ab93-c71aa670968c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleCameraFollow"",
+                    ""type"": ""Button"",
+                    ""id"": ""4df3070b-f2e6-4002-aba4-354a9749442c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -472,6 +508,94 @@ namespace AcePerinova.Controller
                     ""action"": ""CameraChange"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00adb1c4-c544-4d25-858c-bc16cdf1982e"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetTeamIncrement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d3987af-081e-4a3f-a482-07c172d23530"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetTeamIncrement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bcf4e312-a83f-4366-8ab9-7a65d385198b"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetTeamDecrement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b9ee86b6-9bb5-4d1f-b495-6b8cfd6cc079"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetTeamDecrement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3f5cdfa-6154-4bab-a6c9-568ca03a9182"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af76d449-f8ac-4d2d-adfa-582b1bd1c3f7"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TargetSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8cc2f3f-742f-43f3-b0ec-a4980e08bd44"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleCameraFollow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""812e6fbc-5bd9-4f1f-bc9d-443cc83d221f"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleCameraFollow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -490,6 +614,10 @@ namespace AcePerinova.Controller
             m_Flight_PrimaryWeapon = m_Flight.FindAction("PrimaryWeapon", throwIfNotFound: true);
             m_Flight_SecondaryWeapon = m_Flight.FindAction("SecondaryWeapon", throwIfNotFound: true);
             m_Flight_CameraChange = m_Flight.FindAction("CameraChange", throwIfNotFound: true);
+            m_Flight_TargetTeamIncrement = m_Flight.FindAction("TargetTeamIncrement", throwIfNotFound: true);
+            m_Flight_TargetTeamDecrement = m_Flight.FindAction("TargetTeamDecrement", throwIfNotFound: true);
+            m_Flight_TargetSelect = m_Flight.FindAction("TargetSelect", throwIfNotFound: true);
+            m_Flight_ToggleCameraFollow = m_Flight.FindAction("ToggleCameraFollow", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -559,6 +687,10 @@ namespace AcePerinova.Controller
         private readonly InputAction m_Flight_PrimaryWeapon;
         private readonly InputAction m_Flight_SecondaryWeapon;
         private readonly InputAction m_Flight_CameraChange;
+        private readonly InputAction m_Flight_TargetTeamIncrement;
+        private readonly InputAction m_Flight_TargetTeamDecrement;
+        private readonly InputAction m_Flight_TargetSelect;
+        private readonly InputAction m_Flight_ToggleCameraFollow;
         public struct FlightActions
         {
             private @SpacecraftInputs m_Wrapper;
@@ -573,6 +705,10 @@ namespace AcePerinova.Controller
             public InputAction @PrimaryWeapon => m_Wrapper.m_Flight_PrimaryWeapon;
             public InputAction @SecondaryWeapon => m_Wrapper.m_Flight_SecondaryWeapon;
             public InputAction @CameraChange => m_Wrapper.m_Flight_CameraChange;
+            public InputAction @TargetTeamIncrement => m_Wrapper.m_Flight_TargetTeamIncrement;
+            public InputAction @TargetTeamDecrement => m_Wrapper.m_Flight_TargetTeamDecrement;
+            public InputAction @TargetSelect => m_Wrapper.m_Flight_TargetSelect;
+            public InputAction @ToggleCameraFollow => m_Wrapper.m_Flight_ToggleCameraFollow;
             public InputActionMap Get() { return m_Wrapper.m_Flight; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -612,6 +748,18 @@ namespace AcePerinova.Controller
                     @CameraChange.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraChange;
                     @CameraChange.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraChange;
                     @CameraChange.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCameraChange;
+                    @TargetTeamIncrement.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTargetTeamIncrement;
+                    @TargetTeamIncrement.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTargetTeamIncrement;
+                    @TargetTeamIncrement.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTargetTeamIncrement;
+                    @TargetTeamDecrement.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTargetTeamDecrement;
+                    @TargetTeamDecrement.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTargetTeamDecrement;
+                    @TargetTeamDecrement.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTargetTeamDecrement;
+                    @TargetSelect.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTargetSelect;
+                    @TargetSelect.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTargetSelect;
+                    @TargetSelect.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTargetSelect;
+                    @ToggleCameraFollow.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnToggleCameraFollow;
+                    @ToggleCameraFollow.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnToggleCameraFollow;
+                    @ToggleCameraFollow.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnToggleCameraFollow;
                 }
                 m_Wrapper.m_FlightActionsCallbackInterface = instance;
                 if (instance != null)
@@ -646,6 +794,18 @@ namespace AcePerinova.Controller
                     @CameraChange.started += instance.OnCameraChange;
                     @CameraChange.performed += instance.OnCameraChange;
                     @CameraChange.canceled += instance.OnCameraChange;
+                    @TargetTeamIncrement.started += instance.OnTargetTeamIncrement;
+                    @TargetTeamIncrement.performed += instance.OnTargetTeamIncrement;
+                    @TargetTeamIncrement.canceled += instance.OnTargetTeamIncrement;
+                    @TargetTeamDecrement.started += instance.OnTargetTeamDecrement;
+                    @TargetTeamDecrement.performed += instance.OnTargetTeamDecrement;
+                    @TargetTeamDecrement.canceled += instance.OnTargetTeamDecrement;
+                    @TargetSelect.started += instance.OnTargetSelect;
+                    @TargetSelect.performed += instance.OnTargetSelect;
+                    @TargetSelect.canceled += instance.OnTargetSelect;
+                    @ToggleCameraFollow.started += instance.OnToggleCameraFollow;
+                    @ToggleCameraFollow.performed += instance.OnToggleCameraFollow;
+                    @ToggleCameraFollow.canceled += instance.OnToggleCameraFollow;
                 }
             }
         }
@@ -662,6 +822,10 @@ namespace AcePerinova.Controller
             void OnPrimaryWeapon(InputAction.CallbackContext context);
             void OnSecondaryWeapon(InputAction.CallbackContext context);
             void OnCameraChange(InputAction.CallbackContext context);
+            void OnTargetTeamIncrement(InputAction.CallbackContext context);
+            void OnTargetTeamDecrement(InputAction.CallbackContext context);
+            void OnTargetSelect(InputAction.CallbackContext context);
+            void OnToggleCameraFollow(InputAction.CallbackContext context);
         }
     }
 }

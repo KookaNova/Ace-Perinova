@@ -12,8 +12,9 @@ namespace AcePerinova.Controller
         Selectables.ShipUtility ship;
         Controller.PlayerController sc;
         GameManagement.GameManager gm;
+        TargetingSystem ts;
+        int team;
         
-
         [SerializeField] Canvas overlayHud;
        
         public Image[] thrustImage, speedImage;
@@ -23,11 +24,14 @@ namespace AcePerinova.Controller
         public IndicatorComponent indicatorPrefab;
         public List<IndicatorComponent> indicators;
         public Image orientationImage;
+        public GameObject targetPointer;
 
         public void Awake(){
             gm = FindObjectOfType<GameManagement.GameManager>();
             ship = this?.GetComponentInParent<Selectables.ShipUtility>();
             sc = this?.GetComponentInParent<Controller.PlayerController>();
+            ts = this?.GetComponent<TargetingSystem>();
+            team = sc.team;
             if(overlayHud == null){
                 Debug.LogWarning("HUDController: No overlayHud canvas has been s elected in the inspector.");
             }
@@ -81,9 +85,23 @@ namespace AcePerinova.Controller
             for(int i = 0; i < gm.allTargets.Count; i++){
                 TargetableObject target = gm.allTargets[i];
                 var ind = Instantiate(indicatorPrefab, overlayHud.transform);
+                ind.targetableObject = target;
                 indicators.Add(ind);
-                ind.objectName.text = target.targetName;
+                ts?.targetSelectEvent.AddListener(ind.CheckTarget);
+                if(target.team != 2){
+                    if(target.team == team){
+                        ind.color = ColorPaletteUtility.friendly;
+                    }
+                    else{
+                        ind.color = ColorPaletteUtility.enemy;
 
+                    }
+                }
+                else{
+                    ind.color = ColorPaletteUtility.global;
+                }
+                ind.ChangeColor();
+                
                 ind.gameObject.SetActive(false);
             }
         }
@@ -130,19 +148,29 @@ namespace AcePerinova.Controller
                 var desiredPosition = MathC.WorldToHUDSpace(Camera.main, target.transform.position, overlayHud.transform.position);
                 ind.transform.position = Vector3.Lerp(ind.transform.position, desiredPosition, 50 * Time.deltaTime);
                 //fill details
-                ind.distance.text = Vector3.Distance(transform.position, target.transform.position).ToString(".#0");
-                
+                float distance = Vector3.Distance(transform.position, target.transform.position);
+                ind.distance.text = distance.ToString(".#0");
+                //ind.transform.localScale =  (ind.transform.localScale + (Vector3.one * 75)) / distance; This will scale the target indicator.
 
             }
+            if(ts.currentTarget == null){
+                targetPointer.SetActive(false);
+            }
+            else{
+                targetPointer.SetActive(true);
+                targetPointer.transform.LookAt(ts.currentTarget.transform, transform.up);
+            }
+            
         }
 
         private void AimWeaponReticle(){
             //reticle for accurate aim
-            var actualPosition = MathC.WorldToHUDSpace(Camera.main, ship.actualPosition, overlayHud.transform.position);
+            var actualPosition = MathC.WorldToHUDSpace(Camera.main, ship.aimPosition, overlayHud.transform.position);
             weaponReticle.transform.position = Vector3.Slerp(weaponReticle.transform.position, actualPosition, 15 * Time.deltaTime);
             //reticle for basically the center of the screen
-            var targetPosition = MathC.WorldToHUDSpace(Camera.main, ship.targetPosition, overlayHud.transform.position);
+            var targetPosition = MathC.WorldToHUDSpace(Camera.main, ship.centerPosition, overlayHud.transform.position);
             centerPositionReticle.transform.position = Vector3.Lerp(centerPositionReticle.transform.position, targetPosition, 25 * Time.deltaTime);
+            //Debug.Log(centerPositionReticle.transform.position);
         }
 
         #endregion

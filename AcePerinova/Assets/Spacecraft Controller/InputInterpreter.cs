@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 namespace AcePerinova.Controller
 {
@@ -12,7 +13,14 @@ namespace AcePerinova.Controller
         public float thrust, brake, yaw;
         public Vector2 torque, cameraInput;
         public bool pIsFiring, sIsFiring;
-        public int cameraIndex;
+        [HideInInspector]
+        public UnityEvent 
+            cameraChangedEvent,
+            teamIncrementEvent,
+            teamDecrementEvent,
+            targetSelectEvent,
+            cameraFollowToggleEvent;
+
 
 
         SpacecraftInputs _controls;
@@ -79,7 +87,31 @@ namespace AcePerinova.Controller
         public void OnCameraChange(InputAction.CallbackContext context)
         {
             if(context.performed)
-            cameraIndex++;
+            cameraChangedEvent.Invoke();
+        }
+
+        public void OnTargetTeamIncrement(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+            teamIncrementEvent.Invoke();
+        }
+
+        public void OnTargetTeamDecrement(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+            teamIncrementEvent.Invoke();
+        }
+
+        public void OnTargetSelect(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+            targetSelectEvent.Invoke();
+        }
+
+        public void OnToggleCameraFollow(InputAction.CallbackContext context)
+        {
+            if(context.performed)
+            cameraFollowToggleEvent.Invoke();
         }
     }
 }

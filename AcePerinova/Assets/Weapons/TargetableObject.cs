@@ -8,12 +8,15 @@ namespace AcePerinova.Controller
     [RequireComponent(typeof(Rigidbody))]
     public class TargetableObject : MonoBehaviour
     {
+        
         public string targetName = "Unknown";
         public int team = 0; //0 = a, 1 = b, 2 = global
         public bool isObjective = false;
-        public MeshRenderer mesh;
-        public Rigidbody rb;
-        public SpacecraftController sc;
+
+        [HideInInspector] public MeshRenderer mesh;
+        [HideInInspector] public Rigidbody rb;
+        [HideInInspector] public SpacecraftController sc;
+        [HideInInspector] public bool isTargeted;
 
         private void Awake() {
             var gm = FindObjectOfType<GameManager>();
@@ -31,10 +34,7 @@ namespace AcePerinova.Controller
                 targetName = sc.playerName;
                 team = sc.team;
             }
-            
-
         }
-    
     }
 }
 

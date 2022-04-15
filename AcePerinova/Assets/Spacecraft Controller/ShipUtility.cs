@@ -19,10 +19,9 @@ namespace AcePerinova.Selectables{
         public Transform[] secondaryWeaponPositions;
         public VisualEffect[] secondaryMuzzle;
 
-        public GameObject[] cameras;
-        int cameraIndex = 0;
+        
 
-        [HideInInspector] public Vector3 targetPosition, actualPosition;
+        [HideInInspector] public Vector3 centerPosition, aimPosition;
 
         private void Awake() {
             sc = GetComponentInParent<SpacecraftController>();
@@ -30,29 +29,12 @@ namespace AcePerinova.Selectables{
         }
 
         private void Update(){
-            targetPosition = transform.position + (transform.forward * sc.aimDistance);
-            actualPosition = Vector3.Lerp(actualPosition, targetPosition, 15f * Time.deltaTime);
+            centerPosition = transform.position + (transform.forward * sc.aimDistance);
+            aimPosition = Vector3.Lerp(aimPosition, centerPosition, 15f * Time.deltaTime);
 
             foreach(var item in primaryWeaponPositions){
-                item.LookAt(actualPosition);
+                item.LookAt(aimPosition);
             }
-            if(_in?.cameraIndex != cameraIndex){
-                Camera();
-            }
-
-        }
-
-        private void Camera(){
-            cameras[cameraIndex].SetActive(false);
-            if(_in?.cameraIndex >= cameras.Length){
-                _in.cameraIndex = 0;
-                cameraIndex = 0;
-            }
-            else{
-                cameraIndex++;
-            }
-            cameras[cameraIndex].SetActive(true);
-
 
         }
     }
