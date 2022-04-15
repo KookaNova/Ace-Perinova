@@ -16,7 +16,7 @@ namespace AcePerinova.Controller
         [HideInInspector] public MeshRenderer mesh;
         [HideInInspector] public Rigidbody rb;
         [HideInInspector] public SpacecraftController sc;
-        [HideInInspector] public bool isTargeted;
+        [HideInInspector] public bool isTargeted, isLocked;
 
         private void Awake() {
             var gm = FindObjectOfType<GameManager>();

@@ -10,20 +10,27 @@ namespace AcePerinova.Controller
         GameManagement.GameManager gm;
         SpacecraftController sc;
         InputInterpreter _in;
+        
+        [SerializeField] Camera targettingCamera;
+        [SerializeField] Transform overlayHUD;
 
         int targetedTeam = 0;
-        public List<TargetableObject> validTargets;
-        public TargetableObject currentTarget;
-        
-        [HideInInspector] public UnityEvent targetSelectEvent;
 
-
-        //store screen positions of targets.
-        //decide if a target is visible
+        //Target Selection
+        [HideInInspector] public List<TargetableObject> validTargets = new List<TargetableObject>();
+        [HideInInspector] public TargetableObject currentTarget;
+        [HideInInspector] public UnityEvent targetSelectEvent, lockStatusEvent;
+        //lock on
+        [HideInInspector] public bool isLocking = false, targetLocked = false;
+        [HideInInspector] public Transform lockTransform = null;
+        float lockIncrementor = 0.05f;
 
         private void Awake() {
             sc = GetComponentInParent<SpacecraftController>();
             gm = FindObjectOfType<GameManagement.GameManager>();
+            lockTransform = new GameObject("LockPositioner").transform;
+            lockTransform.SetParent(overlayHUD);
+            lockTransform.transform.localPosition = Vector3.zero;
             if(sc.team == 0){
                 targetedTeam = 1;
             }
@@ -34,6 +41,12 @@ namespace AcePerinova.Controller
             _in.teamIncrementEvent.AddListener(ChangeTargetTeam);
             _in.targetSelectEvent.AddListener(SelectTarget);
             FindValidTargets();
+        }
+
+        private void Update() {
+            if(validTargets.Count > 0){
+                TargetLock();
+            }
         }
 
         private void FindValidTargets(){
@@ -62,25 +75,95 @@ namespace AcePerinova.Controller
 
         public void SelectTarget(){
             if(currentTarget != null) currentTarget.isTargeted = false;
+            LockFailed();
             float distance = 1;
             Vector3 center = Vector3.one/2;
             foreach(var target in validTargets){
-                Vector3 pos = Camera.main.WorldToViewportPoint(target.transform.position);
+                if(target == currentTarget)continue;
+                Vector2 pos = Camera.main.WorldToViewportPoint(target.transform.position);
                 float diff = Vector2.Distance(center, pos);
                 Debug.Log(diff);
 
                 if(diff < distance){
                     distance = diff;
+                    if(currentTarget != null) currentTarget.isTargeted = false;
+                    target.isTargeted = true;
                     currentTarget = target;
-                    currentTarget.isTargeted = true;
                     Debug.Log(currentTarget.targetName);
                 }
                 else{
                     continue;
                 }
             }
+            sc.lockedTarget = currentTarget;
             targetSelectEvent.Invoke();
+           
             
+        }
+
+        private void TargetLock(){
+            if(targettingCamera == null){
+                Debug.LogWarningFormat("Targeting System on {0} is missing a targetting camera. TargetLock() can not be achieved.", this);
+                return;
+            }
+            if(currentTarget == null){
+                LockFailed();
+                return;
+            }
+            //First check the FOV Camera
+            Vector3 targetPosition = currentTarget.transform.position;
+            Vector2 fovCamPosition = targettingCamera.WorldToViewportPoint(targetPosition);
+            if(fovCamPosition.x > 1 || fovCamPosition.x < 0 || fovCamPosition.y > 1 || fovCamPosition.y < 0){
+                //lock failed
+                LockFailed();
+                return;
+            }
+            //Raycast obstruction check
+            LayerMask layerMask = 1 << 11; //weapons layer
+            RaycastHit hit;
+            Vector3 origin = targettingCamera.transform.position;
+	        Vector3 dir = currentTarget.transform.position - origin;
+            Debug.DrawRay(origin, dir, Color.red);
+            Physics.SphereCast(origin, 2, dir, out hit, 2000, ~layerMask);
+
+            if(hit.collider != null){
+                if(hit.collider.attachedRigidbody == currentTarget.rb){
+                    //the target was hit //Lock tracking
+                    isLocking = true;
+                    Vector3 targetScreenPos = MathC.WorldToHUDSpace(Camera.main, targetPosition, overlayHUD.transform.position);
+                    Vector3 result = Vector3.MoveTowards(lockTransform.position, targetScreenPos, lockIncrementor * Time.deltaTime);
+                    lockTransform.position = result;
+                    lockIncrementor += lockIncrementor * Time.deltaTime;
+
+                    Debug.Log("Targeting " + lockTransform);
+
+                    if(lockTransform.position == targetScreenPos){
+                        if(targetLocked != true){
+                            Debug.Log("Target Locked");
+                            currentTarget.isLocked = true;
+                            targetLocked = true; 
+                            sc.lockedTarget = currentTarget;
+                            lockStatusEvent.Invoke();
+                            lockIncrementor = 100;
+                        }
+                    }
+                }
+                else{
+                    LockFailed();
+
+                }
+            }
+
+           
+        }
+        private void LockFailed(){
+            if(currentTarget != null) currentTarget.isLocked = false;
+            sc.lockedTarget = null;
+            isLocking = false;
+            targetLocked = false;
+            lockIncrementor = 0.05f;
+            lockStatusEvent.Invoke();
+            //lockIndicatorPosition = Vector3.one/2;
         }
     }
 }

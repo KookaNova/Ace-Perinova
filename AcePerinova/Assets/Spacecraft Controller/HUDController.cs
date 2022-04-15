@@ -17,14 +17,14 @@ namespace AcePerinova.Controller
         
         [SerializeField] Canvas overlayHud;
        
-        public Image[] thrustImage, speedImage;
+        [SerializeField] Image[] thrustImage, speedImage;
+        [SerializeField] Image orientationImage;
 
         //Weapons 
-        public Image weaponReticle, centerPositionReticle; //Maybe this can be swapped by the weapon choice
-        public IndicatorComponent indicatorPrefab;
-        public List<IndicatorComponent> indicators;
-        public Image orientationImage;
-        public GameObject targetPointer;
+        [SerializeField] Image weaponReticle, centerPositionReticle, lockOnIndicator; //Maybe this can be swapped by the weapon choice
+        [SerializeField] IndicatorComponent indicatorPrefab;
+        [SerializeField] GameObject targetPointer;
+        List<IndicatorComponent> indicators = new List<IndicatorComponent>();
 
         public void Awake(){
             gm = FindObjectOfType<GameManagement.GameManager>();
@@ -42,7 +42,6 @@ namespace AcePerinova.Controller
             Fills();//Fill basic ship info like speed, health, etc.
 
             //Target info
-            
             if(indicators.Count != gm.allTargets.Count){
                 CreateTargetIndicators();
             }
@@ -55,6 +54,13 @@ namespace AcePerinova.Controller
             }
             if(orientationImage.IsActive()){
                 UpdateRoll();
+            }
+            //target locking
+            if(ts.isLocking){
+                LockOnIndicator();
+            }
+            else{
+                if(lockOnIndicator.gameObject.activeSelf == true) lockOnIndicator.gameObject.SetActive(false);
             }
         }
 
@@ -88,6 +94,7 @@ namespace AcePerinova.Controller
                 ind.targetableObject = target;
                 indicators.Add(ind);
                 ts?.targetSelectEvent.AddListener(ind.CheckTarget);
+                ts?.lockStatusEvent.AddListener(ind.CheckLock);
                 if(target.team != 2){
                     if(target.team == team){
                         ind.color = ColorPaletteUtility.friendly;
@@ -173,6 +180,10 @@ namespace AcePerinova.Controller
             //Debug.Log(centerPositionReticle.transform.position);
         }
 
+        private void LockOnIndicator(){
+            if(lockOnIndicator.gameObject.activeSelf == false)lockOnIndicator.gameObject.SetActive(true);
+            lockOnIndicator.transform.position = Vector3.Lerp(lockOnIndicator.transform.position, ts.lockTransform.position, 50f * Time.deltaTime);
+        }
         #endregion
 
         

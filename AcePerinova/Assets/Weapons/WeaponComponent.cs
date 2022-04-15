@@ -22,7 +22,7 @@ namespace AcePerinova.Weapons{
         /// <summary> Speed at which reload happens or recharge happens.</summary>
         public float rechargeSpeed = 0.01f;
 
-        public GameObject target = null;
+        public Controller.TargetableObject target = null;
 
 
         [HideInInspector] public Controller.SpacecraftController owner;

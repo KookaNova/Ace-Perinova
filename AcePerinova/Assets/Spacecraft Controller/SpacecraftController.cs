@@ -13,7 +13,7 @@ namespace AcePerinova.Controller{
         public int team = 0;
         public ShipObject ship;
         
-        public float currentSpeed, speedTarget;
+        [HideInInspector] public float currentSpeed, speedTarget;
 
         #region Ship Data
         protected float 
@@ -25,13 +25,15 @@ namespace AcePerinova.Controller{
         protected ShipUtility shipUtility;
         protected Rigidbody rb;
         protected Weapons.WeaponComponent w_primary, w_secondary;
-        public int aimDistance;
+        [HideInInspector] public int aimDistance;
         #endregion
 
         #region Input
         bool canUsePrimaryWeapon = true, canUseSecondaryWeapon = true;
         Transform[] primaryWeaponPositions, secondaryWeaponPositions;
         int p_index = 0, s_index = 0;
+
+        [HideInInspector] public TargetableObject lockedTarget;
         #endregion
 
         #region On Spawn
@@ -80,14 +82,34 @@ namespace AcePerinova.Controller{
                 Transform t = primaryWeaponPositions[p_index];
                 var w = Instantiate(w_primary, t.position, t.rotation, null);
                 w.owner = this;
+                w.target = lockedTarget;
                 w.Activate();
-                shipUtility.primaryMuzzle[p_index].Play();
+                shipUtility?.primaryMuzzle[p_index].Play();
                 p_index++;
                 if(p_index >= primaryWeaponPositions.Length){
                     p_index = 0;
                 }
                 yield return new WaitForSecondsRealtime(w_primary.fireDelay);
                 canUsePrimaryWeapon = true;
+            }
+            
+        }
+
+         protected IEnumerator UseSecondaryWeapon(){
+            if(canUseSecondaryWeapon){
+                canUseSecondaryWeapon = false;
+                Transform t = secondaryWeaponPositions[p_index];
+                var w = Instantiate(w_secondary, t.position, t.rotation, null);
+                w.owner = this;
+                w.target = lockedTarget;
+                w.Activate();
+                shipUtility?.secondaryMuzzle[p_index].Play();
+                s_index++;
+                if(s_index >= secondaryWeaponPositions.Length){
+                    s_index = 0;
+                }
+                yield return new WaitForSecondsRealtime(w_secondary.fireDelay);
+                canUseSecondaryWeapon = true;
             }
             
         }

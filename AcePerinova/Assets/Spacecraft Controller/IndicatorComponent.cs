@@ -37,8 +37,13 @@ namespace AcePerinova.Utilities{
         }
 
         public void CheckTarget(){
-            ani.SetBool("isActive", targetableObject.isTargeted);
             targetActive.SetActive(targetableObject.isTargeted);
+            ani.SetBool("isActive", targetableObject.isTargeted);
+            
+            
+        }
+        public void CheckLock(){
+            lockIcon.SetActive(targetableObject.isLocked);
         }
 
         #if UNITY_EDITOR
