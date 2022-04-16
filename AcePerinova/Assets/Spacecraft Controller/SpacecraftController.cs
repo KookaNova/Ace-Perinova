@@ -25,15 +25,21 @@ namespace AcePerinova.Controller{
         protected ShipUtility shipUtility;
         protected Rigidbody rb;
         protected Weapons.WeaponComponent w_primary, w_secondary;
+        private int p_maxUse, s_maxUse;
+        private float p_reloadTime, s_reloadTime;
         [HideInInspector] public int aimDistance;
         #endregion
 
         #region Input
         bool canUsePrimaryWeapon = true, canUseSecondaryWeapon = true;
-        Transform[] primaryWeaponPositions, secondaryWeaponPositions;
-        int p_index = 0, s_index = 0;
+        #endregion
 
+        #region Weapons
+        
+        Transform[] primaryWeaponPositions, secondaryWeaponPositions;
+        int p_index = 0, s_index = 0, p_used = 0, s_used = 0;
         [HideInInspector] public TargetableObject lockedTarget;
+
         #endregion
 
         #region On Spawn
@@ -59,7 +65,10 @@ namespace AcePerinova.Controller{
             primaryWeaponPositions = shipUtility.primaryWeaponPositions;
             secondaryWeaponPositions = shipUtility.secondaryWeaponPositions;
             aimDistance = ship.aimDistance;
-
+            p_maxUse = w_primary.maxUseCount;
+            p_reloadTime = w_primary.reloadTime;
+            s_maxUse = w_secondary.maxUseCount;
+            s_reloadTime = w_secondary.reloadTime;
         }
         
         protected virtual void OnActivate(){}
@@ -78,6 +87,10 @@ namespace AcePerinova.Controller{
 
         protected IEnumerator UsePrimaryWeapon(){
             if(canUsePrimaryWeapon){
+                if(p_used == 0){
+                    StartCoroutine(ReloadPrimaryWeapon());
+                }
+                p_used++;
                 canUsePrimaryWeapon = false;
                 Transform t = primaryWeaponPositions[p_index];
                 var w = Instantiate(w_primary, t.position, t.rotation, null);
@@ -89,7 +102,7 @@ namespace AcePerinova.Controller{
                 if(p_index >= primaryWeaponPositions.Length){
                     p_index = 0;
                 }
-                yield return new WaitForSecondsRealtime(w_primary.fireDelay);
+                yield return new WaitForSecondsRealtime(w_primary.canUseDelay);
                 canUsePrimaryWeapon = true;
             }
             
@@ -97,6 +110,10 @@ namespace AcePerinova.Controller{
 
          protected IEnumerator UseSecondaryWeapon(){
             if(canUseSecondaryWeapon){
+                if(s_used == 0){
+                    StartCoroutine(ReloadSecondaryWeapon());
+                }
+                s_used++;
                 canUseSecondaryWeapon = false;
                 Transform t = secondaryWeaponPositions[s_index];
                 var w = Instantiate(w_secondary, t.position, t.rotation, null);
@@ -108,10 +125,25 @@ namespace AcePerinova.Controller{
                 if(s_index >= secondaryWeaponPositions.Length){
                     s_index = 0;
                 }
-                yield return new WaitForSecondsRealtime(w_secondary.fireDelay);
+                yield return new WaitForSecondsRealtime(w_secondary.canUseDelay);
                 canUseSecondaryWeapon = true;
             }
             
+        }
+
+        protected IEnumerator ReloadPrimaryWeapon(){
+            yield return new WaitForSecondsRealtime(p_reloadTime);
+            p_used--;
+            if(p_used > 0){
+                StartCoroutine(ReloadPrimaryWeapon());
+            }
+        }
+        protected IEnumerator ReloadSecondaryWeapon(){
+            yield return new WaitForSecondsRealtime(s_reloadTime);
+            s_used--;
+            if(s_used > 0){
+                StartCoroutine(ReloadSecondaryWeapon());
+            }
         }
 
         

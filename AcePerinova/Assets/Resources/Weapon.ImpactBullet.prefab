@@ -403,21 +403,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5970038752861106926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 877de05561cc05e41a90bacb1f3974d9, type: 3}
+  m_Script: {fileID: 11500000, guid: b6650a51d2da3fc409e01a5f4b742697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modifiers:
-  - {fileID: 11400000, guid: 5c199110bb4f1374e918b6f8e82262ff, type: 2}
-  - {fileID: 11400000, guid: d0fcea46080a2e24e917680b3e779f40, type: 2}
-  - {fileID: 11400000, guid: 5c199110bb4f1374e918b6f8e82262ff, type: 2}
-  - {fileID: 11400000, guid: 5c199110bb4f1374e918b6f8e82262ff, type: 2}
-  - {fileID: 11400000, guid: 5c199110bb4f1374e918b6f8e82262ff, type: 2}
-  randomizeModifiers: 1
   weaponName: Impact Bullet
-  fireDelay: 0.1
-  useCharge: 1
-  fireUsage: 0.05
-  rechargeSpeed: 0.01
+  collisionVFX: {fileID: 3521178832052089834, guid: 38daa0efb950ddc41bbd05d4f869cbcc, type: 3}
+  force: 300
+  colliderDelay: 0.1
+  activeTime: 6
+  canUseDelay: 0.25
+  maxUseCount: 20
+  reloadTime: 0.5
   target: {fileID: 0}
   owner: {fileID: 0}
 --- !u!65 &8236369189648692459

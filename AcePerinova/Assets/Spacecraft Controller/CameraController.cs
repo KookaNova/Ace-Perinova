@@ -45,6 +45,10 @@ namespace AcePerinova.Controller{
 
             switch (targetFollowCamera){
                 case true:
+                    if(ts.currentTarget == null){
+                        targetFollowCamera = false;
+                        break;
+                    }
                     Vector3 toTarget = ts.currentTarget.transform.position - transform.position; //find ideal forward direction
                     Quaternion targetRot = Quaternion.LookRotation(toTarget, transform.up);
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 10f * Time.deltaTime);

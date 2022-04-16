@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AcePerinova.Weapons{
@@ -7,109 +6,53 @@ namespace AcePerinova.Weapons{
     /// This component makes an object behave like a weapon.
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class WeaponComponent : MonoBehaviour
+    public abstract class WeaponComponent : MonoBehaviour
     {
         //Consider including pool information on the specific weapon.
-        [SerializeField] WeaponModifier[] modifiers;
-        [SerializeField] bool randomizeModifiers = true;
 
         public string weaponName = "Unnamed Weapon";
-        public float fireDelay = .25f;
-        [Tooltip("Use ammo amount, or use charge.")]
-        public bool useCharge = true;
-        /// <summary> Speed at which ammo or charge is used.</summary>
-        public float fireUsage = .05f;
-        /// <summary> Speed at which reload happens or recharge happens.</summary>
-        public float rechargeSpeed = 0.01f;
-
-        public Controller.TargetableObject target = null;
-
-
+        public GameObject collisionVFX;
+        public float force = 100;
+        public float colliderDelay = 0.1f, activeTime = 6, canUseDelay = 0.25f;
+        public int maxUseCount = 20;
+        public float reloadTime = 0.5f;
+        
+        [HideInInspector] public Controller.TargetableObject target = null;
         [HideInInspector] public Controller.SpacecraftController owner;
-        Rigidbody rb;
+
+        protected Rigidbody rb;
         Collider thisCollider;
-        int i = 0;
 
         public void Activate(){
             rb = GetComponent<Rigidbody>();
             thisCollider = GetComponent<Collider>();
             thisCollider.enabled = false;
-            ActivateModifier();
+            WeaponAction();
             StartCoroutine(StartUp());
-
+            StartCoroutine(Terminate());
         }
+        protected virtual void WeaponAction(){}
 
-        public void IncrementModifiers(){
-            i++;
-            if(i < modifiers.Length){
-                ActivateModifier();
+        protected virtual void OnCollisionEnter(Collision other){
+            if(collisionVFX != null){
+                Instantiate(collisionVFX, transform.position, transform.rotation);
             }
-            else{
-                EndUse();
-            }
-
-        }
-
-        private void OnCollisionEnter(Collision other) {
-            if(modifiers[i].collisionVFX != null){
-               Instantiate(modifiers[i].collisionVFX, this.transform.position, this.transform.rotation, null);
-           }
-            if(modifiers[i].terminateOnCollision){
-                TerminateModifier();
-            }
+            EndUse();
             
         }
 
-        private void ActivateModifier(){
-           // Instantiate(modifiers[i].startUpFX, this.transform.position, this.transform.rotation, null);
-           if(randomizeModifiers){
-               i = Random.Range(0, modifiers.Length - 1);
-           }
-           if(modifiers[i].startUpVFX != null){
-               Instantiate(modifiers[i].startUpVFX, this.transform.position, this.transform.rotation, null);
-           }
-            StartCoroutine(ModifierTimer());
-            if(!modifiers[i].isStationary)
-            rb.velocity = (transform.forward * modifiers[i].moveForce);
-            
-        }
-        private void TerminateModifier(){
-            if(randomizeModifiers){
-                EndUse();
-                return;
-            }
-            //Instantiate(modifiers[i].endFX, null);
-            IncrementModifiers();
-        }
-
-        private void Update() {
-            if(modifiers[i].updateForce && !modifiers[i].isStationary){
-                rb.AddRelativeForce(0, 0, owner.currentSpeed + modifiers[i].moveForce, ForceMode.Acceleration);
-            }
-            if(modifiers[i].isTracking && target != null)
-            {
-                var toTarget = target.transform.position - rb.position;
-                var targetRotation = Vector3.RotateTowards(rb.transform.forward, toTarget, modifiers[i].trackingStrength * Time.fixedDeltaTime, 1080);
-                rb.transform.rotation = Quaternion.LookRotation(targetRotation);
-
-                Debug.Log("To Target: " + toTarget + " | Target Rotation: " + targetRotation);
-                //if to Target is too high, we miss? Might be a better miss system.
-            }
-            
-            
-        }
         private IEnumerator StartUp(){
-            yield return new WaitForSecondsRealtime(0.05f);
+            yield return new WaitForSecondsRealtime(colliderDelay);
             thisCollider.enabled = true;
         }
 
-        private IEnumerator ModifierTimer(){
-            yield return new WaitForSecondsRealtime(modifiers[i].activeTime);
-            TerminateModifier();
+        private IEnumerator Terminate(){
+            yield return new WaitForSecondsRealtime(activeTime);
+            EndUse();
         }
 
         private void EndUse(){
-            GetComponentInChildren<TrailRenderer>().transform.parent = null;
+            //GetComponentInChildren<TrailRenderer>().transform.parent = null;
             Destroy(this.gameObject); //we should be pooling, but we need to learn how to use it with Fusion
         }
         

@@ -403,19 +403,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5970038752861106926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 877de05561cc05e41a90bacb1f3974d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fde5a93cf57abf49ba37b928e3aa42e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modifiers:
-  - {fileID: 11400000, guid: a88fe1cf78a3de042bbf9edb6621abee, type: 2}
-  randomizeModifiers: 1
   weaponName: Impact Missile
-  fireDelay: 0.1
-  useCharge: 0
-  fireUsage: 5
-  rechargeSpeed: 3
+  collisionVFX: {fileID: 3521178832052089834, guid: 38daa0efb950ddc41bbd05d4f869cbcc, type: 3}
+  force: 100
+  colliderDelay: 0.15
+  activeTime: 6
+  canUseDelay: 0.25
+  maxUseCount: 2
+  reloadTime: 3
   target: {fileID: 0}
   owner: {fileID: 0}
+  trackingStrength: 3
 --- !u!65 &8236369189648692459
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -437,8 +438,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5970038752861106926}
   serializedVersion: 2
-  m_Mass: 0.01
-  m_Drag: 0.5
+  m_Mass: 0.1
+  m_Drag: 0
   m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
