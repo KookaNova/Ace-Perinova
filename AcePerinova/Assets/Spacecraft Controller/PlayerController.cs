@@ -20,6 +20,9 @@ namespace AcePerinova.Controller{
             if(_in.pIsFiring){
                 StartCoroutine(UsePrimaryWeapon());
             }
+            if(_in.sIsFiring){
+                StartCoroutine(UseSecondaryWeapon());
+            }
         }
 
         protected override void Movement(){

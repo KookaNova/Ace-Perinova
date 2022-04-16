@@ -99,7 +99,7 @@ namespace AcePerinova.Weapons{
             
         }
         private IEnumerator StartUp(){
-            yield return new WaitForSecondsRealtime(0.01f);
+            yield return new WaitForSecondsRealtime(0.05f);
             thisCollider.enabled = true;
         }
 
@@ -109,6 +109,7 @@ namespace AcePerinova.Weapons{
         }
 
         private void EndUse(){
+            GetComponentInChildren<TrailRenderer>().transform.parent = null;
             Destroy(this.gameObject); //we should be pooling, but we need to learn how to use it with Fusion
         }
         

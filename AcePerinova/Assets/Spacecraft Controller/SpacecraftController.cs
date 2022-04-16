@@ -98,12 +98,12 @@ namespace AcePerinova.Controller{
          protected IEnumerator UseSecondaryWeapon(){
             if(canUseSecondaryWeapon){
                 canUseSecondaryWeapon = false;
-                Transform t = secondaryWeaponPositions[p_index];
+                Transform t = secondaryWeaponPositions[s_index];
                 var w = Instantiate(w_secondary, t.position, t.rotation, null);
                 w.owner = this;
                 w.target = lockedTarget;
                 w.Activate();
-                shipUtility?.secondaryMuzzle[p_index].Play();
+                shipUtility?.secondaryMuzzle[s_index]?.Play();
                 s_index++;
                 if(s_index >= secondaryWeaponPositions.Length){
                     s_index = 0;
