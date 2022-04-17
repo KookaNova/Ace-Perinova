@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Tri-Canopy
     second: {fileID: 2100000, guid: b1cd7a7e04d5cef4f91b52a5f1fd5769, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tri-Cockpit
+    second: {fileID: 2100000, guid: 3bfce213ac7659440bca42247530dc52, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -129,10 +129,10 @@ namespace AcePerinova.Controller
                 //Ray to check for obstructions
                 LayerMask layerMask = 1 << 11; //weapons layer
                 RaycastHit hit;
-                Vector3 origin = this.transform.position + (transform.forward * 5); //distance offset
+                Vector3 origin = this.transform.position + (transform.up * 0.5f); //distance offset
 	            Vector3 dir = target.transform.position - origin;
                 Debug.DrawRay(origin, dir, Color.green);
-                Physics.SphereCast(origin, 2, dir, out hit, 2000, ~layerMask);
+                Physics.Raycast(origin, dir, out hit, 2000, ~layerMask);
                 if(hit.collider != null){
                     //something was hit
                     if(hit.collider.attachedRigidbody == target.rb){

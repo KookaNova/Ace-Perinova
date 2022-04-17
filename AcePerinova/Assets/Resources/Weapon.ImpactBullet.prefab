@@ -409,7 +409,7 @@ MonoBehaviour:
   weaponName: Impact Bullet
   collisionVFX: {fileID: 3521178832052089834, guid: 38daa0efb950ddc41bbd05d4f869cbcc, type: 3}
   force: 300
-  colliderDelay: 0.1
+  colliderDelay: 0.025
   activeTime: 6
   canUseDelay: 0.25
   maxUseCount: 20
