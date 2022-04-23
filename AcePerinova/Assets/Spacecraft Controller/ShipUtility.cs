@@ -13,14 +13,11 @@ namespace AcePerinova.Selectables{
         SpacecraftController sc;
         InputInterpreter _in;
 
-
+        //weapons
         public Transform[] primaryWeaponPositions;
         public VisualEffect[] primaryMuzzle;
         public Transform[] secondaryWeaponPositions;
         public VisualEffect[] secondaryMuzzle;
-
-        
-
         [HideInInspector] public Vector3 centerPosition, aimPosition;
 
         private void Awake() {
@@ -37,6 +34,8 @@ namespace AcePerinova.Selectables{
             }
 
         }
+
+
     }
 }
 

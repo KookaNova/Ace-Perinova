@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using AcePerinova.Controller;
 
 namespace AcePerinova.Utilities{
 [ExecuteAlways]
     public class IndicatorComponent : MonoBehaviour
     {
-        public Controller.TargetableObject targetableObject;
+        public TargetableObject targetableObject;
+        public TargetingSystem targetingSystem;
         public Image indicatorImage;
         public Text player, objectName, distance;
         public GameObject objectiveIndicator, targetActive, lockIcon;
         public Color32 color;
         
         Animator ani;
+
+        
+                //ts?.targetSelectEvent.AddListener(ind.CheckTarget);
+                //ts?.lockStatusEvent.AddListener(ind.CheckLock);
 
         private void Awake() {
             indicatorImage = GetComponent<Image>();
@@ -26,7 +32,15 @@ namespace AcePerinova.Utilities{
             objectName.text = targetableObject.targetName;
             objectiveIndicator.SetActive(targetableObject.isObjective);
             CheckTarget();
+            
+            targetingSystem.OnTargetSelect += CheckTarget;
+            targetingSystem.OnLockStatusChanged += CheckLock;
 
+        }
+
+        private void OnDisable() {
+            targetingSystem.OnTargetSelect -= CheckTarget;
+            targetingSystem.OnLockStatusChanged -= CheckLock;
         }
 
         public void ChangeColor(){

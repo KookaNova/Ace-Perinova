@@ -26,7 +26,7 @@ namespace AcePerinova.Controller
         [SerializeField] GameObject targetPointer;
         List<IndicatorComponent> indicators = new List<IndicatorComponent>();
 
-        public void Awake(){
+        public void OnEnable(){
             gm = FindObjectOfType<GameManagement.GameManager>();
             ship = this?.GetComponentInParent<Selectables.ShipUtility>();
             sc = this?.GetComponentInParent<Controller.PlayerController>();
@@ -92,9 +92,8 @@ namespace AcePerinova.Controller
                 TargetableObject target = gm.allTargets[i];
                 var ind = Instantiate(indicatorPrefab, overlayHud.transform);
                 ind.targetableObject = target;
+                ind.targetingSystem = ts;
                 indicators.Add(ind);
-                ts?.targetSelectEvent.AddListener(ind.CheckTarget);
-                ts?.lockStatusEvent.AddListener(ind.CheckLock);
                 if(target.team != 2){
                     if(target.team == team){
                         ind.color = ColorPaletteUtility.friendly;

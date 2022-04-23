@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace AcePerinova.Controller
 {
@@ -19,7 +18,13 @@ namespace AcePerinova.Controller
         //Target Selection
         [HideInInspector] public List<TargetableObject> validTargets = new List<TargetableObject>();
         [HideInInspector] public TargetableObject currentTarget;
-        [HideInInspector] public UnityEvent targetSelectEvent, lockStatusEvent;
+        
+        public delegate void TargetSelect();
+        public event TargetSelect OnTargetSelect;
+        public delegate void LockStatusChanged();
+        public event LockStatusChanged OnLockStatusChanged;
+
+        //[HideInInspector] public UnityEvent targetSelectEvent, lockStatusEvent;
         //lock on
         [HideInInspector] public bool isLocking = false, targetLocked = false;
         [HideInInspector] public Transform lockTransform = null;
@@ -96,7 +101,7 @@ namespace AcePerinova.Controller
                 }
             }
             sc.lockedTarget = currentTarget;
-            targetSelectEvent.Invoke();
+            if(OnTargetSelect != null) OnTargetSelect();
            
             
         }
@@ -143,7 +148,7 @@ namespace AcePerinova.Controller
                             currentTarget.isLocked = true;
                             targetLocked = true; 
                             sc.lockedTarget = currentTarget;
-                            lockStatusEvent.Invoke();
+                            if(OnLockStatusChanged != null)OnLockStatusChanged();
                             lockIncrementor = 100;
                         }
                     }
@@ -162,7 +167,7 @@ namespace AcePerinova.Controller
             isLocking = false;
             targetLocked = false;
             lockIncrementor = 0.05f;
-            lockStatusEvent.Invoke();
+            if(OnLockStatusChanged != null)OnLockStatusChanged();
             //lockIndicatorPosition = Vector3.one/2;
         }
     }
