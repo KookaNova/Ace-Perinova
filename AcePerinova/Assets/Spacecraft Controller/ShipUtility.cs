@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
-using AcePerinova.Controller;
 
-namespace AcePerinova.Selectables{
+namespace AcePerinova.Controller{
     /// <summary>
     /// Used for etc. utilities like storing positions and potentially certain sounds or effects
     /// </summary>

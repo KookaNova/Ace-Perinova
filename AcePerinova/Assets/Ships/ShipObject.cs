@@ -4,7 +4,7 @@ using UnityEngine;
 using AcePerinova.Weapons;
 
 
-namespace AcePerinova.Selectables{
+namespace AcePerinova.Controller{
     /// <summary>
     /// Stores data about a specific ship's stats, select art, name, weapons, and potentially sound effects, and more.
     /// </summary>
@@ -18,6 +18,12 @@ namespace AcePerinova.Selectables{
         public Texture2D nameArt, selectArt;
 
         public WeaponComponent primary, secondary;
+
+        [Header("Health Stats")]
+        public float health = 600;
+        public float shields = 600,
+            shieldChargeRate = 20,
+            shieldChargeDelay = 8;
 
         [Header("Movement Stats")]
         public float maxSpeed = 100;

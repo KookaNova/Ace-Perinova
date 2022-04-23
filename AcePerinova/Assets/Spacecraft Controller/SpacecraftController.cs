@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AcePerinova.Selectables;
 
 namespace AcePerinova.Controller{
     /// <summary>
@@ -23,6 +22,7 @@ namespace AcePerinova.Controller{
             m_roll;
 
         protected ShipUtility shipUtility;
+        protected HealthComponent hc;
         protected Rigidbody rb;
         protected Weapons.WeaponComponent w_primary, w_secondary;
         private int p_maxUse, s_maxUse;
@@ -50,7 +50,7 @@ namespace AcePerinova.Controller{
         private void Activate(){
             shipUtility = Instantiate(ship.shipUtility, this.transform);
             rb = shipUtility.GetComponentInChildren<Rigidbody>();
-            
+            hc = shipUtility.gameObject?.GetComponent<HealthComponent>();
             LoadShipData();
             OnActivate();
         }
@@ -69,6 +69,10 @@ namespace AcePerinova.Controller{
             p_reloadTime = w_primary.reloadTime;
             s_maxUse = w_secondary.maxUseCount;
             s_reloadTime = w_secondary.reloadTime;
+
+            if(hc != null){
+                hc.SetDataFromShip(ship);
+            }
         }
         
         protected virtual void OnActivate(){}

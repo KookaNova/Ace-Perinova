@@ -1439,8 +1439,8 @@ GameObject:
   - component: {fileID: 2924310484775253931}
   - component: {fileID: 6704983256252011472}
   - component: {fileID: 4761169920771713403}
-  - component: {fileID: 5346872581976965151}
   - component: {fileID: 8357869916429528136}
+  - component: {fileID: 5346872581976965151}
   m_Layer: 0
   m_Name: Ship.TriSpeeder
   m_TagString: Untagged
@@ -1558,15 +1558,27 @@ MonoBehaviour:
   overlayHUD: {fileID: 7422283531051013187}
   validTargets: []
   currentTarget: {fileID: 0}
-  targetSelectEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  lockStatusEvent:
-    m_PersistentCalls:
-      m_Calls: []
   isLocking: 0
   targetLocked: 0
   lockTransform: {fileID: 0}
+--- !u!114 &8357869916429528136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599540377277176352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2373b9abb2328d242b90af23e079918f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  maxShield: 0
+  chargeRate: 0
+  chargeDelay: 0
+  currentHealth: 0
+  currentShield: 0
 --- !u!114 &5346872581976965151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1584,24 +1596,16 @@ MonoBehaviour:
   - {fileID: 8979017372312255576}
   speedImage:
   - {fileID: 929203157}
+  healthImage:
+  - {fileID: 940089543}
+  shieldImage:
+  - {fileID: 1031262279}
   orientationImage: {fileID: 696109461}
   weaponReticle: {fileID: 1745702419323949490}
   centerPositionReticle: {fileID: 679062282}
   lockOnIndicator: {fileID: 8323151420926862813}
   indicatorPrefab: {fileID: 838997698715846741, guid: a14a47131d3b5c74389f76050bce4338, type: 3}
   targetPointer: {fileID: 1375970089895407584}
---- !u!114 &8357869916429528136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3599540377277176352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2373b9abb2328d242b90af23e079918f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3599540377478383513
 GameObject:
   m_ObjectHideFlags: 0

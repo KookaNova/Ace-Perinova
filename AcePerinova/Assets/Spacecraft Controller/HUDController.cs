@@ -9,15 +9,16 @@ namespace AcePerinova.Controller
 {
     public class HUDController : MonoBehaviour
     {
-        Selectables.ShipUtility ship;
+        ShipUtility ship;
         Controller.PlayerController sc;
         GameManagement.GameManager gm;
+        HealthComponent hc;
         TargetingSystem ts;
         int team;
         
         [SerializeField] Canvas overlayHud;
        
-        [SerializeField] Image[] thrustImage, speedImage;
+        [SerializeField] Image[] thrustImage, speedImage, healthImage, shieldImage;
         [SerializeField] Image orientationImage;
 
         //Weapons 
@@ -28,8 +29,9 @@ namespace AcePerinova.Controller
 
         public void OnEnable(){
             gm = FindObjectOfType<GameManagement.GameManager>();
-            ship = this?.GetComponentInParent<Selectables.ShipUtility>();
+            ship = this?.GetComponentInParent<ShipUtility>();
             sc = this?.GetComponentInParent<Controller.PlayerController>();
+            hc = this?.GetComponent<HealthComponent>();
             ts = this?.GetComponent<TargetingSystem>();
             team = sc.team;
             if(overlayHud == null){
@@ -70,6 +72,12 @@ namespace AcePerinova.Controller
             }
             foreach (var item in speedImage){
                 item.fillAmount = MathC.NormalizeRange(sc.ship.maxSpeed, sc.currentSpeed);
+            }
+            foreach (var item in healthImage){
+                item.fillAmount = MathC.NormalizeRange(hc.maxHealth, hc.currentHealth);
+            }
+            foreach (var item in shieldImage){
+                item.fillAmount = MathC.NormalizeRange(hc.maxShield, hc.currentShield);
             }
         }
 
@@ -185,8 +193,6 @@ namespace AcePerinova.Controller
         }
         #endregion
 
-        
-    
     }
 
 }
