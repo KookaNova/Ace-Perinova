@@ -23,7 +23,6 @@ namespace AcePerinova.Controller{
 
             _in.cameraChangedEvent.AddListener(ChangeCamera);
             _in.cameraFollowToggleEvent.AddListener(ToggleFollowCamera);
-
         }
 
         private void ChangeCamera(){

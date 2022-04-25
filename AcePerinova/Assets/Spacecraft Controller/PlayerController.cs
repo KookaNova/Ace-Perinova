@@ -12,7 +12,7 @@ namespace AcePerinova.Controller{
 
         int currentCam;
 
-        protected override void OnActivate() {
+        protected override void Activate() {
             _in = GetComponent<InputInterpreter>();
         }
 

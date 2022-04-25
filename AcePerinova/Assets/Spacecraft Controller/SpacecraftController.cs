@@ -8,11 +8,16 @@ namespace AcePerinova.Controller{
     /// </summary>
     public abstract class SpacecraftController : MonoBehaviour
     {
+        #region Player
         public string playerName = "Unknown";
         public int team = 0;
         public ShipObject ship;
+        #endregion
         
+        #region Utility
         [HideInInspector] public float currentSpeed, speedTarget;
+        bool isAwaitingRespawn = false;
+        #endregion
 
         #region Ship Data
         protected float 
@@ -42,17 +47,22 @@ namespace AcePerinova.Controller{
 
         #endregion
 
-        #region On Spawn
-        private void Awake() {
-            Activate(); //Activate is separate from awake in case I need more control later over what activate the player.
-        }
+        #region Events
+        public delegate void PrimaryFire(int index);
+        public delegate void SecondaryFire(int index);
+        public event PrimaryFire OnPrimaryFire;
+        public event SecondaryFire OnSecondaryFire;
 
-        private void Activate(){
+        #endregion
+
+        #region On Spawn
+        private void OnEnable() {
             shipUtility = Instantiate(ship.shipUtility, this.transform);
             rb = shipUtility.GetComponentInChildren<Rigidbody>();
             hc = shipUtility.gameObject?.GetComponent<HealthComponent>();
             LoadShipData();
-            OnActivate();
+            Activate();
+            SpawnSpacecraft();
         }
         private void LoadShipData(){
             acceleration = ship.acceleration;
@@ -75,7 +85,7 @@ namespace AcePerinova.Controller{
             }
         }
         
-        protected virtual void OnActivate(){}
+        protected virtual void Activate(){}
         protected virtual void Movement(){}
 
         #endregion
@@ -89,6 +99,7 @@ namespace AcePerinova.Controller{
             
         }
 
+        #region Weapons
         protected IEnumerator UsePrimaryWeapon(){
             if(canUsePrimaryWeapon){
                 if(p_used == 0){
@@ -102,10 +113,12 @@ namespace AcePerinova.Controller{
                 w.target = lockedTarget;
                 w.Activate();
                 shipUtility?.primaryMuzzle[p_index].Play();
+                if(OnPrimaryFire != null)OnPrimaryFire(p_index);
                 p_index++;
                 if(p_index >= primaryWeaponPositions.Length){
                     p_index = 0;
                 }
+                
                 yield return new WaitForSecondsRealtime(w_primary.canUseDelay);
                 canUsePrimaryWeapon = true;
             }
@@ -125,11 +138,13 @@ namespace AcePerinova.Controller{
                 w.target = lockedTarget;
                 w.Activate();
                 shipUtility?.secondaryMuzzle[s_index]?.Play();
+                if(OnSecondaryFire != null)OnSecondaryFire(s_index);
                 s_index++;
                 if(s_index >= secondaryWeaponPositions.Length){
                     s_index = 0;
                 }
                 yield return new WaitForSecondsRealtime(w_secondary.canUseDelay);
+                
                 canUseSecondaryWeapon = true;
             }
             
@@ -149,6 +164,37 @@ namespace AcePerinova.Controller{
                 StartCoroutine(ReloadSecondaryWeapon());
             }
         }
+        #endregion
+
+        private void Eliminate(string cause){
+            isAwaitingRespawn = true;
+            if(hc != null){
+                hc.OnEliminate -= Eliminate;
+            }
+
+            StartCoroutine(RespawnTimer(3));
+
+            shipUtility.gameObject.SetActive(false);
+
+        }
+
+        private IEnumerator RespawnTimer(int seconds){
+            yield return new WaitForSecondsRealtime(seconds);
+            if(isAwaitingRespawn) SpawnSpacecraft();
+
+        }
+
+        private void SpawnSpacecraft(){
+            isAwaitingRespawn = false;
+            if(hc != null){
+                hc.OnEliminate += Eliminate;
+            }
+
+            shipUtility.gameObject.SetActive(true);
+
+        }
+
+        
 
         
         

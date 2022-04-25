@@ -53,6 +53,7 @@ namespace AcePerinova.Weapons{
 
         private void EndUse(){
             //GetComponentInChildren<TrailRenderer>().transform.parent = null;
+            GetComponentInChildren<TrailRenderer>().transform.SetParent(null);
             Destroy(this.gameObject); //we should be pooling, but we need to learn how to use it with Fusion
         }
         

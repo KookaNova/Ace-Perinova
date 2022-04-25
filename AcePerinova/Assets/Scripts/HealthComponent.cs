@@ -9,7 +9,10 @@ namespace AcePerinova.Controller{
         Rigidbody rb;
         public float maxHealth, maxShield;
         [SerializeField] float chargeRate, chargeDelay;
+
         [HideInInspector] public float currentHealth, currentShield;
+        public IEnumerator healTime;
+        bool isRecharging = false;
 
         #region Events
         public delegate void TakeDamage(string cause, float damage);
@@ -20,9 +23,19 @@ namespace AcePerinova.Controller{
         public event Eliminated OnEliminate;
         #endregion
 
+        private void Awake() {
+            rb = GetComponent<Rigidbody>();
+        }
+
         private void OnEnable() {
             currentHealth = maxHealth;
             currentShield = maxShield;
+        }
+
+        private void Update() {
+            if(isRecharging && currentShield < maxShield){
+                currentShield += chargeRate * Time.deltaTime;
+            }
         }
 
         public void SetDataFromShip(ShipObject ship){
@@ -38,7 +51,10 @@ namespace AcePerinova.Controller{
         /// Substracts health by given damage value, and raises the event OnTakeDamage
         /// </summary>
         public void DealDamage(string cause, float damage){
-
+            isRecharging = false;
+            if(healTime != null) StopCoroutine(healTime);
+            healTime = HealTimer();
+            StartCoroutine(healTime);
             if(currentShield > 0){
                 Debug.LogFormat("Health Component: DealDamage(), {0} dealt {1} damage to shield.", cause, damage);
                 float targetShield = currentShield - damage;
@@ -48,8 +64,8 @@ namespace AcePerinova.Controller{
                 else{
                     //shield just broke
                     currentShield = 0;
-                    currentHealth += (targetShield * 0.66f);
-                    if(OnShieldBroken != null) OnShieldBroken();
+                    currentHealth += (targetShield * 0.66f); //deal a third of the remaining health
+                    if(OnShieldBroken != null) OnShieldBroken(); //shield broken event
                 }
             }
             else{
@@ -65,21 +81,25 @@ namespace AcePerinova.Controller{
             else{
                 if(OnTakeDamage != null)OnTakeDamage(cause, damage);
             }
-
-            Debug.LogFormat("Health = {0} | Shields = {1}", currentHealth, currentShield);
-            
-            
         }
 
         private void OnCollisionEnter(Collision other) {
             if(other.gameObject.layer != 11){
-                DealDamage("Collision", 100);
+                
+                float damage = other.impulse.magnitude * 10;
+                DealDamage("Collision", damage);
             }
         }
 
         private void Eliminate(string cause){
             Debug.LogFormat("Health Component: Eliminated by {0}", cause);
+
             if(OnEliminate != null)OnEliminate(cause);
+        }
+
+        private IEnumerator HealTimer(){
+            yield return new WaitForSecondsRealtime(chargeDelay);
+            isRecharging = true;
 
         }
 

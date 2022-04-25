@@ -19,7 +19,7 @@ namespace AcePerinova.Weapons{
             var targetRotation = Vector3.RotateTowards(rb.transform.forward, toTarget, trackingStrength * Time.fixedDeltaTime, 360);
             rb.transform.rotation = Quaternion.LookRotation(targetRotation);
 
-            Debug.Log("To Target: " + toTarget + " | Target Rotation: " + targetRotation);
+            Debug.Log("To Target: " + toTarget.magnitude + " | Target Rotation: " + targetRotation.magnitude);
             //if to Target is too high, we miss? Might be a better miss system.
             
         }

@@ -20,6 +20,10 @@ MonoBehaviour:
   selectArt: {fileID: 0}
   primary: {fileID: 1293974354215673490, guid: 0bbe3383876411a4185b8cff1cea6351, type: 3}
   secondary: {fileID: 1293974354215673490, guid: 0f992e24603081c4eb83560a21979240, type: 3}
+  health: 600
+  shields: 600
+  shieldChargeRate: 50
+  shieldChargeDelay: 8
   maxSpeed: 60
   minSpeed: 0
   acceleration: 50
