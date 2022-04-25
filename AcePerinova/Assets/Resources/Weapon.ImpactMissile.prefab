@@ -410,7 +410,7 @@ MonoBehaviour:
   weaponName: Impact Missile
   collisionVFX: {fileID: 6827495013885115517, guid: c62450cf5f38f6048b23666fb8336ff1, type: 3}
   force: 100
-  colliderDelay: 0.15
+  colliderDelay: 0.05
   activeTime: 12
   canUseDelay: 0.5
   maxUseCount: 2
