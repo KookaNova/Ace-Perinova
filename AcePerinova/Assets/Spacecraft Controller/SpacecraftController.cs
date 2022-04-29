@@ -52,6 +52,12 @@ namespace AcePerinova.Controller{
         public delegate void SecondaryFire(int index);
         public event PrimaryFire OnPrimaryFire;
         public event SecondaryFire OnSecondaryFire;
+        public delegate void MissedTarget();
+        public delegate void HitTarget();
+        public delegate void EliminatedTarget();
+        public event MissedTarget OnTargetMissed;
+        public event HitTarget OnTargetHit;
+        public event EliminatedTarget OnTargetEliminated;
 
         #endregion
 
@@ -163,6 +169,15 @@ namespace AcePerinova.Controller{
             if(s_used > 0){
                 StartCoroutine(ReloadSecondaryWeapon());
             }
+        }
+        public void TargetMissed(){
+            if(OnTargetMissed != null)OnTargetMissed();
+        }
+        public void TargetHit(){
+            if(OnTargetHit != null)OnTargetHit();
+        }
+        public void TargetEliminated(){
+            if(OnTargetEliminated != null)OnTargetEliminated();
         }
         #endregion
 

@@ -18,8 +18,20 @@ namespace AcePerinova.Weapons{
             var toTarget = target.transform.position - rb.position;
             var targetRotation = Vector3.RotateTowards(rb.transform.forward, toTarget, trackingStrength * Time.fixedDeltaTime, 360);
             rb.transform.rotation = Quaternion.LookRotation(targetRotation);
-
             Debug.Log("To Target: " + toTarget.magnitude + " | Target Rotation: " + targetRotation.magnitude);
+
+
+            RaycastHit hit;
+            if(Physics.Raycast(this.transform.forward * 2, this.transform.forward, out hit, 2000)){
+                if(hit.collider != null){
+                    if(hit.collider.gameObject != target.gameObject){
+                        target = null;
+                        owner.TargetMissed();
+                        Debug.Log("Target missed!");
+                    }
+                }
+
+            }
             //if to Target is too high, we miss? Might be a better miss system.
             
         }

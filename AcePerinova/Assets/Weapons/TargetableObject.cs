@@ -8,7 +8,8 @@ namespace AcePerinova.Controller
     [RequireComponent(typeof(Rigidbody))]
     public class TargetableObject : MonoBehaviour
     {
-        
+        GameManager gm;
+
         public string targetName = "Unknown";
         public int team = 0; //0 = a, 1 = b, 2 = global
         public bool isObjective = false;
@@ -19,7 +20,7 @@ namespace AcePerinova.Controller
         [HideInInspector] public bool isTargeted, isLocked;
 
         private void Awake() {
-            var gm = FindObjectOfType<GameManager>();
+            gm = FindObjectOfType<GameManager>();
             mesh = this?.GetComponent<MeshRenderer>(); //a mesh is ultimately required to determine visibility.
             rb = GetComponent<Rigidbody>(); //required for obstruction check
             if(mesh == null){
@@ -33,6 +34,11 @@ namespace AcePerinova.Controller
             if(sc != null){
                 targetName = sc.playerName;
                 team = sc.team;
+            }
+        }
+        private void OnDestroy() {
+            if(gm != null){
+                gm.allTargets.Remove(this);
             }
         }
     }

@@ -19,6 +19,7 @@ namespace AcePerinova.Controller
         [SerializeField] Canvas overlayHud;
        
         [SerializeField] Image[] thrustImage, speedImage, healthImage, shieldImage;
+        [SerializeField] Text[] thrustText, speedText, healthText, shieldText;
         [SerializeField] Image orientationImage;
 
         //Weapons 
@@ -26,8 +27,11 @@ namespace AcePerinova.Controller
         [SerializeField] IndicatorComponent indicatorPrefab;
         [SerializeField] GameObject targetPointer;
         List<IndicatorComponent> indicators = new List<IndicatorComponent>();
+        //States
+        [SerializeField] GameObject missed, hit, eliminated;
+        Coroutine missedTimer, hitTimer, eliminatedTimer;
 
-        public void OnEnable(){
+        public void Awake(){
             gm = FindObjectOfType<GameManagement.GameManager>();
             ship = this?.GetComponentInParent<ShipUtility>();
             sc = this?.GetComponentInParent<Controller.PlayerController>();
@@ -38,6 +42,27 @@ namespace AcePerinova.Controller
                 Debug.LogWarning("HUDController: No overlayHud canvas has been s elected in the inspector.");
             }
             overlayHud.worldCamera = Camera.main;
+        }
+        private void OnEnable() {
+            missed.SetActive(false);
+            hit.SetActive(false);
+            eliminated.SetActive(false);
+
+            if(sc != null){
+                sc.OnTargetMissed += TargetMissed;
+                sc.OnTargetHit += TargetHit;
+                sc.OnTargetEliminated += TargetEliminated;
+            }
+            
+        }
+        private void OnDisable() {
+            StopAllCoroutines();
+            if(sc != null){
+                sc.OnTargetMissed -= TargetMissed;
+                sc.OnTargetHit -= TargetHit;
+                sc.OnTargetEliminated -= TargetEliminated;
+            }
+            
         }
 
         private void LateUpdate() {
@@ -67,17 +92,29 @@ namespace AcePerinova.Controller
         }
 
         private void Fills(){
-            foreach (var item in thrustImage){
-                item.fillAmount = MathC.NormalizeRange(sc.ship.maxSpeed, sc.speedTarget);
+            foreach (var image in thrustImage){
+                image.fillAmount = MathC.NormalizeRange(sc.ship.maxSpeed, sc.speedTarget);
             }
-            foreach (var item in speedImage){
-                item.fillAmount = MathC.NormalizeRange(sc.ship.maxSpeed, sc.currentSpeed);
+            foreach (var text in thrustText){
+                text.text = sc.speedTarget.ToString("00.00");
             }
-            foreach (var item in healthImage){
-                item.fillAmount = MathC.NormalizeRange(hc.maxHealth, hc.currentHealth);
+            foreach (var image in speedImage){
+                image.fillAmount = MathC.NormalizeRange(sc.ship.maxSpeed, sc.currentSpeed);
             }
-            foreach (var item in shieldImage){
-                item.fillAmount = MathC.NormalizeRange(hc.maxShield, hc.currentShield);
+            foreach (var text in speedText){
+                text.text = sc.currentSpeed.ToString("00.00");
+            }
+            foreach (var image in healthImage){
+                image.fillAmount = MathC.NormalizeRange(hc.maxHealth, hc.currentHealth);
+            }
+            foreach (var text in healthText){
+                text.text = hc.currentHealth.ToString("000.00");
+            }
+            foreach (var image in shieldImage){
+                image.fillAmount = MathC.NormalizeRange(hc.maxShield, hc.currentShield);
+            }
+            foreach (var text in shieldText){
+                text.text = hc.currentShield.ToString("000.00");
             }
         }
 
@@ -90,10 +127,32 @@ namespace AcePerinova.Controller
             orientationImage.transform.position = centerPositionReticle.transform.position;
         }
 
-        #region Target and Weapons
+        #region Status
+        private void TargetMissed(){
+            if(missedTimer != null)StopCoroutine(missedTimer);
+            missedTimer = StartCoroutine(MessageTimer(missed, 1));
+        }
+        private void TargetHit(){
+            if(hitTimer != null)StopCoroutine(hitTimer);
+            hitTimer = StartCoroutine(MessageTimer(hit, 1));
+        }
+        private void TargetEliminated(){
+            if(eliminatedTimer != null)StopCoroutine(eliminatedTimer);
+            eliminatedTimer = StartCoroutine(MessageTimer(eliminated, 2));
+        }
+
+        private IEnumerator MessageTimer(GameObject messageObject, int seconds){
+            messageObject.SetActive(true);
+            yield return new WaitForSecondsRealtime(seconds);
+            messageObject.SetActive(false);
+
+        }
+        #endregion
+
+        #region Targeting and Weapons
         public void CreateTargetIndicators(){
             foreach(var item in indicators){
-                Destroy(item);
+                Destroy(item.gameObject);
             }
             indicators.Clear();
             for(int i = 0; i < gm.allTargets.Count; i++){

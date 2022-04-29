@@ -409,6 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Impact Missile
   collisionVFX: {fileID: 6827495013885115517, guid: c62450cf5f38f6048b23666fb8336ff1, type: 3}
+  damageValue: 400
   force: 100
   colliderDelay: 0.05
   activeTime: 12
@@ -417,7 +418,7 @@ MonoBehaviour:
   reloadTime: 5
   target: {fileID: 0}
   owner: {fileID: 0}
-  trackingStrength: 3
+  trackingStrength: 10
 --- !u!65 &8236369189648692459
 BoxCollider:
   m_ObjectHideFlags: 0

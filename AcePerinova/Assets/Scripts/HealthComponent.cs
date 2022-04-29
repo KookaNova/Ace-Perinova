@@ -9,6 +9,8 @@ namespace AcePerinova.Controller{
         Rigidbody rb;
         public float maxHealth, maxShield;
         [SerializeField] float chargeRate, chargeDelay;
+        bool isShip = false;
+        public GameObject defaultDestroyedObject;
 
         [HideInInspector] public float currentHealth, currentShield;
         public IEnumerator healTime;
@@ -39,6 +41,7 @@ namespace AcePerinova.Controller{
         }
 
         public void SetDataFromShip(ShipObject ship){
+            isShip = true;
             maxHealth = ship.health;
             maxShield = ship.shields;
             chargeRate = ship.shieldChargeRate;
@@ -83,6 +86,40 @@ namespace AcePerinova.Controller{
             }
         }
 
+        public void DealDamage(SpacecraftController weaponOwner,string cause, float damage){
+            isRecharging = false;
+            if(healTime != null) StopCoroutine(healTime);
+            healTime = HealTimer();
+            StartCoroutine(healTime);
+            if(currentShield > 0){
+                Debug.LogFormat("Health Component: DealDamage(), {0} dealt {1} damage to shield.", cause, damage);
+                float targetShield = currentShield - damage;
+                if(targetShield > 0){
+                    currentShield = targetShield;
+                }
+                else{
+                    //shield just broke
+                    currentShield = 0;
+                    currentHealth += (targetShield * 0.66f); //deal a third of the remaining health
+                    if(OnShieldBroken != null) OnShieldBroken(); //shield broken event
+                }
+            }
+            else{
+                Debug.LogFormat("Health Component: DealDamage(), {0} dealt {1} damage to health.", cause, damage);
+                currentHealth -= damage;
+            }
+
+            //Death check
+            if(currentHealth <= 0){
+                currentHealth = 0;
+                Eliminate(weaponOwner, cause);
+            }
+            else{
+                weaponOwner.TargetHit();
+                if(OnTakeDamage != null)OnTakeDamage(cause, damage);
+            }
+        }
+
         private void OnCollisionEnter(Collision other) {
             if(other.gameObject.layer != 11){
                 
@@ -95,6 +132,20 @@ namespace AcePerinova.Controller{
             Debug.LogFormat("Health Component: Eliminated by {0}", cause);
 
             if(OnEliminate != null)OnEliminate(cause);
+            if(!isShip){
+                Instantiate(defaultDestroyedObject, this.transform.position, this.transform.rotation);
+                this.gameObject.SetActive(false);
+            }
+        }
+
+        private void Eliminate(SpacecraftController weaponOwner, string cause){
+            Debug.LogFormat("Health Component: Eliminated by {0}", cause);
+            weaponOwner.TargetEliminated();
+            if(OnEliminate != null)OnEliminate(cause); //this section may be reduced to an if since in the case that the event isn't used, it's likely a default object
+            if(!isShip){
+                Instantiate(defaultDestroyedObject, this.transform.position, this.transform.rotation);
+                this.gameObject.SetActive(false);
+            }
         }
 
         private IEnumerator HealTimer(){

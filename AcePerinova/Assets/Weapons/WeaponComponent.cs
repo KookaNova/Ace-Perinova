@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using AcePerinova.Controller;
 
 namespace AcePerinova.Weapons{
     /// <summary>
@@ -12,6 +13,7 @@ namespace AcePerinova.Weapons{
 
         public string weaponName = "Unnamed Weapon";
         public GameObject collisionVFX;
+        public float damageValue = 100;
         public float force = 100;
         public float colliderDelay = 0.1f, activeTime = 6, canUseDelay = 0.25f;
         public int maxUseCount = 20;
@@ -34,6 +36,15 @@ namespace AcePerinova.Weapons{
         protected virtual void WeaponAction(){}
 
         protected virtual void OnCollisionEnter(Collision other){
+            HealthComponent hitHealth = other.collider?.attachedRigidbody?.GetComponent<HealthComponent>();
+            if(hitHealth == null){
+                if(other.collider.attachedRigidbody.gameObject.GetComponent<TargetableObject>()){
+                    owner.TargetHit();
+                }
+            }
+            if(hitHealth != null){
+                hitHealth.DealDamage(owner, weaponName, damageValue);
+            }
             if(collisionVFX != null){
                 Instantiate(collisionVFX, transform.position, transform.rotation);
             }
