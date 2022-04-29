@@ -49,6 +49,7 @@ namespace AcePerinova.Controller
         }
 
         private void Update() {
+            if(currentTarget?.gameObject.activeInHierarchy == false)DeselectTarget();
             if(validTargets.Count > 0){
                 TargetLock();
             }
@@ -87,14 +88,12 @@ namespace AcePerinova.Controller
                 if(target == currentTarget)continue;
                 Vector2 pos = Camera.main.WorldToViewportPoint(target.transform.position);
                 float diff = Vector2.Distance(center, pos);
-                Debug.Log(diff);
 
                 if(diff < distance){
                     distance = diff;
                     if(currentTarget != null) currentTarget.isTargeted = false;
                     target.isTargeted = true;
                     currentTarget = target;
-                    Debug.Log(currentTarget.targetName);
                 }
                 else{
                     continue;
@@ -102,8 +101,13 @@ namespace AcePerinova.Controller
             }
             sc.lockedTarget = currentTarget;
             if(OnTargetSelect != null) OnTargetSelect();
-           
-            
+        }
+
+        public void DeselectTarget(){
+            LockFailed();
+            currentTarget = null;
+            sc.lockedTarget = null;
+            if(OnTargetSelect != null) OnTargetSelect();
         }
 
         private void TargetLock(){
@@ -139,8 +143,6 @@ namespace AcePerinova.Controller
                     Vector3 result = Vector3.MoveTowards(lockTransform.position, targetScreenPos, lockIncrementor * Time.deltaTime);
                     lockTransform.position = result;
                     lockIncrementor += lockIncrementor * Time.deltaTime;
-
-                    Debug.Log("Targeting " + lockTransform);
 
                     if(lockTransform.position == targetScreenPos){
                         if(targetLocked != true){
