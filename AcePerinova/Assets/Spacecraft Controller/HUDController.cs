@@ -96,25 +96,25 @@ namespace AcePerinova.Controller
                 image.fillAmount = MathC.NormalizeRange(sc.ship.maxSpeed, sc.speedTarget);
             }
             foreach (var text in thrustText){
-                text.text = sc.speedTarget.ToString("00.00");
+                text.text = sc.speedTarget.ToString("[00.00]");
             }
             foreach (var image in speedImage){
                 image.fillAmount = MathC.NormalizeRange(sc.ship.maxSpeed, sc.currentSpeed);
             }
             foreach (var text in speedText){
-                text.text = sc.currentSpeed.ToString("00.00");
+                text.text = sc.currentSpeed.ToString("[00.00]");
             }
             foreach (var image in healthImage){
                 image.fillAmount = MathC.NormalizeRange(hc.maxHealth, hc.currentHealth);
             }
             foreach (var text in healthText){
-                text.text = hc.currentHealth.ToString("000.00");
+                text.text = hc.currentHealth.ToString("[000.00]");
             }
             foreach (var image in shieldImage){
                 image.fillAmount = MathC.NormalizeRange(hc.maxShield, hc.currentShield);
             }
             foreach (var text in shieldText){
-                text.text = hc.currentShield.ToString("000.00");
+                text.text = hc.currentShield.ToString("[000.00]");
             }
         }
 
