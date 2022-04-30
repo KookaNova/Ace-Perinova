@@ -38,7 +38,7 @@ namespace AcePerinova.Weapons{
         protected virtual void OnCollisionEnter(Collision other){
             HealthComponent hitHealth = other.collider?.attachedRigidbody?.GetComponent<HealthComponent>();
             if(hitHealth == null){
-                if(other.collider.attachedRigidbody.gameObject.GetComponent<TargetableObject>()){
+                if(other?.collider?.attachedRigidbody.gameObject.GetComponent<TargetableObject>()){
                     owner.TargetHit();
                 }
             }

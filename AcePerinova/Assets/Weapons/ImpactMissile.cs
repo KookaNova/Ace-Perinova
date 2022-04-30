@@ -18,7 +18,7 @@ namespace AcePerinova.Weapons{
             var toTarget = target.transform.position - rb.position;
             var targetRotation = Vector3.RotateTowards(rb.transform.forward, toTarget, trackingStrength * Time.fixedDeltaTime, 360);
             rb.transform.rotation = Quaternion.LookRotation(targetRotation);
-            Debug.Log("To Target: " + toTarget.magnitude + " | Target Rotation: " + targetRotation.magnitude);
+            //Debug.Log("To Target: " + toTarget.magnitude + " | Target Rotation: " + targetRotation.magnitude);
 
 
             RaycastHit hit;

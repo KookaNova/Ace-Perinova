@@ -9,6 +9,7 @@ namespace AcePerinova.Controller
 {
     public class HUDController : MonoBehaviour
     {
+        //Non-serialized fields
         ShipUtility ship;
         Controller.PlayerController sc;
         GameManagement.GameManager gm;
@@ -16,20 +17,25 @@ namespace AcePerinova.Controller
         TargetingSystem ts;
         int team;
         
+        [Header("Movement and Health")]
         [SerializeField] Canvas overlayHud;
-       
         [SerializeField] Image[] thrustImage, speedImage, healthImage, shieldImage;
         [SerializeField] Text[] thrustText, speedText, healthText, shieldText;
         [SerializeField] Image orientationImage;
 
-        //Weapons 
-        [SerializeField] Image weaponReticle, centerPositionReticle, lockOnIndicator; //Maybe this can be swapped by the weapon choice
-        [SerializeField] IndicatorComponent indicatorPrefab;
-        [SerializeField] GameObject targetPointer;
-        List<IndicatorComponent> indicators = new List<IndicatorComponent>();
-        //States
+        [Header("Alerts & Messages")]
+        [SerializeField] GameObject[] missileWarning;
+        [SerializeField] GameObject[] takingDamage, lowHealth;
         [SerializeField] GameObject missed, hit, eliminated;
         Coroutine missedTimer, hitTimer, eliminatedTimer;
+
+        //Weapons 
+        [Header("Weapons")]
+        [SerializeField] GameObject targetPointer;
+        [SerializeField] Image weaponReticle, centerPositionReticle, lockOnIndicator; //Maybe this can be swapped by the weapon choice
+        [SerializeField] IndicatorComponent indicatorPrefab;
+        List<IndicatorComponent> indicators = new List<IndicatorComponent>();
+        
 
         public void Awake(){
             gm = FindObjectOfType<GameManagement.GameManager>();
@@ -47,6 +53,16 @@ namespace AcePerinova.Controller
             missed.SetActive(false);
             hit.SetActive(false);
             eliminated.SetActive(false);
+
+            foreach (var alerts in missileWarning){
+                alerts.SetActive(false);
+            }
+            foreach (var alerts in takingDamage){
+                alerts.SetActive(false);
+            }
+            foreach (var alerts in lowHealth){
+                alerts.SetActive(false);
+            }
 
             if(sc != null){
                 sc.OnTargetMissed += TargetMissed;
@@ -127,7 +143,7 @@ namespace AcePerinova.Controller
             orientationImage.transform.position = centerPositionReticle.transform.position;
         }
 
-        #region Status
+        #region TargetStatus
         private void TargetMissed(){
             if(missedTimer != null)StopCoroutine(missedTimer);
             missedTimer = StartCoroutine(MessageTimer(missed, 1));
@@ -147,6 +163,19 @@ namespace AcePerinova.Controller
             messageObject.SetActive(false);
 
         }
+        #endregion
+
+        #region Alerts
+        private void MissileWarning(){
+
+        }
+        private void TakingDamage(){
+
+        }
+        private void LowHealth(){
+
+        }
+
         #endregion
 
         #region Targeting and Weapons
