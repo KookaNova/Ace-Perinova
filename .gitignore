@@ -70,8 +70,7 @@ Assets/AddressableAssetsData/*/*.bin*
 # Temporary auto-generated Android Assets
 Assets/StreamingAssets/aa.meta
 Assets/StreamingAssets/aa/*
-AcePerinova/Assets/Localization/GoogleSheetsService.asset
-AcePerinova/Assets/Localization/GoogleSheetsService.asset.meta
+AcePerinova/Assets/Localization
 AcePerinova/Assets/Meshes
 AcePerinova/Assets/Materials
 AcePerinova/Assets/Textures
