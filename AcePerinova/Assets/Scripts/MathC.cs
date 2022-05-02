@@ -8,20 +8,22 @@ using UnityEngine;
 static class MathC
 {
     /// <summary>
-    /// Normalizes a given number and it's maximum between 0 and 1.
+    /// Normalizes a given value and its minimum and maximum between 0 and 1.
     /// </summary>
-    public static float NormalizeRange(int max, int current){
-        float difference = max - current;
-        float amount = 1 - (difference/max);
-        return amount;
+    public static float NormalizeRange01(float min, float max, float value){
+        return (value - min)/(max - min);
     }
     /// <summary>
-    /// Normalizes a given number and it's maximum between 0 and 1.
+    /// Normalizes a given value and its minimum and maximum between -1 and 1.
     /// </summary>
-    public static float NormalizeRange(float max, float current){
-        float difference = max - current;
-        float amount = 1 - (difference/max);
-        return amount;
+    public static float NormalizeRangeNegative1Positive1(float min, float max, float value){
+	    return ((value - min)/(max - min)*2) - 1;
+    }
+    /// <summary>
+    /// Normalizes a given value and its min and max between any new minimum and maximum.
+    /// </summary>
+    public static float NormalizeRangeAnyMinMax(float min, float max, float value, float newMin, float newMax){
+        return (((value - min)/(max - min))*(newMax - newMin)) + newMin;
     }
 
     public static Vector3 WorldToHUDSpace(Camera camera, Vector3 worldObjectPosition, Vector3 referenceObjectPosition){

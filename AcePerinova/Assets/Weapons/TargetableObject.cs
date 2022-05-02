@@ -36,6 +36,7 @@ namespace AcePerinova.Controller
                 team = sc.team;
             }
         }
+
         private void OnDestroy() {
             if(gm != null){
                 gm.allTargets.Remove(this);

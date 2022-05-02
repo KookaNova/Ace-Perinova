@@ -10,7 +10,7 @@ namespace AcePerinova.Weapons{
             rb.AddRelativeForce(0, 0, owner.currentSpeed + force, ForceMode.VelocityChange);
         }
 
-        private void FixedUpdate() {
+        private void LateUpdate() {
             rb.AddRelativeForce(0, 0, owner.currentSpeed + force, ForceMode.Acceleration);
 
             if(target == null)return;
@@ -19,6 +19,8 @@ namespace AcePerinova.Weapons{
             var targetRotation = Vector3.RotateTowards(rb.transform.forward, toTarget, trackingStrength * Time.fixedDeltaTime, 360);
             rb.transform.rotation = Quaternion.LookRotation(targetRotation);
             //Debug.Log("To Target: " + toTarget.magnitude + " | Target Rotation: " + targetRotation.magnitude);
+
+            
 
 
             RaycastHit hit;
@@ -35,6 +37,8 @@ namespace AcePerinova.Weapons{
             //if to Target is too high, we miss? Might be a better miss system.
             
         }
+
+        
     }
 }
 
