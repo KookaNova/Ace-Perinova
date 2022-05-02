@@ -1144,7 +1144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radarRotation: {x: 0, y: 0, z: 0}
-  meshPlane: {fileID: 0}
   radarPositionParent: {fileID: 833750882562658042}
   targetIndicator: {fileID: 3673083670747923247, guid: ec4a085ef0371a1478595f728594a294, type: 3}
 --- !u!1 &2239511343993802545
@@ -2285,7 +2284,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3599540377277176352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd5bfadb44b1fc44ca031ab7b6e7d753, type: 3}
+  m_Script: {fileID: 11500000, guid: 01a4e5b2aa51aaa44ba7878e1c49235b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetName: Tri-Speeder

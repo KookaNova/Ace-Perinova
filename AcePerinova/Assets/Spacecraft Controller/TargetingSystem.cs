@@ -49,7 +49,7 @@ namespace AcePerinova.Controller
         }
 
         private void Update() {
-            if(currentTarget?.gameObject.activeInHierarchy == false)DeselectTarget();
+            if(currentTarget?.gameObject.activeInHierarchy == false)SelectTarget();
             if(validTargets.Count > 0){
                 TargetLock();
             }
@@ -66,7 +66,6 @@ namespace AcePerinova.Controller
                 }
             }
             SelectTarget();
-
         }
 
         public void ChangeTargetTeam(){
@@ -80,7 +79,7 @@ namespace AcePerinova.Controller
         }
 
         public void SelectTarget(){
-            if(currentTarget != null) currentTarget.isTargeted = false;
+            if(currentTarget != null)DeselectTarget();
             LockFailed();
             float distance = 1;
             Vector3 center = Vector3.one/2;
@@ -157,11 +156,8 @@ namespace AcePerinova.Controller
                 }
                 else{
                     LockFailed();
-
                 }
             }
-
-           
         }
         private void LockFailed(){
             if(currentTarget != null) currentTarget.isLocked = false;

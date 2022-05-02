@@ -135,10 +135,8 @@ namespace AcePerinova.Controller
         }
 
         private void UpdateRoll(){
-            float yaw = ship.transform.rotation.eulerAngles.y;
-            float pitch = ship.transform.rotation.eulerAngles.x;
-            float roll = ship.transform.rotation.eulerAngles.z;
-            orientationImage.transform.rotation = Quaternion.Euler(pitch, yaw, -roll);
+            float roll = -ship.GetComponent<Rigidbody>().rotation.eulerAngles.z;
+            orientationImage.transform.rotation = Quaternion.Euler(orientationImage.transform.rotation.eulerAngles.x,  orientationImage.transform.rotation.eulerAngles.y, 0);
 
             orientationImage.transform.position = centerPositionReticle.transform.position;
         }
@@ -255,7 +253,7 @@ namespace AcePerinova.Controller
                 //ind.transform.localScale =  (ind.transform.localScale + (Vector3.one * 75)) / distance; This will scale the target indicator.
 
             }
-            if(ts.currentTarget == null){
+            if(ts.currentTarget == null || ts.currentTarget.gameObject.activeInHierarchy == false){
                 targetPointer.SetActive(false);
             }
             else{

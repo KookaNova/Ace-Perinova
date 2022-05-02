@@ -44,7 +44,7 @@ namespace AcePerinova.Controller{
 
             switch (targetFollowCamera){
                 case true:
-                    if(ts.currentTarget == null){
+                    if(ts.currentTarget == null || ts?.currentTarget.gameObject.activeInHierarchy == false){
                         targetFollowCamera = false;
                         break;
                     }
