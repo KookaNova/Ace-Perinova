@@ -135,8 +135,8 @@ namespace AcePerinova.Controller
         }
 
         private void UpdateRoll(){
-            float roll = -ship.GetComponent<Rigidbody>().rotation.eulerAngles.z;
-            orientationImage.transform.rotation = Quaternion.Euler(orientationImage.transform.rotation.eulerAngles.x,  orientationImage.transform.rotation.eulerAngles.y, 0);
+            var startEuler = orientationImage.transform.rotation.eulerAngles;
+            orientationImage.transform.rotation = Quaternion.Euler(startEuler.x, startEuler.y, 0);
 
             orientationImage.transform.position = centerPositionReticle.transform.position;
         }
