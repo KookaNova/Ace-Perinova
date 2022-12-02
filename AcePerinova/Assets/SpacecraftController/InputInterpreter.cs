@@ -21,8 +21,6 @@ namespace AcePerinova.Controller
             targetSelectEvent,
             cameraFollowToggleEvent;
 
-
-
         SpacecraftInputs _controls;
 
         public void OnEnable() {

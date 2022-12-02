@@ -1,0 +1,50 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/style.uss?fileID=7433441132597879392&amp;guid=193cc4023c216ee4dac2ce48417baa97&amp;type=3#style" />
+    <HomeMenuController picking-mode="Ignore" class="text-p1 text-light" style="flex-grow: 1;">
+        <ui:VisualElement name="bounds" picking-mode="Ignore" style="flex-grow: 1; margin-left: 1%; margin-right: 1%; margin-top: 1%; margin-bottom: 1%; flex-direction: column; justify-content: space-between;">
+            <ui:VisualElement name="screens" picking-mode="Ignore" style="flex-grow: 1;">
+                <ui:VisualElement name="nav" style="flex-grow: 0.1; flex-direction: row; justify-content: flex-start; align-items: stretch; display: flex;">
+                    <ui:Button text="HOME" display-tooltip-when-elided="true" name="nav-home" class="button-nav button text-body" />
+                    <ui:Button text="FRIENDS" display-tooltip-when-elided="true" name="nav-friends" class="button-nav button text-body" />
+                    <ui:Button text="CHALLENGES" display-tooltip-when-elided="true" name="nav-challenges" class="button-nav button text-body" />
+                </ui:VisualElement>
+                <ui:VisualElement name="s-title" focusable="true" class="screen" style="display: none;">
+                    <ui:VisualElement name="art" style="background-image: url(&apos;project://database/Assets/Textures/Sprites/AP%20Logo%20Full.png?fileID=2800000&amp;guid=d0832c1ad516eb14da7163a660a4d3ea&amp;type=3#AP Logo Full&apos;); -unity-background-scale-mode: scale-to-fit; align-items: center; justify-content: space-around; width: 75%; flex-grow: 1; margin-bottom: -12%;" />
+                    <ui:Label text="Press any button to continue" display-tooltip-when-elided="true" name="Label" class="text-title text-t1" style="flex-grow: 0.25;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="s-home" class="screen" style="align-items: stretch; justify-content: space-between; display: flex;">
+                    <ui:VisualElement name="body" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                        <ui:VisualElement name="selections" style="flex-grow: 0.5; flex-direction: column; justify-content: flex-end; align-items: stretch;">
+                            <ui:Button text="STORY" display-tooltip-when-elided="true" name="b-story" class="button-main text-body button" />
+                            <ui:Button text="MULTIPLAYER" display-tooltip-when-elided="true" name="b-multiplayer" tabindex="1" class="button-main text-body button" style="height: 55px;" />
+                            <ui:Button text="THEATER" display-tooltip-when-elided="true" name="b-theater" tabindex="2" class="button-main text-body button" />
+                            <ui:Button text="GALLERY" display-tooltip-when-elided="true" name="b-gallery" tabindex="3" class="button-main text-body button" />
+                            <ui:Button text="OPTIONS" display-tooltip-when-elided="true" name="b-options" tabindex="4" class="button-main text-body button" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="center" style="flex-grow: 1;" />
+                        <ui:VisualElement name="right" style="flex-grow: 1;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="s-story" picking-mode="Ignore" class="screen" style="display: none; justify-content: space-between; flex-grow: 1; flex-direction: row; align-items: flex-end;">
+                    <ui:VisualElement name="LEFT" style="flex-grow: 1;">
+                        <ui:Button text="CONTINUE" display-tooltip-when-elided="true" name="b-continue" class="text-title button button-main" />
+                        <ui:Button text="SCENE SELECT" display-tooltip-when-elided="true" name="b-scene-select" class="text-title button button-main" />
+                        <ui:Button text="TRIAL MODE" display-tooltip-when-elided="true" name="b-trial" class="text-title button button-main" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="CENTER" style="flex-direction: column; justify-content: center; align-items: stretch; flex-grow: 1;" />
+                    <ui:VisualElement name="RIGHT" style="flex-grow: 1;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="s-scene-select" class="screen" style="display: none;">
+                    <ui:Button text="00 - Dev Scene" display-tooltip-when-elided="true" name="b-dev" class="button-picture button text-t1 text-light" style="background-image: url(&apos;project://database/Assets/Textures/Lens%20Flares/2%201.png?fileID=2800000&amp;guid=74a34d9ba40202c4580b00c36ccf9ca7&amp;type=3#2 1&apos;); -unity-background-scale-mode: scale-and-crop; flex-grow: 1;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="info-bar" style="width: 100%; height: 5%; flex-direction: row; justify-content: space-between;">
+                <ui:VisualElement name="LEFT" style="flex-grow: 1; justify-content: space-between;">
+                    <ui:Button text="BACK" display-tooltip-when-elided="true" name="b-back" tabindex="15" usage-hints="DynamicTransform" class="button text-t2" style="width: 25%; height: 100%; display: none;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="MIDDLE" style="flex-grow: 1;" />
+                <ui:VisualElement name="RIGHT" style="flex-grow: 1;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </HomeMenuController>
+</ui:UXML>

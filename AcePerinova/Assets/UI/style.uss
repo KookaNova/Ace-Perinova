@@ -1,0 +1,98 @@
+.text-t1 {
+    -unity-font-definition: none;
+    -unity-font: url('project://database/Assets/Fonts/conthrax-sb.ttf?fileID=12800000&guid=b6c747822e625a540884b64b2fd4d4c0&type=3#conthrax-sb');
+    font-size: 56px;
+    -unity-font-style: normal;
+}
+
+.text-t2 {
+    -unity-font-definition: none;
+    -unity-font: url('project://database/Assets/Fonts/conthrax-sb.ttf?fileID=12800000&guid=b6c747822e625a540884b64b2fd4d4c0&type=3#conthrax-sb');
+    font-size: 24px;
+}
+
+.text-p1 {
+    -unity-font: url('project://database/Assets/Fonts/BAHNSCHRIFT.TTF?fileID=12800000&guid=f12a7b87d3da30d4dad33657d470a7a5&type=3#BAHNSCHRIFT');
+    -unity-font-definition: none;
+    font-size: 24px;
+}
+
+.text-light {
+    color: rgb(238, 238, 238);
+}
+
+.screen {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button {
+    -unity-text-align: middle-center;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: rgba(91, 82, 143, 0);
+    transition-duration: 0.2s;
+}
+
+.button:hover {
+    background-color: rgb(176, 40, 119);
+}
+
+.button:focus {
+    background-color: rgb(176, 40, 119);
+}
+
+.button-main {
+    padding-left: 10%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    margin-bottom: 5px;
+    -unity-text-align: upper-left;
+}
+
+.button-nav {
+    -unity-text-align: middle-left;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-left-width: 0;
+    border-right-width: 1px;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.button-main:hover {
+    translate: 12px 0;
+}
+
+.button-main:focus {
+    translate: 12px 0;
+}
+
+.button-picture {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    -unity-text-align: upper-center;
+}
