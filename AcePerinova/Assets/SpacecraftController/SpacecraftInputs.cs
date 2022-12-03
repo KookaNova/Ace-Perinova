@@ -972,17 +972,6 @@ namespace AcePerinova.Controller
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2514d9ab-f074-400a-b077-939f29660b4a"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Submit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f5634a31-17f3-4194-bda6-6ce6d206ee28"",
                     ""path"": ""*/{Cancel}"",
                     ""interactions"": """",

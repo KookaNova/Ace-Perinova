@@ -25,6 +25,7 @@
     flex-grow: 1;
     align-items: center;
     justify-content: space-around;
+    width: 100%;
 }
 
 .button {
@@ -66,7 +67,7 @@
 }
 
 .button-nav {
-    -unity-text-align: middle-left;
+    -unity-text-align: middle-center;
     padding-left: 3%;
     padding-right: 3%;
     padding-top: 0;
@@ -95,4 +96,11 @@
     padding-top: 2%;
     padding-bottom: 2%;
     -unity-text-align: upper-center;
+    background-image: url('project://database/Assets/Textures/Lens%20Flares/2%201.png?fileID=2800000&guid=74a34d9ba40202c4580b00c36ccf9ca7&type=3#2 1');
+    -unity-background-scale-mode: scale-and-crop;
+    flex-grow: 1;
+}
+
+.anim-opacity-out {
+    opacity: 0;
 }

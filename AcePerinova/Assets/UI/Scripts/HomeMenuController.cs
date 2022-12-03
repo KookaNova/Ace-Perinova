@@ -12,6 +12,7 @@ public class HomeMenuController : VisualElement {
     Screen s_title;
     Screen s_home;
     Screen s_story;
+    Screen s_multiplayer;
     Screen s_scene_select;
 
     VisualElement nav;
@@ -32,31 +33,57 @@ public class HomeMenuController : VisualElement {
                 this.Q<Button>()?.Focus();
             }
         });
+        AssignScreens();
+        RegisterButtonCallbacks();
+
+
+        OpenScreen(s_title);
+
+        this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChanged);
+    }
+
+    void AssignScreens() {
         //Screen Elements
         s_title = new Screen(this.Q("s-title"));
-        s_home = new Screen(this.Q("s-home"),true);
+        s_home = new Screen(this.Q("s-home"), true);
         s_story = new Screen(this.Q("s-story"), s_home, true);
+        s_multiplayer = new Screen(this.Q("s-multiplayer"), s_home);
         //story screen
         s_scene_select = new Screen(this.Q("s-scene-select"), s_story);
         //generic
         nav = this.Q("nav");
         b_back = this.Q<Button>("b-back");
+    }
 
+    void RegisterButtonCallbacks() {
+        //Title
+        s_title.visualElement.RegisterCallback<NavigationSubmitEvent>(ev => TitleClicked());
+        s_title.visualElement.RegisterCallback<ClickEvent>(ev => TitleClicked());
         //Home Screen
-        s_home.visualElement?.Q<Button>("b-story").RegisterCallback<NavigationSubmitEvent>(ev => OpenScreen(s_story));
-
+        s_home.visualElement?.Q<Button>("b-story").RegisterCallback<NavigationSubmitEvent>(ev => OpenScreen(s_story)); 
+        s_home.visualElement?.Q<Button>("b-story").RegisterCallback<ClickEvent>(ev => OpenScreen(s_story));
+        s_home.visualElement?.Q<Button>("b-multiplayer").RegisterCallback<NavigationSubmitEvent>(ev => OpenScreen(s_multiplayer));
+        s_home.visualElement?.Q<Button>("b-multiplayer").RegisterCallback<ClickEvent>(ev => OpenScreen(s_multiplayer));
         //Story Screen
-        s_story.visualElement?.Q<Button>("b-scene-select").RegisterCallback<NavigationSubmitEvent>(ev => OpenScreen(s_scene_select));
+        s_story.visualElement?.Q<Button>("b-scene-select").RegisterCallback<NavigationSubmitEvent>(ev => OpenScreen(s_scene_select)); 
+        s_story.visualElement?.Q<Button>("b-scene-select").RegisterCallback<ClickEvent>(ev => OpenScreen(s_scene_select));
+        //Multiplayer
 
-        s_title.visualElement.RegisterCallback<NavigationSubmitEvent>(ev => OpenScreen(s_home));
+        
+    }
 
-        this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChanged);
+    void TitleClicked() {
+        s_title.visualElement.AddToClassList("anim-opacity-out");
+        s_title.visualElement.RegisterCallback<TransitionEndEvent>(ev => { OpenScreen(s_home); });
+        
+        
     }
 
     void CloseAllScreens() {
         s_title.Close();
         s_home.Close();
         s_story.Close();
+        s_multiplayer.Close();
         s_scene_select.Close();
         nav.style.display = DisplayStyle.None;
 
@@ -69,24 +96,29 @@ public class HomeMenuController : VisualElement {
         CloseAllScreens();
         screen.visualElement.style.display = DisplayStyle.Flex;
         screen.visualElement.BringToFront();
+        screen.visualElement.RegisterCallback<NavigationMoveEvent>(ev => {
+            if (focusController.focusedElement == null) {
+                screen.visualElement.Q<Button>()?.Focus();
+            }
+        });
+
         if (screen.useNav) nav.style.display = DisplayStyle.Flex;
         if (screen.backLocation != null) {
             b_back.style.display = DisplayStyle.Flex;
             b_back.RegisterCallback<NavigationSubmitEvent>(ev => OnBackButton(screen));
+            b_back.RegisterCallback<ClickEvent>(ev => OnBackButton(screen));
             RegisterCallback<NavigationCancelEvent>(ev => OnBackButton(screen));
         }
-        screen.visualElement.RegisterCallback<NavigationMoveEvent>(ev => {
-            if(focusController.focusedElement == null) {
-                screen.visualElement.Q<Button>()?.Focus();
-            }
-        });
+        
     }
 
     void OnBackButton(Screen screen) {
         b_back.UnregisterCallback<NavigationSubmitEvent>(ev => OnBackButton(screen));
+        b_back.UnregisterCallback<ClickEvent>(ev => OnBackButton(screen));
         UnregisterCallback<NavigationCancelEvent>(ev => OnBackButton(screen));
         OpenScreen(screen.backLocation);
     }
+  
     class Screen {
         public VisualElement visualElement;
         public Screen backLocation = null;
