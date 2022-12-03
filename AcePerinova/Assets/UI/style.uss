@@ -99,8 +99,20 @@
     background-image: url('project://database/Assets/Textures/Lens%20Flares/2%201.png?fileID=2800000&guid=74a34d9ba40202c4580b00c36ccf9ca7&type=3#2 1');
     -unity-background-scale-mode: scale-and-crop;
     flex-grow: 1;
+    -unity-background-image-tint-color: rgba(53, 53, 53, 255);
+}
+
+.button-picture:hover {
+    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
 }
 
 .anim-opacity-out {
     opacity: 0;
+}
+
+.playlist {
+    justify-content: space-between;
+    align-items: stretch;
+    flex-direction: column;
+    flex-grow: 1;
 }
