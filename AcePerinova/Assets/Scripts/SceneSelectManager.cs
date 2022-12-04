@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 
 namespace AcePerinova.Utilities {
     public class SceneSelectManager : MonoBehaviour {
-        public ScenePlaylistObject storyPlaylist;
-        public ScenePlaylistObject quickplay;
         public SceneObject selectedScene;
+        [SerializeField] ScenePlaylistObject storyPlaylist, quickplay;
+        
 
         public void LoadSelectedScene() {
             SceneManager.LoadSceneAsync(selectedScene.GetSceneName());
         }
+        private void LoadRandomScene(ScenePlaylistObject scenePlaylist) {
+            selectedScene = scenePlaylist.FindRandomScene();
+        }
+
     }
 }

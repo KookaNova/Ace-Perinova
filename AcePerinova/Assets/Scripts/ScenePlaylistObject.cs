@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,4 +5,9 @@ using UnityEngine;
 public class ScenePlaylistObject : ScriptableObject
 {
     public List<SceneObject> scenes;
+
+    public SceneObject FindRandomScene() {
+        int selection = Random.Range(0, scenes.Count);
+        return scenes[selection];
+    }
 }
