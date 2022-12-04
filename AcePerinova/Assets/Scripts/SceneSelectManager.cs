@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 namespace AcePerinova.Utilities {
     public class SceneSelectManager : MonoBehaviour {
         public SceneObject selectedScene;
-        [SerializeField] ScenePlaylistObject storyPlaylist, quickplay;
+        public ScenePlaylistObject storyPlaylist, quickplay;
         
 
         public void LoadSelectedScene() {
