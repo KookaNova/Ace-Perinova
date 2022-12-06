@@ -746,7 +746,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919794518}
-  m_LocalRotation: {x: 0.017485965, y: -0.7247052, z: 0.018403031, w: 0.6885913}
+  m_LocalRotation: {x: 0.01748596, y: -0.7247052, z: 0.018403027, w: 0.6885913}
   m_LocalPosition: {x: 1.1463758, y: 0.34, z: 0.0912285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -784,9 +784,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204033856b053664fb11bc066c273326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedScene: {fileID: 11400000, guid: a4eff7cd6c5075b41957ef87d2cf9e90, type: 2}
   storyPlaylist: {fileID: 11400000, guid: cd8cb0948e40c71408c1f77b5a82658d, type: 2}
   quickplay: {fileID: 11400000, guid: cd8cb0948e40c71408c1f77b5a82658d, type: 2}
-  selectedScene: {fileID: 11400000, guid: a4eff7cd6c5075b41957ef87d2cf9e90, type: 2}
+  countDownSec: 5
 --- !u!4 &1472765879
 Transform:
   m_ObjectHideFlags: 0
@@ -880,7 +881,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
-  m_LocalRotation: {x: 0.017485965, y: -0.7247052, z: 0.018403031, w: 0.6885913}
+  m_LocalRotation: {x: 0.01748596, y: -0.7247052, z: 0.018403027, w: 0.6885913}
   m_LocalPosition: {x: 1.1463758, y: 0.34, z: 0.0912285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

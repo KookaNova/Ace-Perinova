@@ -26,6 +26,8 @@
     align-items: center;
     justify-content: space-around;
     width: 100%;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
 }
 
 .button {
@@ -76,6 +78,8 @@
     border-right-width: 1px;
     border-top-width: 0;
     border-bottom-width: 0;
+    transition-property: translate;
+    transition-duration: 1s;
 }
 
 .button-main:hover {
@@ -99,11 +103,11 @@
     background-image: url('project://database/Assets/Textures/Lens%20Flares/2%201.png?fileID=2800000&guid=74a34d9ba40202c4580b00c36ccf9ca7&type=3#2 1');
     -unity-background-scale-mode: scale-and-crop;
     flex-grow: 1;
-    -unity-background-image-tint-color: rgba(53, 53, 53, 255);
+    -unity-background-image-tint-color: rgb(53, 53, 53);
 }
 
 .button-picture:hover {
-    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
 }
 
 .anim-opacity-out {

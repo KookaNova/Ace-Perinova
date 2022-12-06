@@ -36,8 +36,8 @@ namespace AcePerinova.Utilities {
             play.text = "PLAY";
             play.AddToClassList("button");
             Add(play);
-            play.RegisterCallback<ClickEvent>(ev => sceneSelectManager.LoadSelectedScene());
-            play.RegisterCallback<NavigationSubmitEvent>(ev => sceneSelectManager.LoadSelectedScene());
+            play.RegisterCallback<ClickEvent>(ev => sceneSelectManager.BeginCountDown());
+            play.RegisterCallback<NavigationSubmitEvent>(ev => sceneSelectManager.BeginCountDown());
         }
 
         public void GenerateButtons() {
