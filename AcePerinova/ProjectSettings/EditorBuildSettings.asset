@@ -5,21 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Persistent.unity
+    guid: 4c22c1c99c86fe74cb4fdbb58459513d
   - enabled: 1
     path: Assets/Scenes/Home.unity
     guid: 4ac2fd79608f6b14ba4fd7b7ff584ab2
   - enabled: 1
     path: Assets/Scenes/Flight Test Scene.unity
     guid: 99320d6f9630bc54d864016af2615872
-  - enabled: 1
-    path: Assets/Scenes/Debug2.unity
-    guid: accb1525c58ef464ca585cbea6b3b611
-  - enabled: 1
-    path: Assets/Scenes/Debug3.unity
-    guid: a18960a6dae58e14dbd0c05f41845686
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 82c0c5429a861e24bba12b85e663dfcd, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 916c918e68288144f83b86b4d92bd5d6, type: 2}

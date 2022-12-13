@@ -15,9 +15,13 @@ namespace AcePerinova.Utilities {
         Screen s_multiplayer;
         Screen s_scene_select;
 
+        IVisualElementScheduledItem timer = null;
+
         Screen nav;
         public VisualElement action_message;
         Button b_back;
+
+        int countdown = 0;
 
         SceneSelectManager sceneSelectManager;
 
@@ -125,7 +129,31 @@ namespace AcePerinova.Utilities {
             action_message.Q<Button>().style.display = DisplayStyle.Flex;
             action_message.Q<Label>().text = messageText;
             action_message.Q<Button>().text = interactionText;
-            
+        }
+
+        public void BeginCountdown(int seconds) {
+            EditActionMessage("Prepare to Launch in " + seconds + ".", "CANCEL");
+            countdown = seconds;
+            timer = schedule.Execute(count);
+            timer.Every(1000);
+            timer.ForDuration(seconds * 1000);
+        }
+
+        public void CancelCountdown() {
+            timer = null;
+            EditActionMessage(null);
+            action_message.Q<Button>().RegisterCallback<ClickEvent>(ev => CancelCountdown());
+            action_message.Q<Button>().RegisterCallback<NavigationSubmitEvent>(ev => CancelCountdown());
+        }
+
+        void count() {
+            countdown--;
+            EditActionMessage("Prepare to Launch in " + countdown + ".", "CANCEL");
+            if (countdown == 0) {
+                EditActionMessage("Launching...");
+                sceneSelectManager.LoadSelectedScene();
+            }
+
         }
 
         #endregion
