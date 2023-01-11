@@ -65,7 +65,7 @@ namespace AcePerinova.Weapons{
 
                 //finds height to a plane based on the ship's up vector
                 float dot = Vector3.Dot(transform.up, -direction);
-                Debug.Log(dot);
+                //Debug.Log(dot);
 
                 ind.transform.localScale = (Vector3.one) + (Vector3.one * MathC.NormalizeRangeNegative1Positive1(-180, 250 , dot));
                 ind.image.color = new Color(ind.image.color.r, ind.image.color.g, ind.image.color.b, 1 - Mathf.Abs(MathC.NormalizeRangeNegative1Positive1(-90, 90 , dot)));

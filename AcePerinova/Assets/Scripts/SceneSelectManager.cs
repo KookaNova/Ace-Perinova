@@ -13,13 +13,15 @@ namespace AcePerinova.Utilities {
         [SerializeField] CanvasGroup loadingScreen;
         [SerializeField] float transitionSpeed = 0.01f;
 
-        int openedScene = 0, loadingScene = 1;
-        AsyncOperation status;
+        [SerializeField] int openedScene = 0;
+        AsyncOperation loadStatus;
         bool isLoading = false;
 
         void Start() {
-            SceneManager.LoadSceneAsync(homeScene.buildIndex, LoadSceneMode.Additive);
-            openedScene = homeScene.buildIndex;
+            selectedScene = homeScene;
+            LoadSelectedScene();
+            //SceneManager.LoadSceneAsync(homeScene.buildIndex, LoadSceneMode.Additive);
+            //openedScene = homeScene.buildIndex;
         }
         public void ReturnToHomeScene() {
             selectedScene = homeScene;
@@ -27,29 +29,34 @@ namespace AcePerinova.Utilities {
         }
         public void LoadSelectedScene() {
             isLoading = true;
-            SceneManager.LoadSceneAsync(loadingScene, LoadSceneMode.Additive);
-            status = SceneManager.LoadSceneAsync(selectedScene.buildIndex, LoadSceneMode.Additive);
-            status.allowSceneActivation = false;
+            loadStatus = SceneManager.LoadSceneAsync(selectedScene.buildIndex, LoadSceneMode.Additive);
+            loadStatus.allowSceneActivation = false;
             StartCoroutine(DuringLoading());
         }
         private IEnumerator LoadComplete() {
-            if (openedScene > 0)SceneManager.UnloadSceneAsync(openedScene);
-            SceneManager.UnloadSceneAsync(loadingScene);
-            yield return new WaitForSeconds(1.5f);
+            //if (openedScene > 0)SceneManager.UnloadSceneAsync(openedScene);
+            yield return new WaitForSeconds(.75f);
             openedScene = selectedScene.buildIndex;
             SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(selectedScene.buildIndex));
 
             loadProgress = 0;
-            Debug.LogFormat("Level Loaded: {0}", status.isDone);
+            Debug.LogFormat("Level Loaded: {0}", loadStatus.isDone);
             isLoading = false;
         }
         private void Update() {
             if (isLoading && loadingScreen.alpha < 1) {
                 loadingScreen.alpha += transitionSpeed;
                 if (loadingScreen.alpha >= 1) {
-                    if (openedScene > 0)SceneManager.UnloadSceneAsync(openedScene);
-                    status.allowSceneActivation = true;
+                    if(openedScene > 0) {
+                        SceneManager.UnloadScene(openedScene); //implement async later. Async gets stuck for some reason.
+                        loadStatus.allowSceneActivation = true;
+                    }
+                    else{
+                        loadStatus.allowSceneActivation = true;
+                    }
+
                 }
+                
             }
             else if (!isLoading && loadingScreen.alpha > 0) { 
                 loadingScreen.alpha -= transitionSpeed;
@@ -57,9 +64,9 @@ namespace AcePerinova.Utilities {
         }
 
         IEnumerator DuringLoading() {
-            loadProgress = status.progress * 100;
+            loadProgress = loadStatus.progress * 100;
             Debug.LogFormat("Level loading: {0}%", loadProgress);
-            if(status.isDone) {
+            if(loadStatus.isDone) {
                 StartCoroutine(LoadComplete());
                 yield break;
             }

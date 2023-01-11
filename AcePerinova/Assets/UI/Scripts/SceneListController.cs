@@ -40,6 +40,7 @@ namespace AcePerinova.Utilities {
             play.text = "PLAY";
             play.AddToClassList("button");
             Add(play);
+            play.SetEnabled(false);
             play.RegisterCallback<ClickEvent>(ev => controller.BeginCountdown(countdown));
             play.RegisterCallback<NavigationSubmitEvent>(ev => controller.BeginCountdown(countdown));
         }
@@ -48,8 +49,8 @@ namespace AcePerinova.Utilities {
             foreach (var scene in scenePlaylist.scenes) {
                 SceneSelectorButton sceneButton = new SceneSelectorButton(scene);
                 list.Add(sceneButton);
-                sceneButton.RegisterCallback<ClickEvent>(ev => { sceneSelectManager.selectedScene = scene; play.Focus(); });
-                sceneButton.RegisterCallback<NavigationSubmitEvent>(ev => { sceneSelectManager.selectedScene = scene; play.Focus(); });
+                sceneButton.RegisterCallback<ClickEvent>(ev => { sceneSelectManager.selectedScene = scene; play.SetEnabled(true); play.Focus(); });
+                sceneButton.RegisterCallback<NavigationSubmitEvent>(ev => { sceneSelectManager.selectedScene = scene; play.SetEnabled(true); play.Focus(); });
                 
 
             }
