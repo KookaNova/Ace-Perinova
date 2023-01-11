@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8458cf133f4101459c5fc4cb8a945bf, type: 3}
-  m_Name: Flight Test
+  m_Name: Home Menu
   m_EditorClassIdentifier: 
-  buildIndex: 2
+  buildIndex: 1

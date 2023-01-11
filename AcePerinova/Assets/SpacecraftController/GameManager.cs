@@ -19,14 +19,15 @@ namespace AcePerinova.GameManagement{
         private void Awake() {
             //Only start if client is host
 
-            StartGame();
+            CheckGameRequirements();
         }
 
         private void CheckGameRequirements(){
             //check for minimum players
             //check if gamemode is selected
 
-            //run start countdown
+            //Start countdown
+            StartCoroutine(CountDown());
 
         }
 
@@ -72,6 +73,15 @@ namespace AcePerinova.GameManagement{
         }
 
         #endregion
+
+        IEnumerator CountDown() {
+            int seconds = 3;
+            while (seconds > 0) {
+                yield return new WaitForSeconds(seconds);
+                seconds--;
+            }
+            StartGame();
+        }
     }
 }
 
