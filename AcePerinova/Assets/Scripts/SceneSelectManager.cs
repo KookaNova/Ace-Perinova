@@ -18,10 +18,12 @@ namespace AcePerinova.Utilities {
         bool isLoading = false;
 
         void Start() {
+            if(SceneManager.sceneCount > 1) {
+                openedScene = SceneManager.GetSceneAt(0).buildIndex;
+                return;
+            }
             selectedScene = homeScene;
             LoadSelectedScene();
-            //SceneManager.LoadSceneAsync(homeScene.buildIndex, LoadSceneMode.Additive);
-            //openedScene = homeScene.buildIndex;
         }
         public void ReturnToHomeScene() {
             selectedScene = homeScene;

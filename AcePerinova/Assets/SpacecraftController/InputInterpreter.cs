@@ -24,7 +24,6 @@ namespace AcePerinova.Controller
         SpacecraftInputs _controls;
 
         public void OnEnable() {
-            //sc = GetComponent<PlayerController>();
             _controls = new SpacecraftInputs();
 
             _controls.Flight.SetCallbacks(this);

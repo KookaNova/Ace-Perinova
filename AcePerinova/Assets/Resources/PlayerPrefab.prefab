@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9106485803859884349}
   - component: {fileID: 9106485803859884350}
   - component: {fileID: -3508289558827300807}
+  - component: {fileID: -1141013104184046188}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -45,12 +46,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8fb149537f01de4dada0d404d7b9085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sc: {fileID: 0}
   thrust: 0
   brake: 0
   yaw: 0
   torque: {x: 0, y: 0}
   cameraInput: {x: 0, y: 0}
+  pIsFiring: 0
+  sIsFiring: 0
+  cameraChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  teamIncrementEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  teamDecrementEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  targetSelectEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  cameraFollowToggleEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &-3508289558827300807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,4 +80,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d720f745c167024085ec4b646463037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: Unknown
+  team: 0
   ship: {fileID: 11400000, guid: f8cbc35f8dcff1844994ee315d74ab07, type: 2}
+  currentSpeed: 0
+  speedTarget: 0
+  aimDistance: 0
+  lockedTarget: {fileID: 0}
+  _in: {fileID: 0}
+--- !u!114 &-1141013104184046188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9106485803859884344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2305
+  NetworkGuid:
+    RawGuidValue: 9278c1ba4e6b013458e1dc484e562362
+  NestedObjects: []
+  NetworkedBehaviours: []
+  SimulationBehaviours: []
