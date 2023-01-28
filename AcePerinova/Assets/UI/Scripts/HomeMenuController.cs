@@ -28,6 +28,9 @@ namespace AcePerinova.Utilities {
         public HomeMenuController() {
             this.RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
             sceneSelectManager = Object.FindObjectOfType<SceneSelectManager>();
+            if(sceneSelectManager == null) {
+                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(0);
+            }
         }
         private void OnGeometryChanged(GeometryChangedEvent evt) {
             Initialize();
