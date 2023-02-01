@@ -1,8 +1,6 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using UnityEngine.UIElements.Experimental;
 
 namespace AcePerinova.Utilities {
     public class HomeMenuController : VisualElement {
@@ -13,12 +11,12 @@ namespace AcePerinova.Utilities {
 
         App app = App.FindInstance();
 
-        Screen s_title;
-        Screen s_home;
-        Screen s_story;
-        Screen s_multiplayer;
-        Screen s_scene_select;
-        Screen s_connecting;
+        Screen s_title,
+            s_home,
+            s_story,
+            s_multiplayer,
+            s_scene_select,
+            s_waiting_room;
 
         IVisualElementScheduledItem timer = null;
 
@@ -30,9 +28,12 @@ namespace AcePerinova.Utilities {
 
         SceneSelectManager sceneSelectManager;
 
+        #region BaseSetup
+
         public HomeMenuController() {
             this.RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
             sceneSelectManager = app?.sceneSelectManager;
+            
 
             if (sceneSelectManager == null) {
 #if UNITY_EDITOR
@@ -65,14 +66,15 @@ namespace AcePerinova.Utilities {
                 }
             });
         }
-#region Assign and Register
+        #endregion
+        #region Assign and Register
         void AssignScreens() {
             //Screen Elements
             s_title = new Screen(this.Q("s-title"), Vector2.zero);
             s_home = new Screen(this.Q("s-home"), true, new Vector2(-3000, 0));
             s_story = new Screen(this.Q("s-story"), s_home, true, new Vector2(-3000, 0));
             s_multiplayer = new Screen(this.Q("s-multiplayer"), s_home, new Vector2(-3000, 0));
-            s_connecting = new Screen(this.Q("s_connecting"), s_home, new Vector2(0, -3000));
+            s_waiting_room = new Screen(this.Q("s-waiting-room"), s_multiplayer, new Vector2(3000, 0));
             //story screen
             s_scene_select = new Screen(this.Q("s-scene-select"), s_story, Vector2.zero);
             if (sceneSelectManager != null) s_scene_select.visualElement.Add(new SceneListController(sceneSelectManager.storyPlaylist, sceneSelectManager));
@@ -100,14 +102,33 @@ namespace AcePerinova.Utilities {
         #endregion
         #region Multiplayer Buttons
         void Quickplay() {
+
             if(app == null) {
                 app = App.FindInstance();
+                app.SetHomeMenu(this);
             }
+            
             app?.FindSession();
+            OpenScreen(s_waiting_room);
+            action_message.style.display = DisplayStyle.Flex;
+            action_message.Q<Button>().text = "DISCONNECT";
+            action_message.Q<Label>().text = "Establishing connection...";
+            //s_waiting_room.visualElement.Q<Label>("l-waiting-status").text = "Establishing connection...";
         }
         #endregion
-
         #region Opening and Closing
+        public void ReturnHome() {
+            CloseAllScreens();
+            s_home.Open();
+            s_home.visualElement.RegisterCallback<NavigationMoveEvent>(ev => {
+                if (focusController.focusedElement == null) {
+                    s_home.visualElement.Q<Button>()?.Focus();
+                }
+            });
+            if (s_home.useNav) {
+                nav.Open();
+            }
+        }
         void TitleClicked() {
             s_title.Close();
             OpenScreen(s_home);
@@ -118,7 +139,7 @@ namespace AcePerinova.Utilities {
             s_story.Close();
             s_multiplayer.Close();
             s_scene_select.Close();
-            s_connecting.Close();
+            s_waiting_room.Close();
 
             nav.Close();
             b_back.style.display = DisplayStyle.None;
@@ -148,7 +169,7 @@ namespace AcePerinova.Utilities {
             OpenScreen(screen.backLocation);
         }
 #endregion
-#region Methods
+        #region Methods
         public void EditActionMessage(string messageText) {
             action_message.style.display = DisplayStyle.Flex;
             action_message.Q<Button>().style.display = DisplayStyle.None;

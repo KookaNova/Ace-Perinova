@@ -58,9 +58,10 @@
                     <ui:VisualElement name="art" style="background-image: url(&apos;project://database/Assets/Textures/Sprites/AP%20Logo%20Full.png?fileID=2800000&amp;guid=d0832c1ad516eb14da7163a660a4d3ea&amp;type=3#AP Logo Full&apos;); -unity-background-scale-mode: scale-to-fit; align-items: center; justify-content: flex-end; width: 75%; height: 50%;" />
                     <ui:Label text="Press any button to continue" display-tooltip-when-elided="true" name="Label" class="text-title text-t1" />
                 </ui:VisualElement>
-                <ui:VisualElement name="s-waiting-room" class="screen" style="align-items: stretch; flex-direction: row; justify-content: space-between;">
+                <ui:VisualElement name="s-waiting-room" class="screen" style="align-items: stretch; flex-direction: row; justify-content: space-between; display: flex;">
                     <ui:VisualElement name="VisualElement">
-                        <ui:VisualElement name="picture" style="background-image: url(&apos;project://database/Assets/Textures/Lens%20Flares/6.png?fileID=2800000&amp;guid=d257467e83f654b4ebbe6e82884c5231&amp;type=3#6&apos;); width: 512px; height: 516px; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgba(255, 255, 255, 255); border-right-color: rgba(255, 255, 255, 255); border-top-color: rgba(255, 255, 255, 255); border-bottom-color: rgba(255, 255, 255, 255); border-top-left-radius: 24px; border-bottom-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px;" />
+                        <ui:VisualElement name="picture" style="background-image: url(&apos;project://database/Assets/Textures/Lens%20Flares/6.png?fileID=2800000&amp;guid=d257467e83f654b4ebbe6e82884c5231&amp;type=3#6&apos;); width: 512px; height: 516px; border-left-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-right-width: 2px;" />
+                        <ui:Label text="l-waiting-status" display-tooltip-when-elided="true" name="l-waiting-status" />
                     </ui:VisualElement>
                     <ui:VisualElement name="VisualElement" />
                     <ui:VisualElement name="VisualElement" />
