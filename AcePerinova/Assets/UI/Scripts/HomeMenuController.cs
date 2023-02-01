@@ -1,4 +1,6 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 
@@ -9,11 +11,14 @@ namespace AcePerinova.Utilities {
         public new class UxmlTraits : VisualElement.UxmlTraits { }
         #endregion
 
+        App app = App.FindInstance();
+
         Screen s_title;
         Screen s_home;
         Screen s_story;
         Screen s_multiplayer;
         Screen s_scene_select;
+        Screen s_connecting;
 
         IVisualElementScheduledItem timer = null;
 
@@ -27,16 +32,29 @@ namespace AcePerinova.Utilities {
 
         public HomeMenuController() {
             this.RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
-            sceneSelectManager = Object.FindObjectOfType<SceneSelectManager>();
-            if(sceneSelectManager == null) {
-                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(0);
+            sceneSelectManager = app?.sceneSelectManager;
+
+            if (sceneSelectManager == null) {
+#if UNITY_EDITOR
+                if (Application.isPlaying && !Application.isEditor) {
+                    SceneManager.LoadSceneAsync(0);
+                }
+#else
+                SceneManager.LoadSceneAsync(0);
+#endif
             }
         }
         private void OnGeometryChanged(GeometryChangedEvent evt) {
             Initialize();
             AssignScreens();
             RegisterButtonCallbacks();
+#if UNITY_EDITOR
+            if (Application.isPlaying) {
+                OpenScreen(s_title);
+            }
+#else
             OpenScreen(s_title);
+#endif
             this.UnregisterCallback<GeometryChangedEvent>(OnGeometryChanged);
         }
         void Initialize() {
@@ -47,19 +65,20 @@ namespace AcePerinova.Utilities {
                 }
             });
         }
-        #region Assign and Register
+#region Assign and Register
         void AssignScreens() {
             //Screen Elements
             s_title = new Screen(this.Q("s-title"), Vector2.zero);
-            s_home = new Screen(this.Q("s-home"), true, new Vector2(-3000,0));
+            s_home = new Screen(this.Q("s-home"), true, new Vector2(-3000, 0));
             s_story = new Screen(this.Q("s-story"), s_home, true, new Vector2(-3000, 0));
             s_multiplayer = new Screen(this.Q("s-multiplayer"), s_home, new Vector2(-3000, 0));
+            s_connecting = new Screen(this.Q("s_connecting"), s_home, new Vector2(0, -3000));
             //story screen
             s_scene_select = new Screen(this.Q("s-scene-select"), s_story, Vector2.zero);
-            s_scene_select.visualElement.Add(new SceneListController(sceneSelectManager.storyPlaylist, sceneSelectManager));
+            if (sceneSelectManager != null) s_scene_select.visualElement.Add(new SceneListController(sceneSelectManager.storyPlaylist, sceneSelectManager));
             //generic
-            nav = new Screen(this.Q("nav"), new Vector2(0,-500));
-            action_message = this.Q("action-message"); 
+            nav = new Screen(this.Q("nav"), new Vector2(0, -500));
+            action_message = this.Q("action-message");
             action_message.style.display = DisplayStyle.None;
             b_back = this.Q<Button>("b-back");
         }
@@ -76,8 +95,18 @@ namespace AcePerinova.Utilities {
             s_story.visualElement?.Q<Button>("b-scene-select").RegisterCallback<NavigationSubmitEvent>(ev => OpenScreen(s_scene_select));
             s_story.visualElement?.Q<Button>("b-scene-select").RegisterCallback<ClickEvent>(ev => OpenScreen(s_scene_select));
             //Multiplayer
+            s_multiplayer.visualElement?.Q<Button>("b-quickplay").RegisterCallback<ClickEvent>(ev => Quickplay());
         }
         #endregion
+        #region Multiplayer Buttons
+        void Quickplay() {
+            if(app == null) {
+                app = App.FindInstance();
+            }
+            app?.FindSession();
+        }
+        #endregion
+
         #region Opening and Closing
         void TitleClicked() {
             s_title.Close();
@@ -89,6 +118,7 @@ namespace AcePerinova.Utilities {
             s_story.Close();
             s_multiplayer.Close();
             s_scene_select.Close();
+            s_connecting.Close();
 
             nav.Close();
             b_back.style.display = DisplayStyle.None;
@@ -117,13 +147,13 @@ namespace AcePerinova.Utilities {
             this.UnregisterCallback<NavigationCancelEvent>(ev => OnBackButton(screen));
             OpenScreen(screen.backLocation);
         }
-        #endregion
-        #region Methods
+#endregion
+#region Methods
         public void EditActionMessage(string messageText) {
             action_message.style.display = DisplayStyle.Flex;
             action_message.Q<Button>().style.display = DisplayStyle.None;
             action_message.Q<Label>().text = messageText;
-            if(messageText == null) {
+            if (messageText == null) {
                 action_message.style.display = DisplayStyle.None;
             }
         }
@@ -159,7 +189,7 @@ namespace AcePerinova.Utilities {
 
         }
 
-        #endregion
+#endregion
         class Screen {
             public VisualElement visualElement;
             public Screen backLocation = null;
