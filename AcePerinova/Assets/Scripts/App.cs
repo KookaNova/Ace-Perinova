@@ -23,6 +23,7 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
     private HomeMenuController homeMenu;
     public ConnectionStatus connectionStatus = ConnectionStatus.Disconnected;
     public SceneSelectManager sceneSelectManager;
+    private NetworkSceneManagerBase networkSceneManager;
     private NetworkRunner _runner;
 
     public static App FindInstance() {
@@ -43,8 +44,8 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
             return;
         }
 
-        if(sceneSelectManager == null) {
-            sceneSelectManager = GetComponentInChildren<SceneSelectManager>();
+        if(networkSceneManager == null) {
+            networkSceneManager = GetComponentInChildren<NetworkSceneManagerBase>();
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -75,6 +76,7 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
         CheckRunner();
         var result = await _runner.StartGame(new StartGameArgs(){
             GameMode = GameMode.Shared,
+            SceneManager = networkSceneManager,
             PlayerCount = 1,
 
         });

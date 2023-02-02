@@ -1,10 +1,11 @@
 using Fusion;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace AcePerinova.Utilities {
-    public class SceneSelectManager : NetworkSceneManagerBase {
+    public class SceneSelectManager : MonoBehaviour {
         public SceneObject homeScene, selectedScene;
         public ScenePlaylistObject storyPlaylist, quickplay;
         public float loadProgress;
@@ -74,10 +75,6 @@ namespace AcePerinova.Utilities {
             }
             yield return new WaitForSeconds(.1f);
             StartCoroutine(DuringLoading());
-        }
-
-        protected override IEnumerator SwitchScene(SceneRef prevScene, SceneRef newScene, FinishedLoadingDelegate finished) {
-            throw new System.NotImplementedException();
         }
     }
 }
