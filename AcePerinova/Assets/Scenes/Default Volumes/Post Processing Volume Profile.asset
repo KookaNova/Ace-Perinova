@@ -80,22 +80,22 @@ MonoBehaviour:
     m_Value: 3
   toeStrength:
     m_OverrideState: 1
-    m_Value: 0.387
+    m_Value: 0.829
   toeLength:
     m_OverrideState: 1
-    m_Value: 0.362
+    m_Value: 0.378
   shoulderStrength:
-    m_OverrideState: 0
-    m_Value: 0.261
+    m_OverrideState: 1
+    m_Value: 0.689
   shoulderLength:
-    m_OverrideState: 0
-    m_Value: 0.31
+    m_OverrideState: 1
+    m_Value: 0.46
   shoulderAngle:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.148
   gamma:
     m_OverrideState: 1
-    m_Value: 1.15
+    m_Value: 1
   lutTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -117,13 +117,13 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 4
   intensity:
     m_OverrideState: 1
-    m_Value: 0.42
+    m_Value: 0.234
   response:
     m_OverrideState: 1
-    m_Value: 0.778
+    m_Value: 0.066
   texture:
     m_OverrideState: 0
     m_Value: {fileID: 0}

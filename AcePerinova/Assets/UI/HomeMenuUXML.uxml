@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/style.uss?fileID=7433441132597879392&amp;guid=193cc4023c216ee4dac2ce48417baa97&amp;type=3#style" />
-    <AcePerinova.Utilities.HomeMenuController name="HomeMenuController" class="text-p1 text-light" style="flex-grow: 1; width: 100%; height: 100%; justify-content: space-between; background-image: none; background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(94, 205, 245, 0.21); -unity-background-scale-mode: scale-and-crop;">
+    <AcePerinova.Utilities.HomeMenuController name="HomeMenuController" class="text-p1 text-light" style="flex-grow: 1; width: 100%; height: 100%; justify-content: space-between;">
         <ui:VisualElement name="bounds" picking-mode="Ignore" style="flex-grow: 1; margin-left: 1%; margin-right: 1%; margin-top: 1%; margin-bottom: 1%; flex-direction: column; justify-content: space-between;">
             <ui:VisualElement name="screens" picking-mode="Ignore" style="flex-grow: 1; align-items: stretch; justify-content: space-between; flex-direction: column-reverse;">
                 <ui:VisualElement name="s-establishing-connection" class="screen" style="align-items: stretch; display: none;">
@@ -42,7 +42,7 @@
                     <ui:VisualElement name="RIGHT" class="screen" style="flex-grow: 1;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="s-home" class="screen" style="align-items: stretch; justify-content: space-between; display: none;">
-                    <ui:VisualElement name="body" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                    <ui:VisualElement name="BODY" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
                         <ui:VisualElement name="LEFT" class="screen" style="flex-grow: 1; flex-direction: column; justify-content: flex-end; align-items: stretch;">
                             <ui:Button text="STORY" display-tooltip-when-elided="true" name="b-story" class="button-main text-body button" />
                             <ui:Button text="MULTIPLAYER" display-tooltip-when-elided="true" name="b-multiplayer" tabindex="1" class="button-main text-body button" style="height: 55px;" />
@@ -59,12 +59,27 @@
                     <ui:Label text="Press any button to continue" display-tooltip-when-elided="true" name="Label" class="text-title text-t1" />
                 </ui:VisualElement>
                 <ui:VisualElement name="s-waiting-room" class="screen" style="align-items: stretch; flex-direction: row; justify-content: space-between; display: flex;">
-                    <ui:VisualElement name="VisualElement">
-                        <ui:VisualElement name="picture" style="background-image: url(&apos;project://database/Assets/Textures/Lens%20Flares/6.png?fileID=2800000&amp;guid=d257467e83f654b4ebbe6e82884c5231&amp;type=3#6&apos;); width: 512px; height: 516px; border-left-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-right-width: 2px;" />
-                        <ui:Label text="l-waiting-status" display-tooltip-when-elided="true" name="l-waiting-status" />
+                    <ui:VisualElement name="LEFT" style="flex-grow: 1; justify-content: flex-start; flex-direction: column;">
+                        <ui:VisualElement name="TITLE" style="margin-bottom: 120px; align-items: flex-start; width: 50%;">
+                            <ui:Label text="PLAYLIST" display-tooltip-when-elided="true" name="t-playlist" class="text-t1" style="flex-direction: column; justify-content: flex-end; -unity-text-align: upper-left;" />
+                            <ui:VisualElement class="underline" style="background-color: rgb(186, 255, 228); width: 100%;" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="DETAILS" style="width: 69%; height: 100%;">
+                            <ui:Label text="l-waiting-status" display-tooltip-when-elided="true" name="l-waiting-status" />
+                            <ui:VisualElement name="i-playlist-picture" style="background-image: url(&apos;project://database/Assets/Textures/dark-ring.png?fileID=2800000&amp;guid=067f9b0bcee09024086609db426ad366&amp;type=3#dark-ring&apos;); -unity-background-scale-mode: scale-and-crop; height: 50%; width: 100%; border-left-width: 4px; border-right-width: 4px; border-top-width: 4px; border-bottom-width: 4px; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-left-color: rgba(186, 255, 228, 0.5); border-right-color: rgba(186, 255, 228, 0.5); border-top-color: rgba(186, 255, 228, 0.5); border-bottom-color: rgba(186, 255, 228, 0.5); overflow: hidden;">
+                                <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Textures/dot-grid.png?fileID=2800000&amp;guid=b5044655fc332834986758de0fc5ea13&amp;type=3#dot-grid&apos;); -unity-background-image-tint-color: rgba(88, 247, 255, 0.02); -unity-background-scale-mode: scale-and-crop; scale: 3 3;" />
+                            </ui:VisualElement>
+                            <ui:Label text="A description of the selected playlist. Quicplay puts you into a match as soon as possible." display-tooltip-when-elided="true" name="l-playlist-description" style="white-space: normal;" />
+                        </ui:VisualElement>
                     </ui:VisualElement>
-                    <ui:VisualElement name="VisualElement" />
-                    <ui:VisualElement name="VisualElement" />
+                    <ui:VisualElement name="RIGHT" style="flex-grow: 1; flex-shrink: 0; align-items: auto; width: 20%;">
+                        <ui:VisualElement name="BG" style="background-color: rgba(0, 166, 152, 0.46); flex-grow: 1; background-image: url(&apos;project://database/Assets/Textures/dot-grid.png?fileID=2800000&amp;guid=b5044655fc332834986758de0fc5ea13&amp;type=3#dot-grid&apos;); -unity-background-scale-mode: scale-and-crop; -unity-background-image-tint-color: rgba(255, 255, 255, 0.28); align-items: auto; width: 53%; margin-right: -4%; margin-bottom: -14%; margin-top: -6%;">
+                            <ui:VisualElement name="v-player-list" style="width: 100%; height: 100%; translate: -50px 0; margin-top: 15%; margin-bottom: 14%;">
+                                <ui:Label text="PLAYERS" display-tooltip-when-elided="true" style="white-space: nowrap; -unity-text-align: upper-right;" />
+                                <ui:VisualElement class="player" style="height: 7%;" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="info-bar" style="width: 100%; height: 5%; flex-direction: row; justify-content: space-between; margin-top: 10px;">

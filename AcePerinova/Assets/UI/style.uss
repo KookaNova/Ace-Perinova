@@ -18,7 +18,7 @@
 }
 
 .text-light {
-    color: rgb(238, 238, 238);
+    color: rgb(186, 255, 228);
 }
 
 .screen {
@@ -119,4 +119,13 @@
     align-items: stretch;
     flex-direction: column;
     flex-grow: 1;
+}
+
+.underline {
+    background-color: rgba(255, 255, 255, 255);
+    height: 6px;
+}
+
+.player {
+    background-color: rgba(52, 49, 77, 255);
 }

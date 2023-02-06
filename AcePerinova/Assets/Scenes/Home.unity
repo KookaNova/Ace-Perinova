@@ -893,7 +893,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919794518}
-  m_LocalRotation: {x: 0.01748596, y: -0.7247052, z: 0.018403027, w: 0.6885913}
+  m_LocalRotation: {x: 0.017485965, y: -0.7247052, z: 0.018403031, w: 0.6885913}
   m_LocalPosition: {x: 1.1463758, y: 0.34, z: 0.0912285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -981,7 +981,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
-  m_LocalRotation: {x: 0.01748596, y: -0.7247052, z: 0.018403027, w: 0.6885913}
+  m_LocalRotation: {x: 0.017485965, y: -0.7247052, z: 0.018403031, w: 0.6885913}
   m_LocalPosition: {x: 1.1463758, y: 0.34, z: 0.0912285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1215,7 +1215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7877358, g: 0.9596523, b: 1, a: 0.07058824}
+  m_Color: {r: 0.5707547, g: 0.92051023, b: 1, a: 0.09411765}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 2.32
+  m_PixelsPerUnitMultiplier: 2
 --- !u!222 &1845303590
 CanvasRenderer:
   m_ObjectHideFlags: 0
