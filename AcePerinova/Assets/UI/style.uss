@@ -8,13 +8,13 @@
 .text-t2 {
     -unity-font-definition: none;
     -unity-font: url('project://database/Assets/Fonts/conthrax-sb.ttf?fileID=12800000&guid=b6c747822e625a540884b64b2fd4d4c0&type=3#conthrax-sb');
-    font-size: 24px;
+    font-size: 36px;
 }
 
 .text-p1 {
     -unity-font: url('project://database/Assets/Fonts/BAHNSCHRIFT.TTF?fileID=12800000&guid=f12a7b87d3da30d4dad33657d470a7a5&type=3#BAHNSCHRIFT');
     -unity-font-definition: none;
-    font-size: 24px;
+    font-size: 36px;
 }
 
 .text-light {
@@ -32,54 +32,46 @@
 
 .button {
     -unity-text-align: middle-center;
-    border-left-color: rgb(255, 255, 255);
-    border-right-color: rgb(255, 255, 255);
-    border-top-color: rgb(255, 255, 255);
-    border-bottom-color: rgb(255, 255, 255);
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    background-color: rgba(91, 82, 143, 0);
+    border-left-color: rgb(186, 255, 228);
+    border-right-color: rgb(186, 255, 228);
+    border-top-color: rgb(186, 255, 228);
+    border-bottom-color: rgb(186, 255, 228);
+    background-color: rgba(0, 88, 137, 0.27);
     transition-duration: 0.2s;
+    transition-property: all;
+    padding-left: 20%;
+    padding-right: 20%;
+    border-top-left-radius: 26px;
+    border-bottom-left-radius: 26px;
+    border-top-right-radius: 26px;
+    border-bottom-right-radius: 26px;
 }
 
 .button:hover {
-    background-color: rgb(176, 40, 119);
+    background-color: rgba(16, 125, 101, 0.56);
+    -unity-background-scale-mode: scale-and-crop;
+    -unity-background-image-tint-color: rgb(155, 212, 255);
 }
 
 .button:focus {
-    background-color: rgb(176, 40, 119);
+    background-color: rgba(255, 92, 178, 0.62);
 }
 
 .button-main {
-    padding-left: 10%;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    border-left-width: 0;
-    border-right-width: 0;
-    border-top-width: 1px;
-    border-bottom-width: 1px;
-    margin-bottom: 5px;
-    -unity-text-align: upper-left;
-}
-
-.button-nav {
-    -unity-text-align: middle-center;
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-top: 0;
-    padding-bottom: 0;
-    border-left-width: 0;
-    border-right-width: 1px;
-    border-top-width: 0;
-    border-bottom-width: 0;
-    transition-property: translate;
-    transition-duration: 1s;
+    padding-left: 7%;
+    padding-bottom: 7%;
+    padding-top: 7%;
+    margin-bottom: 20px;
+    -unity-text-align: upper-right;
+    padding-right: 7%;
+    border-left-color: rgba(174, 248, 219, 0.7);
+    border-right-color: rgba(174, 248, 219, 0.7);
+    border-top-color: rgba(174, 248, 219, 0.7);
+    border-bottom-color: rgba(174, 248, 219, 0.7);
+    border-top-left-radius: 66px;
+    border-bottom-left-radius: 66px;
+    border-top-right-radius: 66px;
+    border-bottom-right-radius: 66px;
 }
 
 .button-main:hover {
@@ -122,10 +114,10 @@
 }
 
 .underline {
-    background-color: rgba(255, 255, 255, 255);
+    background-color: rgb(255, 255, 255);
     height: 6px;
 }
 
 .player {
-    background-color: rgba(52, 49, 77, 255);
+    background-color: rgb(52, 49, 77);
 }

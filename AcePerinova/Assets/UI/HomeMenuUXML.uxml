@@ -10,11 +10,6 @@
                     </ui:VisualElement>
                     <ui:VisualElement name="VisualElement" />
                 </ui:VisualElement>
-                <ui:VisualElement name="nav" style="flex-direction: row; justify-content: flex-start; align-items: stretch; height: 8%; transition-property: all; transition-duration: 1s; transition-timing-function: ease-in-out; display: none;">
-                    <ui:Button text="HOME" display-tooltip-when-elided="true" name="nav-home" class="button-nav button text-body" />
-                    <ui:Button text="FRIENDS" display-tooltip-when-elided="true" name="nav-friends" class="button-nav button text-body" />
-                    <ui:Button text="CHALLENGES" display-tooltip-when-elided="true" name="nav-challenges" class="button-nav button text-body" />
-                </ui:VisualElement>
                 <ui:VisualElement name="s-scene-select" class="screen" style="display: none;" />
                 <ui:VisualElement name="s-multiplayer" focusable="false" picking-mode="Ignore" class="screen" style="flex-direction: column; display: none;">
                     <ui:VisualElement name="fullbutton" style="flex-grow: 1; width: 70%; flex-direction: row;">
@@ -28,37 +23,36 @@
                             </ui:VisualElement>
                         </ui:VisualElement>
                         <ui:VisualElement name="EXTRARIGHT" style="justify-content: flex-end;">
-                            <ui:Button text="DEBUG" display-tooltip-when-elided="true" name="b-debug" class="button" />
+                            <ui:Button text="DEBUG" display-tooltip-when-elided="true" name="b-debug" class="button" style="padding-left: 0; padding-right: 5%;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="s-story" picking-mode="Ignore" class="screen" style="justify-content: space-between; flex-grow: 1; flex-direction: row; align-items: flex-end; display: none;">
-                    <ui:VisualElement name="LEFT" class="screen" style="flex-grow: 1; align-items: stretch; justify-content: flex-end;">
+                <ui:VisualElement name="s-story" picking-mode="Ignore" class="screen" style="justify-content: space-between; flex-grow: 1; flex-direction: row; align-items: stretch; display: none;">
+                    <ui:VisualElement name="LEFT" class="screen" style="align-items: stretch; justify-content: flex-end; translate: -40% 0;">
                         <ui:Button text="CONTINUE" display-tooltip-when-elided="true" name="b-continue" class="text-title button button-main" />
-                        <ui:Button text="SCENE SELECT" display-tooltip-when-elided="true" name="b-scene-select" class="text-title button button-main" />
-                        <ui:Button text="TRIAL MODE" display-tooltip-when-elided="true" name="b-trial" class="text-title button button-main" />
+                        <ui:Button text="SCENE SELECT" display-tooltip-when-elided="true" name="b-scene-select" class="text-title button button-main" style="left: 10%;" />
+                        <ui:Button text="TRIAL MODE" display-tooltip-when-elided="true" name="b-trial" class="text-title button button-main" style="left: 20%;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="CENTER" class="screen" style="flex-direction: column; justify-content: center; align-items: stretch; flex-grow: 1;" />
                     <ui:VisualElement name="RIGHT" class="screen" style="flex-grow: 1;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="s-home" class="screen" style="align-items: stretch; justify-content: space-between; display: none;">
+                <ui:VisualElement name="s-home" class="screen" style="align-items: stretch; justify-content: space-between; display: flex;">
                     <ui:VisualElement name="BODY" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
-                        <ui:VisualElement name="LEFT" class="screen" style="flex-grow: 1; flex-direction: column; justify-content: flex-end; align-items: stretch;">
+                        <ui:VisualElement name="MENU-BUTTONS" style="flex-direction: column; justify-content: flex-end; align-items: stretch; flex-grow: 0; width: 30%; translate: -56% 0;">
                             <ui:Button text="STORY" display-tooltip-when-elided="true" name="b-story" class="button-main text-body button" />
-                            <ui:Button text="MULTIPLAYER" display-tooltip-when-elided="true" name="b-multiplayer" tabindex="1" class="button-main text-body button" style="height: 55px;" />
-                            <ui:Button text="THEATER" display-tooltip-when-elided="true" name="b-theater" tabindex="2" class="button-main text-body button" />
-                            <ui:Button text="GALLERY" display-tooltip-when-elided="true" name="b-gallery" tabindex="3" class="button-main text-body button" />
-                            <ui:Button text="OPTIONS" display-tooltip-when-elided="true" name="b-options" tabindex="4" class="button-main text-body button" />
+                            <ui:Button text="ONLINE" display-tooltip-when-elided="true" name="b-multiplayer" tabindex="1" class="button-main text-body button" style="left: 10%;" />
+                            <ui:Button text="THEATER" display-tooltip-when-elided="true" name="b-theater" tabindex="2" class="button-main text-body button" style="left: 20%;" />
+                            <ui:Button text="GALLERY" display-tooltip-when-elided="true" name="b-gallery" tabindex="3" class="button-main text-body button" style="left: 30%;" />
+                            <ui:Button text="OPTIONS" display-tooltip-when-elided="true" name="b-options" tabindex="4" class="button-main text-body button" style="left: 40%;" />
                         </ui:VisualElement>
-                        <ui:VisualElement name="CENTER" class="screen" style="flex-grow: 1;" />
-                        <ui:VisualElement name="RIGHT" class="screen" style="flex-grow: 1;" />
+                        <ui:VisualElement name="RIGHT" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="s-title" focusable="true" class="screen" style="justify-content: center; transition-duration: 1s; display: none;">
                     <ui:VisualElement name="art" style="background-image: url(&apos;project://database/Assets/Textures/Sprites/AP%20Logo%20Full.png?fileID=2800000&amp;guid=d0832c1ad516eb14da7163a660a4d3ea&amp;type=3#AP Logo Full&apos;); -unity-background-scale-mode: scale-to-fit; align-items: center; justify-content: flex-end; width: 75%; height: 50%;" />
-                    <ui:Label text="Press any button to continue" display-tooltip-when-elided="true" name="Label" class="text-title text-t1" />
+                    <ui:Label text="Press any button to continue" display-tooltip-when-elided="true" name="Label" class="text-title text-t1" style="background-image: none; color: rgb(255, 255, 255);" />
                 </ui:VisualElement>
-                <ui:VisualElement name="s-waiting-room" class="screen" style="align-items: stretch; flex-direction: row; justify-content: space-between; display: flex;">
+                <ui:VisualElement name="s-waiting-room" class="screen" style="align-items: stretch; flex-direction: row; justify-content: space-between; display: none;">
                     <ui:VisualElement name="LEFT" style="flex-grow: 1; justify-content: flex-start; flex-direction: column;">
                         <ui:VisualElement name="TITLE" style="margin-bottom: 120px; align-items: flex-start; width: 50%;">
                             <ui:Label text="PLAYLIST" display-tooltip-when-elided="true" name="t-playlist" class="text-t1" style="flex-direction: column; justify-content: flex-end; -unity-text-align: upper-left;" />
@@ -73,7 +67,7 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="RIGHT" style="flex-grow: 1; flex-shrink: 0; align-items: auto; width: 20%;">
-                        <ui:VisualElement name="BG" style="background-color: rgba(0, 166, 152, 0.46); flex-grow: 1; background-image: url(&apos;project://database/Assets/Textures/dot-grid.png?fileID=2800000&amp;guid=b5044655fc332834986758de0fc5ea13&amp;type=3#dot-grid&apos;); -unity-background-scale-mode: scale-and-crop; -unity-background-image-tint-color: rgba(255, 255, 255, 0.28); align-items: auto; width: 53%; margin-right: -4%; margin-bottom: -14%; margin-top: -6%;">
+                        <ui:VisualElement name="BG" style="background-color: rgba(4, 79, 135, 0.13); flex-grow: 1; background-image: url(&apos;project://database/Assets/Textures/dot-grid.png?fileID=2800000&amp;guid=b5044655fc332834986758de0fc5ea13&amp;type=3#dot-grid&apos;); -unity-background-scale-mode: scale-and-crop; -unity-background-image-tint-color: rgba(255, 255, 255, 0); align-items: auto; width: 53%; margin-right: -4%; margin-bottom: -14%; margin-top: -6%; opacity: 1;">
                             <ui:VisualElement name="v-player-list" style="width: 100%; height: 100%; translate: -50px 0; margin-top: 15%; margin-bottom: 14%;">
                                 <ui:Label text="PLAYERS" display-tooltip-when-elided="true" style="white-space: nowrap; -unity-text-align: upper-right;" />
                                 <ui:VisualElement class="player" style="height: 7%;" />

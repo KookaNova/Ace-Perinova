@@ -23,7 +23,7 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
     private HomeMenuController homeMenu;
     public ConnectionStatus connectionStatus = ConnectionStatus.Disconnected;
     public SceneSelectManager sceneSelectManager;
-    private NetworkSceneManagerBase networkSceneManager;
+    private NetworkSceneManager networkSceneManager;
     private NetworkRunner _runner;
 
     public static App FindInstance() {
@@ -45,7 +45,7 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
         }
 
         if(networkSceneManager == null) {
-            networkSceneManager = GetComponentInChildren<NetworkSceneManagerBase>();
+            networkSceneManager = GetComponentInChildren<NetworkSceneManager>();
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -74,7 +74,7 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
 
     public async Task FindSession() {
         CheckRunner();
-        var result = await _runner.StartGame(new StartGameArgs(){
+        StartGameResult result = await _runner.StartGame(new StartGameArgs(){
             GameMode = GameMode.Shared,
             SceneManager = networkSceneManager,
             PlayerCount = 1,
@@ -102,10 +102,7 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
         }
         homeMenu.action_message.Q<Label>().text = "Connected.";
         homeMenu.action_message.Q<Button>().RegisterCallback<ClickEvent>(ev => Disconnect()); homeMenu.action_message.Q<Button>().RegisterCallback<NavigationSubmitEvent>(ev => Disconnect());
-        if (_runner.ActivePlayers.Count() == _runner.SessionInfo.PlayerCount) {
-            homeMenu.Q<Label>("l-waiting-status").text = "Begin countdown.";
-            Debug.Log("Begin countdown!");
-        }
+        
         
     }
 
@@ -128,7 +125,15 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
     public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) {}
     public void OnInput(NetworkRunner runner, NetworkInput input) {}
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) {}
-    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) {}
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player) {
+        runner.SceneManager.IsReady(runner);
+        if (!runner.IsSharedModeMasterClient) return;
+        if (runner.ActivePlayers.Count() == runner.SessionInfo.PlayerCount) {
+            homeMenu.Q<Label>("l-waiting-status").text = "Begin countdown.";
+            Debug.Log("Begin countdown!");
+
+        }
+    }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) {}
     public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data) {}
     public void OnSceneLoadDone(NetworkRunner runner) {}

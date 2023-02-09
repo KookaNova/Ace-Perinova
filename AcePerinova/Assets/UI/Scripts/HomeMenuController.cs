@@ -20,7 +20,6 @@ namespace AcePerinova.Utilities {
 
         IVisualElementScheduledItem timer = null;
 
-        Screen nav;
         public VisualElement action_message;
         Button b_back;
 
@@ -71,15 +70,14 @@ namespace AcePerinova.Utilities {
         void AssignScreens() {
             //Screen Elements
             s_title = new Screen(this.Q("s-title"), Vector2.zero);
-            s_home = new Screen(this.Q("s-home"), true, new Vector2(-3000, 0));
-            s_story = new Screen(this.Q("s-story"), s_home, true, new Vector2(-3000, 0));
+            s_home = new Screen(this.Q("s-home"), new Vector2(-3000, 0));
+            s_story = new Screen(this.Q("s-story"), s_home, new Vector2(-3000, 0));
             s_multiplayer = new Screen(this.Q("s-multiplayer"), s_home, new Vector2(-3000, 0));
             s_waiting_room = new Screen(this.Q("s-waiting-room"), s_multiplayer, new Vector2(3000, 0));
             //story screen
             s_scene_select = new Screen(this.Q("s-scene-select"), s_story, Vector2.zero);
             if (sceneSelectManager != null) s_scene_select.visualElement.Add(new SceneListController(sceneSelectManager.storyPlaylist, sceneSelectManager));
             //generic
-            nav = new Screen(this.Q("nav"), new Vector2(0, -500));
             action_message = this.Q("action-message");
             action_message.style.display = DisplayStyle.None;
             b_back = this.Q<Button>("b-back");
@@ -125,9 +123,6 @@ namespace AcePerinova.Utilities {
                     s_home.visualElement.Q<Button>()?.Focus();
                 }
             });
-            if (s_home.useNav) {
-                nav.Open();
-            }
         }
         void TitleClicked() {
             s_title.Close();
@@ -141,7 +136,6 @@ namespace AcePerinova.Utilities {
             s_scene_select.Close();
             s_waiting_room.Close();
 
-            nav.Close();
             b_back.style.display = DisplayStyle.None;
         }
         void OpenScreen(Screen screen) {
@@ -152,9 +146,6 @@ namespace AcePerinova.Utilities {
                     screen.visualElement.Q<Button>()?.Focus();
                 }
             });
-            if (screen.useNav) {
-                nav.Open();
-            }
             if (screen.backLocation != null) {
                 b_back.style.display = DisplayStyle.Flex;
                 b_back.RegisterCallback<NavigationSubmitEvent>(ev => OnBackButton(screen));
@@ -227,12 +218,6 @@ namespace AcePerinova.Utilities {
             }
             public Screen(VisualElement _visualElement, bool _useNav, Vector2 _transition) {
                 visualElement = _visualElement;
-                useNav = _useNav;
-                transition = _transition;
-            }
-            public Screen(VisualElement _visualElement, Screen _backLocation, bool _useNav, Vector2 _transition) {
-                visualElement = _visualElement;
-                backLocation = _backLocation;
                 useNav = _useNav;
                 transition = _transition;
             }

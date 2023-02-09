@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NetworkSceneManager : NetworkSceneManagerBase {
+    List<SceneRef> sceneRefs = new List<SceneRef>();
+    FinishedLoadingDelegate LevelLoaded;
+
     protected override IEnumerator SwitchScene(SceneRef prevScene, SceneRef newScene, FinishedLoadingDelegate finished) {
-        throw new System.NotImplementedException();
+        yield return 0;
     }
 }
