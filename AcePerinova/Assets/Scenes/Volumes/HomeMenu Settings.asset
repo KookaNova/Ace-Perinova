@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   meteringMode:
     m_OverrideState: 1
     m_Value: 0
@@ -29,8 +29,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   limitMin:
-    m_OverrideState: 0
-    m_Value: -0.42372853
+    m_OverrideState: 1
+    m_Value: 4.983317
   limitMax:
     m_OverrideState: 0
     m_Value: 3.2203393
@@ -151,49 +151,6 @@ MonoBehaviour:
   proceduralSoftness:
     m_OverrideState: 0
     m_Value: 0.5
---- !u!114 &-5479709792435962627
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ddcec8a8eb2d684d833ac8f5d26aebd, type: 3}
-  m_Name: HDShadowSettings
-  m_EditorClassIdentifier: 
-  active: 1
-  maxShadowDistance:
-    m_OverrideState: 0
-    m_Value: 500
-  directionalTransmissionMultiplier:
-    m_OverrideState: 0
-    m_Value: 1
-  cascadeShadowSplitCount:
-    m_OverrideState: 0
-    m_Value: 4
-  cascadeShadowSplit0:
-    m_OverrideState: 0
-    m_Value: 0.05
-  cascadeShadowSplit1:
-    m_OverrideState: 0
-    m_Value: 0.15
-  cascadeShadowSplit2:
-    m_OverrideState: 0
-    m_Value: 0.3
-  cascadeShadowBorder0:
-    m_OverrideState: 0
-    m_Value: 0
-  cascadeShadowBorder1:
-    m_OverrideState: 0
-    m_Value: 0
-  cascadeShadowBorder2:
-    m_OverrideState: 0
-    m_Value: 0
-  cascadeShadowBorder3:
-    m_OverrideState: 0
-    m_Value: 0
 --- !u!114 &-2555475100657685837
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -320,7 +277,6 @@ MonoBehaviour:
   - {fileID: -2555475100657685837}
   - {fileID: -1837848791169169680}
   - {fileID: 3911606874075383628}
-  - {fileID: -5479709792435962627}
 --- !u!114 &3911606874075383628
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -339,7 +295,7 @@ MonoBehaviour:
     m_Value: {r: 0.41651833, g: 0.4910367, b: 0.754717, a: 1}
   highlights:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.93561035, b: 0.514151, a: 1}
+    m_Value: {r: 1, g: 0.953291, b: 0.7122642, a: 1}
   balance:
     m_OverrideState: 1
     m_Value: -11

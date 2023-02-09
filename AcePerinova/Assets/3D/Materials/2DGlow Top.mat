@@ -232,6 +232,7 @@ Material:
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
     - _RenderQueueType: 4
+    - _Saturation: 25
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -300,7 +301,7 @@ Material:
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _UnlitColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnlitColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _intensity: {r: 11.984314, g: 11.984314, b: 11.984314, a: 0}
+    - _intensity: {r: 16, g: 16, b: 16, a: 0}
     - m_Color: {r: 1, g: 0.14528295, b: 0.14528295, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3967864099180308167
