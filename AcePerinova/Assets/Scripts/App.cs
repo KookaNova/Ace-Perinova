@@ -78,8 +78,9 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
             GameMode = GameMode.Shared,
             SceneManager = networkSceneManager,
             PlayerCount = 1,
+            Scene = 2,
 
-        });
+        });;
         if (!result.Ok) {
             Debug.LogError($"Failed to Start: {result.ShutdownReason}");
             Debug.LogError($"Failure Message: {result.ErrorMessage}");
@@ -131,6 +132,7 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
         if (runner.ActivePlayers.Count() == runner.SessionInfo.PlayerCount) {
             homeMenu.Q<Label>("l-waiting-status").text = "Begin countdown.";
             Debug.Log("Begin countdown!");
+            runner.SetActiveScene(2);
 
         }
     }
