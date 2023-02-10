@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AcePerinova.Controller;
+using Fusion;
 
 namespace AcePerinova.GameManagement{
     /// <summary>
@@ -12,14 +13,17 @@ namespace AcePerinova.GameManagement{
         public GameObject playerPrefab, aiPrefab;
         public int playersA, playersB;
         public int scoreA, scoreB;
-        
+        public int startCountdown = 3;
+        NetworkRunner runner;
+
         public List<TargetableObject> allTargets;
         #region Game Start
 
         private void Awake() {
             //Only start if client is host
-
+            
             CheckGameRequirements();
+            
         }
 
         private void CheckGameRequirements(){
@@ -58,7 +62,6 @@ namespace AcePerinova.GameManagement{
         private void SpawnPlayer(){
             //if game isn't started, return. This tells select not to spawn.
             //if select is loaded, return. Select will do the spawning.
-
             Instantiate(playerPrefab);
             //instantiate at spawn points. This will be Network.Instantiate in the future.
         }
@@ -75,7 +78,7 @@ namespace AcePerinova.GameManagement{
         #endregion
 
         IEnumerator CountDown() {
-            int seconds = 3;
+            int seconds = startCountdown;
             while (seconds > 0) {
                 yield return new WaitForSeconds(seconds);
                 seconds--;

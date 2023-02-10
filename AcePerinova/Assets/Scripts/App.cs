@@ -75,7 +75,7 @@ public class App : MonoBehaviour, INetworkRunnerCallbacks {
     public async Task FindSession() {
         CheckRunner();
         StartGameResult result = await _runner.StartGame(new StartGameArgs(){
-            GameMode = GameMode.Shared,
+            GameMode = GameMode.Host,
             SceneManager = networkSceneManager,
             PlayerCount = 1,
             Scene = 2,

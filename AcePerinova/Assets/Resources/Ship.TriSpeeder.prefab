@@ -2429,6 +2429,7 @@ GameObject:
   - component: {fileID: 4761169920771713403}
   - component: {fileID: 8357869916429528136}
   - component: {fileID: 5346872581976965151}
+  - component: {fileID: 2823937045399077192}
   m_Layer: 0
   m_Name: Ship.TriSpeeder
   m_TagString: Untagged
@@ -2623,6 +2624,34 @@ MonoBehaviour:
   centerPositionReticle: {fileID: 679062282}
   lockOnIndicator: {fileID: 8323151420926862813}
   indicatorPrefab: {fileID: 838997698715846741, guid: a14a47131d3b5c74389f76050bce4338, type: 3}
+--- !u!114 &2823937045399077192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599540377277176352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1710889294, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 3
+  InterpolationSpace: 0
+  InterpolationTarget: {fileID: 3599540376867544729}
+  InterpolateErrorCorrection: 1
+  InterpolatedErrorCorrectionSettings:
+    MinRate: 3.3
+    MaxRate: 10
+    PosBlendStart: 0.25
+    PosBlendEnd: 1
+    PosMinCorrection: 0.025
+    PosTeleportDistance: 2
+    RotBlendStart: 0.1
+    RotBlendEnd: 0.5
+    RotTeleportRadians: 1.5
+  UseLegacySharedModeInterpolation: 0
+  TargetInterpolationDelay: 0.03
 --- !u!1 &3599540377478383513
 GameObject:
   m_ObjectHideFlags: 0

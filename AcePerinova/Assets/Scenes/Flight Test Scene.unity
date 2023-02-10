@@ -62116,6 +62116,7 @@ MonoBehaviour:
   playersB: 0
   scoreA: 0
   scoreB: 0
+  startCountdown: 1
   allTargets: []
 --- !u!4 &1539657540
 Transform:
