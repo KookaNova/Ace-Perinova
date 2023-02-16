@@ -11,23 +11,21 @@ namespace AcePerinova.Utilities {
         #endregion
 
         HomeMenuController controller;
-        ScenePlaylistObject scenePlaylist;
-        SceneSelectManager sceneSelectManager;
+        NetworkSceneManager networkSceneManager;
         ScrollView list = new ScrollView();
         Button play = new Button();
         int countdown = 5;
 
         public SceneListController() {
-            Initialize();
+            Initialize();   
             for (int i = 0; i < 9; i++) {
                 list.Add(new SceneSelectorButton());
             }
 
         }
-        public SceneListController(ScenePlaylistObject scenePlaylistObject, SceneSelectManager _sceneSelectManager) {
+        public SceneListController(NetworkSceneManager _networkSceneManager) {
             Initialize();
-            scenePlaylist = scenePlaylistObject;
-            sceneSelectManager = _sceneSelectManager;
+            networkSceneManager = _networkSceneManager;
             GenerateButtons();
             
         }
@@ -46,11 +44,11 @@ namespace AcePerinova.Utilities {
         }
 
         public void GenerateButtons() {
-            foreach (var scene in scenePlaylist.scenes) {
+            foreach (var scene in networkSceneManager.GetSinglePlayerPlaylist().scenes) {
                 SceneSelectorButton sceneButton = new SceneSelectorButton(scene);
                 list.Add(sceneButton);
-                sceneButton.RegisterCallback<ClickEvent>(ev => { sceneSelectManager.selectedScene = scene; play.SetEnabled(true); play.Focus(); });
-                sceneButton.RegisterCallback<NavigationSubmitEvent>(ev => { sceneSelectManager.selectedScene = scene; play.SetEnabled(true); play.Focus(); });
+                sceneButton.RegisterCallback<ClickEvent>(ev => { networkSceneManager.queuedScene = scene; play.SetEnabled(true); play.Focus(); });
+                sceneButton.RegisterCallback<NavigationSubmitEvent>(ev => { networkSceneManager.queuedScene = scene; play.SetEnabled(true); play.Focus(); });
                 
 
             }

@@ -51,7 +51,7 @@ namespace AcePerinova.Controller{
             }
         }
 
-        private void Update(){
+        private void FixedUpdate(){
             centerPosition = transform.position + (transform.forward * sc.aimDistance);
             aimPosition = Vector3.Lerp(aimPosition, centerPosition, 15f * Time.deltaTime);
 

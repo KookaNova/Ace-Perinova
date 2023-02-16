@@ -50,7 +50,7 @@ namespace AcePerinova.Controller{
                     }
                     Vector3 toTarget = ts.currentTarget.transform.position - transform.position; //find ideal forward direction
                     Quaternion targetRot = Quaternion.LookRotation(toTarget, transform.up);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 10f * Time.deltaTime);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, 100f * Time.fixedDeltaTime);
 
                     gameObject.transform.localRotation = new Quaternion(
                         Mathf.Clamp(gameObject.transform.localRotation.x, -1f, .3f), 

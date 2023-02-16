@@ -178,6 +178,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4822436459319428947, guid: 69ca2836c4b8e6b4a9cb7b6f0d4f6fdd, type: 3}
+      propertyPath: quickplay
+      value: 
+      objectReference: {fileID: 11400000, guid: cd8cb0948e40c71408c1f77b5a82658d, type: 2}
+    - target: {fileID: 4822436459319428947, guid: 69ca2836c4b8e6b4a9cb7b6f0d4f6fdd, type: 3}
+      propertyPath: singleplayerScenes
+      value: 
+      objectReference: {fileID: 11400000, guid: cd8cb0948e40c71408c1f77b5a82658d, type: 2}
     - target: {fileID: 8839594148649273251, guid: 69ca2836c4b8e6b4a9cb7b6f0d4f6fdd, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -222,6 +230,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8839594148649273252, guid: 69ca2836c4b8e6b4a9cb7b6f0d4f6fdd, type: 3}
+      propertyPath: ss.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839594148649273252, guid: 69ca2836c4b8e6b4a9cb7b6f0d4f6fdd, type: 3}
+      propertyPath: multiplayerScenes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839594148649273252, guid: 69ca2836c4b8e6b4a9cb7b6f0d4f6fdd, type: 3}
+      propertyPath: singleplayerScenes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839594148649273252, guid: 69ca2836c4b8e6b4a9cb7b6f0d4f6fdd, type: 3}
+      propertyPath: multiplayerScenes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: a4eff7cd6c5075b41957ef87d2cf9e90, type: 2}
+    - target: {fileID: 8839594148649273252, guid: 69ca2836c4b8e6b4a9cb7b6f0d4f6fdd, type: 3}
+      propertyPath: singleplayerScenes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: a4eff7cd6c5075b41957ef87d2cf9e90, type: 2}
     - target: {fileID: 8839594148649273253, guid: 69ca2836c4b8e6b4a9cb7b6f0d4f6fdd, type: 3}
       propertyPath: m_Name
       value: Persistence

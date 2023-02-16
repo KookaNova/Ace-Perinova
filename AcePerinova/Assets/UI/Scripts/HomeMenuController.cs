@@ -1,3 +1,4 @@
+using Fusion;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -25,16 +26,16 @@ namespace AcePerinova.Utilities {
 
         int countdown = 0;
 
-        SceneSelectManager sceneSelectManager;
+        NetworkSceneManager networkSceneManager;
 
         #region BaseSetup
 
         public HomeMenuController() {
             this.RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
-            sceneSelectManager = app?.sceneSelectManager;
+            networkSceneManager = app?.networkSceneManager;
             
 
-            if (sceneSelectManager == null) {
+            if (app == null) {
 #if UNITY_EDITOR
                 if (Application.isPlaying && !Application.isEditor) {
                     SceneManager.LoadSceneAsync(0);
@@ -76,7 +77,7 @@ namespace AcePerinova.Utilities {
             s_waiting_room = new Screen(this.Q("s-waiting-room"), s_multiplayer, new Vector2(3000, 0));
             //story screen
             s_scene_select = new Screen(this.Q("s-scene-select"), s_story, Vector2.zero);
-            if (sceneSelectManager != null) s_scene_select.visualElement.Add(new SceneListController(sceneSelectManager.storyPlaylist, sceneSelectManager));
+            if (networkSceneManager != null) s_scene_select.visualElement.Add(new SceneListController(networkSceneManager));
             //generic
             action_message = this.Q("action-message");
             action_message.style.display = DisplayStyle.None;
@@ -196,7 +197,6 @@ namespace AcePerinova.Utilities {
             EditActionMessage("Prepare to Launch in " + countdown + ".", "CANCEL");
             if (countdown == 0) {
                 EditActionMessage("Launching...");
-                sceneSelectManager.LoadSelectedScene();
             }
 
         }

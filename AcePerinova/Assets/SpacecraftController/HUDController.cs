@@ -81,7 +81,7 @@ namespace AcePerinova.Controller
             
         }
 
-        private void LateUpdate() {
+        private void FixedUpdate() {
             Fills();//Fill basic ship info like speed, health, etc.
 
             //Target info

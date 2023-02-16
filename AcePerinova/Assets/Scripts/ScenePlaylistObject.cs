@@ -6,8 +6,17 @@ public class ScenePlaylistObject : ScriptableObject
 {
     public List<SceneObject> scenes;
 
-    public SceneObject FindRandomScene() {
+    public SceneObject FindRandomSceneObject() {
         int selection = Random.Range(0, scenes.Count);
         return scenes[selection];
+    }
+
+    public int FindRandomSceneIndex() {
+        int selection = Random.Range(0, scenes.Count);
+        return scenes[selection].buildIndex;
+    }
+
+    public SceneObject SelectSceneObject(int index) {
+        return scenes[index];
     }
 }

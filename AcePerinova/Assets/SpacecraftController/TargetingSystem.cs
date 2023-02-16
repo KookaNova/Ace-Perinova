@@ -48,7 +48,7 @@ namespace AcePerinova.Controller
             FindValidTargets();
         }
 
-        private void Update() {
+        private void FixedUpdate() {
             if(currentTarget?.gameObject.activeInHierarchy == false)SelectTarget();
             if(validTargets.Count > 0){
                 TargetLock();
