@@ -27,7 +27,7 @@ MonoBehaviour:
   maxSpeed: 60
   minSpeed: 0
   acceleration: 50
-  pitch: 30
-  yaw: 15
-  roll: 75
+  pitch: 10
+  yaw: 5
+  roll: 20
   aimDistance: 200
