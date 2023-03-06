@@ -28,7 +28,6 @@ namespace AcePerinova.Controller{
 
         protected ShipUtility shipUtility;
         protected HealthComponent hc;
-        protected Rigidbody rb;
         protected Weapons.WeaponComponent w_primary, w_secondary;
         private int p_maxUse, s_maxUse;
         private float p_reloadTime, s_reloadTime;
@@ -64,7 +63,6 @@ namespace AcePerinova.Controller{
         #region On Spawn
         private void OnEnable() {
             shipUtility = Instantiate(ship.shipUtility, this.transform);
-            rb = shipUtility.GetComponentInChildren<Rigidbody>();
             hc = shipUtility.gameObject?.GetComponent<HealthComponent>();
             LoadShipData();
             Activate();
@@ -101,7 +99,13 @@ namespace AcePerinova.Controller{
             speedTarget = Mathf.Clamp(speedTarget, ship.minSpeed, ship.maxSpeed);
             currentSpeed = Mathf.Lerp(currentSpeed, speedTarget, (acceleration/50) * Time.fixedDeltaTime);
             currentSpeed = Mathf.Clamp(currentSpeed, ship.minSpeed, ship.maxSpeed);
-            rb.AddRelativeForce(Vector3.forward * currentSpeed, ForceMode.Acceleration);
+
+            Vector3 forwardPosition = Vector3.forward * currentSpeed;
+            transform.Translate(forwardPosition, Space.Self);
+
+
+            //rigidbody forward movement
+            //rb.AddRelativeForce(Vector3.forward * currentSpeed, ForceMode.Acceleration);
             
         }
 
@@ -186,17 +190,13 @@ namespace AcePerinova.Controller{
             if(hc != null){
                 hc.OnEliminate -= Eliminate;
             }
-
             StartCoroutine(RespawnTimer(3));
-
             shipUtility.gameObject.SetActive(false);
-
         }
 
         private IEnumerator RespawnTimer(int seconds){
             yield return new WaitForSecondsRealtime(seconds);
             if(isAwaitingRespawn) SpawnSpacecraft();
-
         }
 
         private void SpawnSpacecraft(){
@@ -204,16 +204,8 @@ namespace AcePerinova.Controller{
             if(hc != null){
                 hc.OnEliminate += Eliminate;
             }
-
             shipUtility.gameObject.SetActive(true);
-
         }
-
-        
-
-        
-        
     }
-
 }
 
