@@ -34,6 +34,7 @@ namespace AcePerinova.Controller{
             
             //Add Torque
             rb.AddRelativeTorque(_in.torque.y * (m_pitch * 10) * Time.fixedDeltaTime, _in.yaw * (m_yaw * 10) * Time.fixedDeltaTime, _in.torque.x * (m_roll * 10) * Time.fixedDeltaTime, ForceMode.Acceleration);
+            rb.AddRelativeForce(0, _in.torque.y * (m_pitch * 10) * Time.fixedDeltaTime * (-currentSpeed/8), 0, ForceMode.Acceleration);
             //torque.y = pitch, torque.x = roll
         }
 
