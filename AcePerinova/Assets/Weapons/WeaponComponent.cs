@@ -22,11 +22,9 @@ namespace AcePerinova.Weapons{
         [HideInInspector] public Controller.TargetableObject target = null;
         [HideInInspector] public Controller.SpacecraftController owner;
 
-        protected Rigidbody rb;
         Collider thisCollider;
 
         public void Activate(){
-            rb = GetComponent<Rigidbody>();
             thisCollider = GetComponent<Collider>();
             thisCollider.enabled = false;
             WeaponAction();

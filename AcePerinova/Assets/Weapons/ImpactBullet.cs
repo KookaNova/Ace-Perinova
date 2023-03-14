@@ -7,7 +7,11 @@ namespace AcePerinova.Weapons{
     {
 
         protected override void WeaponAction(){
-            rb.AddForce(transform.forward * force, ForceMode.VelocityChange);
+        }
+
+        private void Update() {
+            var forwardForce = Vector3.forward * force * Time.deltaTime;
+            transform.Translate(forwardForce, Space.Self);
         }
     }
 }
