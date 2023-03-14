@@ -15,7 +15,7 @@ namespace AcePerinova.Controller{
         #endregion
         
         #region Utility
-        [HideInInspector] public float currentSpeed, speedTarget, currentPitch, currentYaw, currentRoll;
+        [HideInInspector] public float currentSpeed, speedTarget;
         bool isAwaitingRespawn = false;
         #endregion
 
@@ -94,14 +94,14 @@ namespace AcePerinova.Controller{
 
         #endregion
 
-        protected virtual void Update() {
+        private void FixedUpdate() {
             Movement(); //finds target speed and set rotation
             speedTarget = Mathf.Clamp(speedTarget, ship.minSpeed, ship.maxSpeed);
             currentSpeed = Mathf.Lerp(currentSpeed, speedTarget, (acceleration/50) * Time.fixedDeltaTime);
             currentSpeed = Mathf.Clamp(currentSpeed, ship.minSpeed, ship.maxSpeed);
 
             Vector3 forwardPosition = Vector3.forward * currentSpeed;
-            transform.Translate(forwardPosition * Time.deltaTime, Space.Self);
+            transform.Translate(forwardPosition, Space.Self);
 
 
             //rigidbody forward movement
