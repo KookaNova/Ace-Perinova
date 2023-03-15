@@ -161,7 +161,7 @@ namespace AcePerinova.Controller
                     ""id"": ""dce85e3b-e972-4756-ad6d-42aa0f139aa5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Hold(duration=0.2)"",
                     ""initialStateCheck"": true
                 }
             ],
@@ -610,6 +610,17 @@ namespace AcePerinova.Controller
                     ""name"": """",
                     ""id"": ""cf0d691b-b572-4aac-b60b-ffb8ff8125c1"",
                     ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FollowTrackedWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8e70342-db1d-4f99-8457-754b31217644"",
+                    ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

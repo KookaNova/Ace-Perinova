@@ -19,7 +19,7 @@ namespace AcePerinova.Weapons{
             if(target == null)return;
 
             var toTarget = target.transform.position - transform.position;
-            var targetRotation = Vector3.RotateTowards(transform.forward, toTarget, 0.01f, 1) * Time.deltaTime;
+            var targetRotation = Vector3.RotateTowards(transform.forward, toTarget, 0.05f, 1) * Time.deltaTime;
             transform.rotation = Quaternion.LookRotation(targetRotation);
 
             if (Missed()) {
@@ -33,7 +33,7 @@ namespace AcePerinova.Weapons{
         private bool Missed() {
             RaycastHit hit;
             Debug.DrawRay(transform.position, transform.forward * 2000, Color.green);
-            if (Physics.SphereCast(this.transform.forward,0.5f, this.transform.forward, out hit, 2000)) {
+            if (Physics.SphereCast(this.transform.forward,0.25f, this.transform.forward, out hit, 2000)) {
                 if (hit.collider != null) {
                     if (hit.collider.gameObject != target.gameObject) {
                         return true;

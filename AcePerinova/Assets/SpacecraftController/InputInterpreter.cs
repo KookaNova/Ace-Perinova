@@ -119,7 +119,7 @@ namespace AcePerinova.Controller
         }
 
         public void OnFollowTrackedWeapon(InputAction.CallbackContext context) {
-            if (context.started)cameraWeaponTrackEvent.Invoke();
+            if (context.performed) cameraWeaponTrackEvent.Invoke();
             if (context.canceled)cameraWeaponTrackCancelEvent.Invoke();
         }
     }

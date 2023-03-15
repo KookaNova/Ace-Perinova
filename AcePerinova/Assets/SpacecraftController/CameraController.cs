@@ -105,7 +105,7 @@ namespace AcePerinova.Controller{
                         break;
                     }
 
-                    weaponTrackingCamera.transform.position = sc.activeWeapon.transform.position - sc.activeWeapon.transform.forward * 3 + Vector3.up;
+                    weaponTrackingCamera.transform.position = sc.activeWeapon.transform.position - sc.activeWeapon.transform.forward * 3 + Vector3.up + Vector3.right * 0.5f;
                     weaponTrackingCamera.transform.LookAt(sc.activeWeapon.transform);
                     break;
             } 
