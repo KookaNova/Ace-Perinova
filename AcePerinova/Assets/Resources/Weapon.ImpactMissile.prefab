@@ -398,7 +398,7 @@ Transform:
   - {fileID: 6437336863660259589}
   - {fileID: 7945269633982812456}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1293974354215673490
 MonoBehaviour:
@@ -421,6 +421,7 @@ MonoBehaviour:
   canUseDelay: 0.5
   maxUseCount: 2
   reloadTime: 5
+  isTrackable: 1
   target: {fileID: 0}
   owner: {fileID: 0}
   trackingStrength: 0.5

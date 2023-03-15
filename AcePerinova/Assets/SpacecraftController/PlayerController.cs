@@ -14,15 +14,24 @@ namespace AcePerinova.Controller{
 
         protected override void Activate() {
             _in = GetComponent<InputInterpreter>();
+            if (w_primary.isTrackable) _in.primaryFireStartedEvent.AddListener(FirePrimaryOnce);
+            if (w_secondary.isTrackable) _in.secondaryFireStartedEvent.AddListener(FireSecondaryOnce);
         }
 
-        private void Update() {
-            if(_in.pIsFiring){
+        private void LateUpdate() {
+            if(_in.pIsFiring && !w_primary.isTrackable){
                 StartCoroutine(UsePrimaryWeapon());
             }
-            if(_in.sIsFiring){
+            if(_in.sIsFiring && !w_secondary.isTrackable){
                 StartCoroutine(UseSecondaryWeapon());
             }
+        }
+
+        private void FirePrimaryOnce() {
+            StartCoroutine(UsePrimaryWeapon());
+        }
+        private void FireSecondaryOnce() {
+            StartCoroutine(UseSecondaryWeapon());
         }
 
         protected override void Movement(){
@@ -37,8 +46,6 @@ namespace AcePerinova.Controller{
             rb.AddRelativeForce(0, _in.torque.y * (m_pitch * 10) * Time.fixedDeltaTime * (-currentSpeed/8), 0, ForceMode.Acceleration);
             //torque.y = pitch, torque.x = roll
         }
-
-        
     }
 }
 

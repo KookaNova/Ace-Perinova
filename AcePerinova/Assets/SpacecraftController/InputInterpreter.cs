@@ -6,20 +6,25 @@ using UnityEngine.Events;
 
 namespace AcePerinova.Controller
 {
-    public class InputInterpreter : MonoBehaviour, SpacecraftInputs.IFlightActions
-    {
+    public class InputInterpreter : MonoBehaviour, SpacecraftInputs.IFlightActions {
         PlayerController sc;
         
         public float thrust, brake, yaw;
         public Vector2 torque, cameraInput;
         public bool pIsFiring, sIsFiring;
         [HideInInspector]
-        public UnityEvent 
+        public UnityEvent
             cameraChangedEvent,
             teamIncrementEvent,
             teamDecrementEvent,
             targetSelectEvent,
-            cameraFollowToggleEvent;
+            cameraFollowToggleEvent,
+            cameraWeaponTrackEvent,
+            cameraWeaponTrackCancelEvent,
+            primaryFiringEvent,
+            secondaryFiringEvent,
+            primaryFireStartedEvent,
+            secondaryFireStartedEvent;
 
         SpacecraftInputs _controls;
 
@@ -73,11 +78,13 @@ namespace AcePerinova.Controller
 
         public void OnPrimaryWeapon(InputAction.CallbackContext context)
         {
+            if (context.started) primaryFireStartedEvent.Invoke();
             pIsFiring = context.ReadValueAsButton();
         }
 
         public void OnSecondaryWeapon(InputAction.CallbackContext context)
         {
+            if (context.started) secondaryFireStartedEvent.Invoke();
             sIsFiring = context.ReadValueAsButton();
         }
 
@@ -109,6 +116,11 @@ namespace AcePerinova.Controller
         {
             if(context.performed)
             cameraFollowToggleEvent.Invoke();
+        }
+
+        public void OnFollowTrackedWeapon(InputAction.CallbackContext context) {
+            if (context.started)cameraWeaponTrackEvent.Invoke();
+            if (context.canceled)cameraWeaponTrackCancelEvent.Invoke();
         }
     }
 }

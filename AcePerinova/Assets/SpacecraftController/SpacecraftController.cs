@@ -30,6 +30,7 @@ namespace AcePerinova.Controller{
         protected HealthComponent hc;
         protected Rigidbody rb;
         protected Weapons.WeaponComponent w_primary, w_secondary;
+        public GameObject activeWeapon = null;
         private int p_maxUse, s_maxUse;
         private float p_reloadTime, s_reloadTime;
         [HideInInspector] public int aimDistance;
@@ -106,7 +107,7 @@ namespace AcePerinova.Controller{
         }
 
         #region Weapons
-        protected IEnumerator UsePrimaryWeapon(){
+        protected virtual IEnumerator UsePrimaryWeapon(){
             if(canUsePrimaryWeapon){
                 if(p_used == 0){
                     StartCoroutine(ReloadPrimaryWeapon());
@@ -117,6 +118,7 @@ namespace AcePerinova.Controller{
                 var w = Instantiate(w_primary, t.position, t.rotation, null);
                 w.owner = this;
                 w.target = lockedTarget;
+                if(w.isTrackable)activeWeapon = w.gameObject;
                 w.Activate();
                 shipUtility?.primaryMuzzle[p_index].Play();
                 if(OnPrimaryFire != null)OnPrimaryFire(p_index);
@@ -131,7 +133,7 @@ namespace AcePerinova.Controller{
             
         }
 
-         protected IEnumerator UseSecondaryWeapon(){
+         protected virtual IEnumerator UseSecondaryWeapon(){
             if(canUseSecondaryWeapon){
                 if(s_used == 0){
                     StartCoroutine(ReloadSecondaryWeapon());
@@ -142,6 +144,7 @@ namespace AcePerinova.Controller{
                 var w = Instantiate(w_secondary, t.position, t.rotation, null);
                 w.owner = this;
                 w.target = lockedTarget;
+                if (w.isTrackable) activeWeapon = w.gameObject;
                 w.Activate();
                 shipUtility?.secondaryMuzzle[s_index]?.Play();
                 if(OnSecondaryFire != null)OnSecondaryFire(s_index);
@@ -204,16 +207,8 @@ namespace AcePerinova.Controller{
             if(hc != null){
                 hc.OnEliminate += Eliminate;
             }
-
             shipUtility.gameObject.SetActive(true);
-
         }
-
-        
-
-        
-        
     }
-
 }
 

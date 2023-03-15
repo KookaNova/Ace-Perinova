@@ -79,12 +79,12 @@
                 },
                 {
                     "name": "SecondaryWeapon",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "aff477bc-f879-4e71-8853-9565cb833ba1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "CameraChange",
@@ -130,6 +130,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FollowTrackedWeapon",
+                    "type": "Value",
+                    "id": "dce85e3b-e972-4756-ad6d-42aa0f139aa5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -570,6 +579,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleCameraFollow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf0d691b-b572-4aac-b60b-ffb8ff8125c1",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FollowTrackedWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

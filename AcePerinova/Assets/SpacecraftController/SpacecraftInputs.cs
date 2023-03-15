@@ -103,12 +103,12 @@ namespace AcePerinova.Controller
                 },
                 {
                     ""name"": ""SecondaryWeapon"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""aff477bc-f879-4e71-8853-9565cb833ba1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""CameraChange"",
@@ -154,6 +154,15 @@ namespace AcePerinova.Controller
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FollowTrackedWeapon"",
+                    ""type"": ""Value"",
+                    ""id"": ""dce85e3b-e972-4756-ad6d-42aa0f139aa5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -594,6 +603,17 @@ namespace AcePerinova.Controller
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleCameraFollow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf0d691b-b572-4aac-b60b-ffb8ff8125c1"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FollowTrackedWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1145,6 +1165,7 @@ namespace AcePerinova.Controller
             m_Flight_TargetTeamDecrement = m_Flight.FindAction("TargetTeamDecrement", throwIfNotFound: true);
             m_Flight_TargetSelect = m_Flight.FindAction("TargetSelect", throwIfNotFound: true);
             m_Flight_ToggleCameraFollow = m_Flight.FindAction("ToggleCameraFollow", throwIfNotFound: true);
+            m_Flight_FollowTrackedWeapon = m_Flight.FindAction("FollowTrackedWeapon", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1232,6 +1253,7 @@ namespace AcePerinova.Controller
         private readonly InputAction m_Flight_TargetTeamDecrement;
         private readonly InputAction m_Flight_TargetSelect;
         private readonly InputAction m_Flight_ToggleCameraFollow;
+        private readonly InputAction m_Flight_FollowTrackedWeapon;
         public struct FlightActions
         {
             private @SpacecraftInputs m_Wrapper;
@@ -1250,6 +1272,7 @@ namespace AcePerinova.Controller
             public InputAction @TargetTeamDecrement => m_Wrapper.m_Flight_TargetTeamDecrement;
             public InputAction @TargetSelect => m_Wrapper.m_Flight_TargetSelect;
             public InputAction @ToggleCameraFollow => m_Wrapper.m_Flight_ToggleCameraFollow;
+            public InputAction @FollowTrackedWeapon => m_Wrapper.m_Flight_FollowTrackedWeapon;
             public InputActionMap Get() { return m_Wrapper.m_Flight; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1301,6 +1324,9 @@ namespace AcePerinova.Controller
                 @ToggleCameraFollow.started += instance.OnToggleCameraFollow;
                 @ToggleCameraFollow.performed += instance.OnToggleCameraFollow;
                 @ToggleCameraFollow.canceled += instance.OnToggleCameraFollow;
+                @FollowTrackedWeapon.started += instance.OnFollowTrackedWeapon;
+                @FollowTrackedWeapon.performed += instance.OnFollowTrackedWeapon;
+                @FollowTrackedWeapon.canceled += instance.OnFollowTrackedWeapon;
             }
 
             private void UnregisterCallbacks(IFlightActions instance)
@@ -1347,6 +1373,9 @@ namespace AcePerinova.Controller
                 @ToggleCameraFollow.started -= instance.OnToggleCameraFollow;
                 @ToggleCameraFollow.performed -= instance.OnToggleCameraFollow;
                 @ToggleCameraFollow.canceled -= instance.OnToggleCameraFollow;
+                @FollowTrackedWeapon.started -= instance.OnFollowTrackedWeapon;
+                @FollowTrackedWeapon.performed -= instance.OnFollowTrackedWeapon;
+                @FollowTrackedWeapon.canceled -= instance.OnFollowTrackedWeapon;
             }
 
             public void RemoveCallbacks(IFlightActions instance)
@@ -1498,6 +1527,7 @@ namespace AcePerinova.Controller
             void OnTargetTeamDecrement(InputAction.CallbackContext context);
             void OnTargetSelect(InputAction.CallbackContext context);
             void OnToggleCameraFollow(InputAction.CallbackContext context);
+            void OnFollowTrackedWeapon(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

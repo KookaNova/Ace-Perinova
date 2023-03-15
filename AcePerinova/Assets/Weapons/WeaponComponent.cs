@@ -18,15 +18,17 @@ namespace AcePerinova.Weapons{
         public float colliderDelay = 0.1f, activeTime = 6, canUseDelay = 0.25f;
         public int maxUseCount = 20;
         public float reloadTime = 0.5f;
+        public bool isTrackable = false;
         
-        [HideInInspector] public Controller.TargetableObject target = null;
-        [HideInInspector] public Controller.SpacecraftController owner;
+        [HideInInspector] public TargetableObject target = null;
+        [HideInInspector] public SpacecraftController owner;
 
         Collider thisCollider;
 
         public void Activate(){
             thisCollider = GetComponent<Collider>();
             thisCollider.enabled = false;
+            force += owner.currentSpeed;
             WeaponAction();
             StartCoroutine(StartUp());
             StartCoroutine(Terminate());
@@ -62,6 +64,9 @@ namespace AcePerinova.Weapons{
 
         private void EndUse(){
             //GetComponentInChildren<TrailRenderer>().transform.parent = null;
+            if(owner.activeWeapon == this.gameObject) {
+                owner.activeWeapon = null;
+            }
             GetComponentInChildren<TrailRenderer>().transform.SetParent(null);
             Destroy(this.gameObject); //we should be pooling, but we need to learn how to use it with Fusion
         }
