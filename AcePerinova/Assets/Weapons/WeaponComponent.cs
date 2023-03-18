@@ -62,7 +62,7 @@ namespace AcePerinova.Weapons{
             EndUse();
         }
 
-        private void EndUse(){
+        protected virtual void EndUse(){
             //GetComponentInChildren<TrailRenderer>().transform.parent = null;
             if(owner.activeWeapon == this.gameObject) {
                 owner.activeWeapon = null;

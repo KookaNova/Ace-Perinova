@@ -2607,7 +2607,7 @@ Transform:
   - {fileID: 8967691945151875702}
   - {fileID: 5219170977157775196}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3599540377277176359
 Rigidbody:
@@ -3039,6 +3039,8 @@ MonoBehaviour:
   stopNaNs: 0
   taaSharpenStrength: 0.5
   TAAQuality: 1
+  taaSharpenMode: 0
+  taaRingingReduction: 0
   taaHistorySharpening: 0.35
   taaAntiFlicker: 0.5
   taaMotionVectorRejection: 0
@@ -3089,6 +3091,7 @@ MonoBehaviour:
     sssQualityMode: 0
     sssQualityLevel: 0
     sssCustomSampleBudget: 20
+    sssCustomDownsampleSteps: 0
     msaaMode: 1
     materialQuality: 0
   renderingPathCustomFrameSettingsOverrideMask:
@@ -3219,7 +3222,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &8956219003038979965
 MonoBehaviour:
@@ -5460,7 +5463,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: f106bbc7fa52aaf408d74d389f45ddc7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 71f8d75e949112e4a905c4627f2618b4, type: 2}
     - target: {fileID: 919132149155446097, guid: f106bbc7fa52aaf408d74d389f45ddc7, type: 3}
@@ -5809,11 +5812,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5704540244426524925, guid: 71117ecd1cf06b343a302e63f1522328, type: 3}
-      propertyPath: m_Materials.Array.data[2]
+      propertyPath: 'm_Materials.Array.data[2]'
       value: 
       objectReference: {fileID: 2100000, guid: 023a36a07bafa9242a7cc381be2a9790, type: 2}
     - target: {fileID: -5704540244426524925, guid: 71117ecd1cf06b343a302e63f1522328, type: 3}
-      propertyPath: m_Materials.Array.data[3]
+      propertyPath: 'm_Materials.Array.data[3]'
       value: 
       objectReference: {fileID: 2100000, guid: 58abd44f40e6bd34a91d33a1b2f0a60f, type: 2}
     - target: {fileID: 919132149155446097, guid: 71117ecd1cf06b343a302e63f1522328, type: 3}
@@ -5821,7 +5824,7 @@ PrefabInstance:
       value: tri-speeder
       objectReference: {fileID: 0}
     - target: {fileID: 2294964573580146237, guid: 71117ecd1cf06b343a302e63f1522328, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 2361493433d691440859159bb7515d56, type: 2}
     - target: {fileID: 8029106800918022278, guid: 71117ecd1cf06b343a302e63f1522328, type: 3}
@@ -5829,7 +5832,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8029106800918022278, guid: 71117ecd1cf06b343a302e63f1522328, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 22afaa4edf9252c45862913c2c6cfb33, type: 2}
     m_RemovedComponents: []

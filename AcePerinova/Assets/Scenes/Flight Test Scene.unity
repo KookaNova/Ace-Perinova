@@ -87412,7 +87412,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.02
   far clip plane: 2000
   field of view: 45
   orthographic: 0
