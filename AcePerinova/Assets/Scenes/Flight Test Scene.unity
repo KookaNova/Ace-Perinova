@@ -67,9 +67,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -8659,6 +8656,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   useOcclusion: 1
+  useBackgroundCloudOcclusion: 0
   occlusionRadius: 0.09
   sampleCount: 37
   occlusionOffset: 0
@@ -10853,6 +10851,7 @@ MonoBehaviour:
         sssQualityMode: 0
         sssQualityLevel: 0
         sssCustomSampleBudget: 20
+        sssCustomDownsampleSteps: 0
         msaaMode: 1
         materialQuality: 0
       renderingPathCustomFrameSettingsOverrideMask:
@@ -11038,33 +11037,33 @@ MonoBehaviour:
     m_Aspect: 0
   m_HasValidSHForNormalization: 0
   m_SHForNormalization:
-    sh[ 0]: 0
-    sh[ 1]: 0
-    sh[ 2]: 0
-    sh[ 3]: 0
-    sh[ 4]: 0
-    sh[ 5]: 0
-    sh[ 6]: 0
-    sh[ 7]: 0
-    sh[ 8]: 0
-    sh[ 9]: 0
-    sh[10]: 0
-    sh[11]: 0
-    sh[12]: 0
-    sh[13]: 0
-    sh[14]: 0
-    sh[15]: 0
-    sh[16]: 0
-    sh[17]: 0
-    sh[18]: 0
-    sh[19]: 0
-    sh[20]: 0
-    sh[21]: 0
-    sh[22]: 0
-    sh[23]: 0
-    sh[24]: 0
-    sh[25]: 0
-    sh[26]: 0
+    'sh[ 0]': 0
+    'sh[ 1]': 0
+    'sh[ 2]': 0
+    'sh[ 3]': 0
+    'sh[ 4]': 0
+    'sh[ 5]': 0
+    'sh[ 6]': 0
+    'sh[ 7]': 0
+    'sh[ 8]': 0
+    'sh[ 9]': 0
+    'sh[10]': 0
+    'sh[11]': 0
+    'sh[12]': 0
+    'sh[13]': 0
+    'sh[14]': 0
+    'sh[15]': 0
+    'sh[16]': 0
+    'sh[17]': 0
+    'sh[18]': 0
+    'sh[19]': 0
+    'sh[20]': 0
+    'sh[21]': 0
+    'sh[22]': 0
+    'sh[23]': 0
+    'sh[24]': 0
+    'sh[25]': 0
+    'sh[26]': 0
   m_SHValidForCapturePosition: {x: 0, y: 0, z: 0}
   m_SHValidForSourcePosition: {x: 0, y: 0, z: 0}
   m_HDProbeVersion: 3
@@ -77828,7 +77827,7 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: -6647195065521961892, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 58abd44f40e6bd34a91d33a1b2f0a60f, type: 2}
     - target: {fileID: -5451718516887560129, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
@@ -77848,11 +77847,11 @@ PrefabInstance:
       value: -0.203
       objectReference: {fileID: 0}
     - target: {fileID: -1990968323811559735, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7e56fac0938ff3546a235e121236b19f, type: 2}
     - target: {fileID: -710766537246665452, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 2361493433d691440859159bb7515d56, type: 2}
     - target: {fileID: -391268320553695201, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
@@ -77876,7 +77875,7 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1539924405602631323, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 22afaa4edf9252c45862913c2c6cfb33, type: 2}
     - target: {fileID: 2405303644717571033, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
@@ -77884,11 +77883,11 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3417224649810324800, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 58abd44f40e6bd34a91d33a1b2f0a60f, type: 2}
     - target: {fileID: 3857644101675318309, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 58abd44f40e6bd34a91d33a1b2f0a60f, type: 2}
     - target: {fileID: 3983432630690050781, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
@@ -77900,11 +77899,11 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5159068644913845284, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 58abd44f40e6bd34a91d33a1b2f0a60f, type: 2}
     - target: {fileID: 8674086742702752106, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 2361493433d691440859159bb7515d56, type: 2}
     - target: {fileID: 8821623529969584324, guid: c4a538836d45b3f46938f74eafd171ce, type: 3}
@@ -87472,6 +87471,8 @@ MonoBehaviour:
   stopNaNs: 0
   taaSharpenStrength: 0.5
   TAAQuality: 1
+  taaSharpenMode: 0
+  taaRingingReduction: 0
   taaHistorySharpening: 0.35
   taaAntiFlicker: 0.5
   taaMotionVectorRejection: 0
@@ -87522,6 +87523,7 @@ MonoBehaviour:
     sssQualityMode: 0
     sssQualityLevel: 0
     sssCustomSampleBudget: 20
+    sssCustomDownsampleSteps: 0
     msaaMode: 9
     materialQuality: 0
   renderingPathCustomFrameSettingsOverrideMask:

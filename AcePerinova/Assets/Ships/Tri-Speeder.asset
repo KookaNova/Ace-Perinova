@@ -24,10 +24,10 @@ MonoBehaviour:
   shields: 600
   shieldChargeRate: 50
   shieldChargeDelay: 8
-  maxSpeed: 60
-  minSpeed: 0
-  acceleration: 50
-  pitch: 30
+  maxSpeed: 45
+  minSpeed: 10
+  acceleration: 35
+  pitch: 40
   yaw: 15
-  roll: 75
+  roll: 90
   aimDistance: 200
